@@ -313,11 +313,15 @@ class Analyser {
 
         $filter_nodeName = array(
             "a"    => "a",
-            "div"  => "div"
+            "div"  => "div",
+            "i"    => "i",
+            "b"    => "b",
+            "style"=> "style"
         );
 
         $filter_attrName = array(
-            "href" => "href",
+            "href"  => "href",
+            "class" => "class"
         );
 
         $lines = file($file, FILE_IGNORE_NEW_LINES);
