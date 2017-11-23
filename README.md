@@ -1,6 +1,12 @@
 # InfoLeak-Scanner
 
+## Docker
+First run `docker run --rm -p 8000:80 siwecos/infoleak-scanner`.
+
+Open your browser and use the scanner: `http://localhost/?url=<URL>`
+
 ## Install
+
 Get php5, curl and a webserver:
 ```
 sudo apt-get install apache2 php5 php5-curl
@@ -8,11 +14,8 @@ sudo apt-get install apache2 php5 php5-curl
 
 Copy application into webserver:
 ```
-git clone https://github.com/RUB-NDS/siwecos
-cp -R siwecos/InfoLeak-Scanner/ /var/www/html/
+cp -R . /var/www/html/
 ```
-
-Open browser and surf: http://localhost/InfoLeak-Scanner/?url=<URL>
 
 ## What?
 
@@ -60,7 +63,7 @@ Risks are set using:
 
 [E-Mail](http://www.huawei.com/en-CA/psirt/security-advisories/2016/huawei-sa-20161214-01-smartphone-en)
 
-## Output 
+## Output
 
 ### Nonverbose mode
 No findings in any checks:
@@ -215,7 +218,7 @@ Especially tested on:
 ```
 	Mozilla Firefox 45.7.0
 
-	PHP 5.6.30-0+deb8u1 (cli) (built: Feb  8 2017 08:50:21) 
+	PHP 5.6.30-0+deb8u1 (cli) (built: Feb  8 2017 08:50:21)
 	Copyright (c) 1997-2016 The PHP Group
 	Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 
