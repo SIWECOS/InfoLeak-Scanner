@@ -160,6 +160,23 @@ class Analyser {
             }
 
             /**
+             * Potential phone numbers with too many '/' are probably no phone
+             * numbers.
+             */
+            if (substr_count($phoneNumber, '/') > 2) {
+                continue;
+            }
+
+            /**
+             * Phone numbers in general start with 0 or a +. Filter anything
+             * else.
+             */
+            if (($phoneNumber[0] != "0")
+                && ($phoneNumber[0] != "+")) {
+                continue;
+            }
+
+            /**
              * Filter is_numeric() types which are not relevant here
              */
             if ((strpos($phoneNumber, 'x') !== false)
