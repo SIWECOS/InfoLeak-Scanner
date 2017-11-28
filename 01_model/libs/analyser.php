@@ -74,12 +74,6 @@ class Analyser {
         $regex = "/[A-Z0-9._%+-]+(?:@|\s*\[at\]\s*|&#64;)[A-Z0-9.-]+(?:\.|";
         $regex .= "\s*\[dot\]\s*)(" . $top_level_domains . ")[^\w]/i";
 
-        /**
-         * Alternative Regex[ending] <-> more false positives but better
-         * performance
-         */
-        //$regex .= "\s*\[dot\]\s*)[A-Z]{2,4}/i";
-
         preg_match_all($regex, $source, $result);
 
         $result = array_unique($result[0], SORT_REGULAR);
