@@ -179,8 +179,7 @@ class Analyser {
             /**
              * Filter is_numeric() types which are not relevant here
              */
-            if ((strpos($phoneNumber, 'x') !== false)
-                || (strpos($phoneNumber, 'b') !== false)
+            if ((strpos($phoneNumber, 'b') !== false)
                 || (strpos($phoneNumber, 'e') !== false)) {
                 continue;
             }
