@@ -72,20 +72,13 @@ class Analyser {
         $top_level_domains .= "vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|za|zm|zw";
 
         $regex = "/[A-Z0-9._%+-]+(?:@|\s*\[at\]\s*|&#64;)[A-Z0-9.-]+(?:\.|";
-        $regex .= "\s*\[dot\]\s*)(" . $top_level_domains . ")[^\w]/i";
+        $regex .= "\s*\[dot\]\s*)(" . $top_level_domains . ")(?!=\w)/i";
 
         preg_match_all($regex, $source, $result);
 
         $result = array_unique($result[0], SORT_REGULAR);
 
-        $tmp = array();
-        foreach ($result as $res) {
-            /* Delete the non word character. */
-            $tmp[] = preg_replace("/[^\w]$/", "", $res);
-        }
-
-        $tmp = array_unique($tmp, SORT_REGULAR);
-        return $tmp;
+        return $result;
     }
 
 
