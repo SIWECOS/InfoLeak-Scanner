@@ -72,8 +72,6 @@ class Analyser {
         $top_level_domains .= "tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|us|uy|uz|va|";
         $top_level_domains .= "vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|za|zm|zw";
 
-        $regex  = "/[A-Z0-9._%+-]+(?:@|\s*\[at\]\s*|&#64;)[A-Z0-9.-]+(?:\.|";
-        $regex .= "\s*\[dot\]\s*)(" . $top_level_domains . ")(?!=\w)/i";
 
         preg_match_all($regex, $source, $result);
 
