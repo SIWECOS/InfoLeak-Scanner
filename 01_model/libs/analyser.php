@@ -43,11 +43,6 @@ class Analyser {
 
     /**
      * @short: Searches E-Mail addresses
-     * @note: There are weird filenames in the web, which will sometimes match
-     * * this regex. I tried to limit those by only allowing top level domains.
-     * * Right after the top level domain, it has to end with a non word
-     * * character, like a double-quote. The character e.g. the double-quote
-     * * will be filtered, before returning.
      * @return array
      */
     public function find_email($source) {
