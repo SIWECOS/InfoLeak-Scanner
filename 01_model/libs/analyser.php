@@ -50,6 +50,7 @@ class Analyser {
      * (@|\s*\[at\]\s*)
      * (?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(\.|(\s*\[dot\]\s*)))+)([a-z]{2,})\b
      * @return array
+     * TODO: What is better? TLD within regex or filtering afterwards?
      */
     public function find_email($source) {
         /* Generic */
