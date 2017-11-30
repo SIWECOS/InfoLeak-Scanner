@@ -43,6 +43,12 @@ class Analyser {
 
     /**
      * @short: Searches E-Mail addresses
+     * @Note: Regex used:
+     * (?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:(\.|\s*\[dot\]\s*)[a-z0-9!#$%&'*+\/=?^
+     * _`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x0
+     * 1-\x09\x0b\x0c\x0e-\x7f])*")
+     * (@|\s*\[at\]\s*)
+     * (?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(\.|(\s*\[dot\]\s*)))+)([a-z]{2,})\b
      * @return array
      */
     public function find_email($source) {
