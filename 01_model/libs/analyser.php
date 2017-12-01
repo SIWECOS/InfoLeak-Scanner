@@ -117,7 +117,6 @@ class Analyser {
                 return $result;
             else
                 return NULL;
-
         }
     }
 
