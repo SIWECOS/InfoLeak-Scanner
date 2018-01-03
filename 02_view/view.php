@@ -36,6 +36,7 @@ class View{
     private $global_score = 0;
 
     public function __construct($model, $controller) {
+    private $scan_result;
         $this->model      = $model;
         $this->controller = $controller;
 
