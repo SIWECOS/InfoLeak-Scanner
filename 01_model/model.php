@@ -37,6 +37,7 @@ class Model{
     private $email;
     private $phone_numbers;
     private $dangerLevel;
+    private $callbackurls;
 
     
     public function __construct($controller) {
