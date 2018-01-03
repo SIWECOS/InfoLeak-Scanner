@@ -22,48 +22,6 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include '00_control/control.php';
-include '01_model/model.php';
-include '02_view/view.php';
+include 'start.php';
 
-
-if (!isset($_GET['url']) || empty($_GET['url'])) {
-    /**
-     * No URL is set or given. The client probably just entered the site.
-     * Here we set the starting state.
-     */
-    return;
-} else {
-    /**
-     * The controller gets the input data by the user.
-     * The controller decides whether the URL is valid and whether the source
-     * code will be analysed
-     */
-    $controller = new Control($_GET['url']);
-
-    /* Exit here if something went wrong/was disallowed. */
-    if ($controller->to_analyse === FALSE) {
-        return;
-    }
-
-    /**
-     * The performance analysis will only be made over the model.
-     * The model is independent from bandwith, latency etc.
-     * Also the model is the only object where the data is actually processed.
-     * The model is aware of the controller.
-     */
-    //$before = microtime(TRUE);
-    $model = new Model($controller);
-    //$after = microtime(TRUE);
-
-    /*
-     * The view will generate the output. It gets all data from model, which are
-     * mostly HTML nodes. It will iterate through these and generate an output
-     * this way.
-     * The view is aware of the model and the controller.
-     */
-    $view = new View($model, $controller);
-
-    //echo "<br/><br/><p>Done in " . ($after-$before) . " seconds.</p>\r\n";
-}
 ?>
