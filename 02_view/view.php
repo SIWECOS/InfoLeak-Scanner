@@ -96,39 +96,62 @@ class View{
     public function getScanResult() {
         return $this->scan_result;
     }
+    
+    private function printCMS() {
         $nodes    = $this->model->getCMS();
 
         $isVuln   = $nodes['isVuln'];
         $version  = $nodes['version'];
         $cms      = $nodes['cms'];
         $cms_node = $nodes['node'];
-        $node_    = array();
+        $MAX_FINDING_OUT = 1;
+        $result    = array();
+
+
+        $result['name'] = "CMS";
+        $result['hasError'] = FALSE;
+        $result['errorMessage'] = NULL;
+        $result['testDetails'] = array();
+        $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($cms)) {
-            $node_['risk'] = 6; // TODO: higher/lower risk if version was detected etc
+            $result['score'] = 60; // TODO: higher/lower risk if version was detected etc
 
             if (!$version) {
-                $node_['comment'] = $this->messages->getMessageByName('CMS_ONLY',
-                                                                      $cms);
+
+                $result['testDetails'][0]['placeholder'] = "CMS_ONLY";
+                $result['testDetails'][0]['values']['cms'] = $cms;
+                //$result['comment'] = $this->messages->getMessageByName('CMS_ONLY',
+                //                                                       $cms);
             } else {
                 if ($isVuln) {
-                    //$node_['risk'] = 10;
-                    $node_['comment'] = $this->messages->getMessageByName('CMS_VERSION_VULN',
-                                                                          $cms . " " . $version);
+                    //$result['risk'] = 10;
+                    $result['testDetails'][0]['placeholder'] = "CMS_VERSION_VULN";
+                    $result['testDetails'][0]['values']['cms'] = $cms;
+                    $result['testDetails'][0]['values']['VERSION'] = $version;
+
+                    //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION_VULN',
+                    //                                                       $cms . " " . $version);
                 } else {
-                    //$node_['risk'] = 8;
-                    $node_['comment'] = $this->messages->getMessageByName('CMS_VERSION',
-                                                                          $cms . " " . $version);
+                    //$result['risk'] = 8;
+                    $result['testDetails'][0]['placeholder'] = "CMS_VERSION_VULN";
+                    $result['testDetails'][0]['values']['cms'] = $cms;
+                    $result['testDetails'][0]['values']['VERSION'] = $version;
+
+                    //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION',
+                    //                                                       $cms . " " . $version);
                 }
             }
 
             if ($cms_node->nodeName === "script") {
-                $node_['finding'] = preg_replace("/\\n|\\t/", "",
-                                                 $cms_node->nextSibling->nodeValue);
+                //$result['finding'] = preg_replace("/\\n|\\t/", "",
+                //                                  $cms_node->nextSibling->nodeValue);
+                $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;
+                $result['testDetails'][0]['values']['node_content'] = $cms_node->nextSibling->nodeValue;
 
-                if (strlen($node_['finding']) > 100) {
-                    $node_['finding']  = substr($node_['finding'], 0, 100);
-                    $node_['finding'] .= " [...]";
+                if (strlen($result['finding']) > 100) {
+                    $result['finding']  = substr($result['finding'], 0, 100);
+                    $result['finding'] .= " [...]";
                 }
             } else {
                 $i = 0;
