@@ -104,6 +104,16 @@ class Control{
     public function getScannerHasError() {
         return $this->scannerHasError;
     }
+
+    /**
+     * Function to set dangerLevel
+     * NOTE: dangerLevel is not used for now.
+     */
+    public function setDangerLevel($dangerlevel) {
+        if (is_int($dangerlevel)) {
+            $this->dangerLevel = $dangerlevel;
+        }
+    }
      * Function to access the private variable $url
      */
     public function getURL() {
