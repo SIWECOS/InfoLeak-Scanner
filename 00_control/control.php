@@ -408,4 +408,16 @@ class Control{
         return (($ip & $smask) == ($nmask & $smask));
     }
 
+    /**
+     * Send scan results to defined callbackurls
+     */
+    public function send_to_callbackurls($result) {
+        foreach($this->getCallbackurls() as $url) {
+            $this->sendResult_POST(json_encode($result,
+                                               JSON_PRETTY_PRINT |
+                                               JSON_UNESCAPED_UNICODE |
+                                               JSON_UNESCAPED_SLASHES),
+                                   $url);
+        }
+    }
 ?>
