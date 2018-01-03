@@ -252,80 +252,107 @@ class View{
         return $sorted_result;
     }
 
+    /**
+     *
+     */
+    private function printJS(){
         $nodes   = $this->model->getJSLib();
         $isVuln  = $nodes['isVuln'];
         $version = $nodes['version'];
         $lib     = $nodes['lib'];
         $nodes   = $nodes['nodes'];
+        $result  = $finding = array();
+
+        /* Print only 2 finding nodes. */
+        $MAX_FINDING_OUT = 2;
+
+        $result['name']  = "JS_LIB";
+        $result['hasError'] = FALSE;
+        $result['errorMessage'] = NULL;
+        $result['testDetails'] = array();
+        $result['scoreType'] = $this->scoreType(1);
 
         if (!empty($nodes)) {
-            $node_  = $finding = array();
             $i = $j = 0;
-            $node_['result']   = TRUE;
-            $node_['risk']     = 5;
-            $node_['comment']  = $this->messages->getMessageByName('JS_ONLY',
-                                                                   $lib[$i]);
+            $result['score']     = 50;
+
+            $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
+            $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
+
+            //$result['comment']  = $this->messages->getMessageByName('JS_ONLY',
+            //                                                        $lib[$i]);
 
             foreach($nodes as $node) {
-                /* Print only 2 finding nodes. */
                 if ($j < $MAX_FINDING_OUT)
                     $j++;
                 else
                     break;
 
                 foreach($node->attributes as $attribute) {
-                    $finding['attr'] = $attribute->value;
+                    $finding['node_content'] = $attribute->value;
+                    $finding['node_name'] = $attribute->name;
 
-                    if (strlen($finding['attr']) > 100) {
-                        $finding['attr']  = substr($finding['attr'], 0, 100);
+/*
+                    if (strlen($finding['node_content']) > 100) {
+                        $finding['node_content']  = substr($finding['node_content'], 0, 100);
                         $finding['attr'] .= " [...]";
                     }
+*/
                 }
 
                 if ((!empty($version[$i])) &&
-                   ($version[$i] !== "N/A")) {
-                    //$node_['risk'] = 6;
-                    $finding['version'] = $version[$i];
+                    ($version[$i] !== "N/A")) {
+                    //$result['risk'] = 6;
 
-                    $node_['comment']   = $this->messages->getMessageByName('JS_VERSION',
-                                                                            $lib[$i] . " " . $version[$i]);
+                    $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
+                    $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
+                    $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
+
+                    //$result['comment']   = $this->messages->getMessageByName('JS_VERSION',
+                    //                                                         $lib[$i] . " " . $version[$i]);
                 } else {
-                    unset($node_['version']);
+                    unset($result['version']);
                 }
 
                 if ((!empty($isVuln[$i])) &&
-                   ($isVuln[$i] !== "N/A")) {
-                    //$node_['risk'] = 8;
-                    //$node_['result'] = $isVuln[$i];
+                    ($isVuln[$i] !== "N/A")) {
+                    //$result['risk'] = 8;
+                    //$result['result'] = $isVuln[$i];
 
-                    $node_['comment']   = $this->messages->getMessageByName('JS_VULN_VERSION',
-                                                                           $lib[$i] . " " . $version[$i]);
+                    $result['testDetails'][0]['placeholder'] = "JS_LIB_VULN_VERSION";
+                    $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
+                    $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
+
+                    //$result['comment']   = $this->messages->getMessageByName('JS_VULN_VERSION',
+                    //                                                         $lib[$i] . " " . $version[$i]);
                 }
-                // else {
-                //     $node_['result'] = FALSE;
-                // }
+
 
                 $i++;
-                $node_['finding'] = $finding;
+                    $result['testDetails'][0]['values']['node'] = $finding['node_name'];
+                $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
         } else {
-            $node_['result']  = FALSE;
-            $node_['risk']    = 0;
-            $node_['comment'] = $this->messages->getMessageByName('NO_JS');
-            $node_['finding'] = $this->messages->getMessageByName('NO_FINDING');
+            $result['score'] = 0;
+
+            $result['testDetails'][0] = NULL;
+            $result['testDetails'][0] = NULL;
+
+            //$result['comment'] = $this->messages->getMessageByName('NO_JS');
+            //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
 
-        if ($detailed === TRUE) {
-            $sorted_node_ = array("result"  => $node_['result'],
-                                  "risk"    => $node_['risk'],
-                                  "comment" => $node_['comment'],
-                                  "finding" => $node_['finding']);
-        } else {
-            $sorted_node_ = array("result"  => $node_['result'],
-                                  "risk"    => $node_['risk']);
-        }
+        $this->global_score += $result['score'];        
+        $sorted_result = array("name"         => $result['name'],
+                               "hasError"     => $result['hasError'],
+                               "errorMessage" => $result['errorMessage'],
+                               "score"        => $result['score'],
+                               "scoreType"    => $result['scoreType'],
+                               "testDetails"  => $result['testDetails']);
 
-        $result["checks"]["javascript"] = $sorted_node_;
+        return $sorted_result;
+    }
+
 
         /****************************************/
         $emails = $this->model->getEmail();
