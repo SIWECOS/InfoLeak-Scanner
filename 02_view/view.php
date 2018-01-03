@@ -32,6 +32,8 @@ class View{
     private $controller;
     private $messages;
     private $mode;
+    private $scan_count = 5;
+    private $global_score = 0;
 
     public function __construct($model, $controller) {
         $this->model      = $model;
