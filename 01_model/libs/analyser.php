@@ -286,6 +286,7 @@ class Analyser {
                                         $result['result'][]      = FALSE;
                                         $result['version'][]     = NULL;
                                         $result['plugin_name'][] = $line;
+                                        $result['attrName'][]    = $attr->name;
 
                                         $cnt++;
                                         if ($cnt === 3)
