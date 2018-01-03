@@ -31,15 +31,20 @@ class Control{
     private $source;    /* controlled by website */
     private $header;    /* controlled by website */
 
+    private $dangerLevel; /* not used */
+    private $callbackurls = array();
+    private $scannerHasError = FALSE;
+    private $scannerErrorMessage = NULL;
+
     /**
      * Set this manually to filter local IP addresses!
      */
-    private $bcast ;//= "192.168.0.255";
-    private $smask ;//= "255.255.255.0";
+    private $bcast; // = "192.168.0.255";
+    private $smask; // = "255.255.255.0";
 
     public function __construct($url) {
         $this->messages = new Messages();
-        
+
         $this->url = $url;
         $this->url = $this->checkURL($this->url);
 
