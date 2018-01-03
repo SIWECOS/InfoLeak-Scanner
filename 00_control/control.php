@@ -64,8 +64,10 @@ class Control{
          * analyse.
          */
         if (empty($this->source)) {
-            echo $this->messages->getMessageByName('NO_SOURCE_CODE');
+            $this->setScannerErrorMessage
+                ($this->messages->getMessageByName('NO_SOURCE_CODE'));
             $this->to_analyse = FALSE;
+            $this->setScannerHasError(TRUE);
             return NULL;
         }
     }
