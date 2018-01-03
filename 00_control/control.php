@@ -129,6 +129,15 @@ class Control{
     public function getDangerLevel() {
         return $this->dangerLevel;
     }
+
+    /**
+     * Function to access callbackurls
+     */
+    public function getCallbackurls() {
+        return $this->callbackurls;
+    }
+
+    /**
      * Function to access the private variable $url
      */
     public function getURL() {
