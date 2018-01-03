@@ -51,19 +51,14 @@ class View{
         return self::$scoreType_enum[$ordinal];
     }
 
+    public function __construct($model, $controller, $mode) {
         $this->model      = $model;
         $this->controller = $controller;
+        $this->mode       = $mode;
 
         $this->messages   = new Messages();
-        //echo $messages->getMessageById(0);
-        //echo $messages->getMessageByName('test');
-
         
-        // Print verbose:
-        $this->printJSON(TRUE);
-        
-        // Don't print verbose:
-        //$this->printJSON();
+        $this->printJSON($mode);
     }
 
     /**
