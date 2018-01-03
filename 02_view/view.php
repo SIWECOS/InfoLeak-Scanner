@@ -24,6 +24,7 @@
 
 include __DIR__ . '/../01_model/libs/messages.php';
 
+
 /**
  * Returns JSON output of findings.
  */
@@ -35,7 +36,6 @@ class View{
     private $scan_count = 5;
     private $global_score = 0;
 
-    public function __construct($model, $controller) {
     private $scan_result;
 
     private static $scoreType_enum = array(
@@ -440,6 +440,39 @@ class View{
         return $sorted_result;
     }
 
+    /**
+     *
+     */
+    public function printJSON($mode) {
+        $result = array();
+        $tests  = array();
+
+        /* Scan results */
+        $tests[] = $this->printCMS();
+        $tests[] = $this->printPlugin();
+        $tests[] = $this->printJS();
+        $tests[] = $this->printEmail();
+        $tests[] = $this->printPhonenumber();
+
+        /* Scanner details - overall */
+        $result["name"] = "InfoLeak-Scanner";
+        $result["hasError"] = $this->controller->getScannerHasError();
+        $result["errorMessage"] = $this->controller->getScannerErrorMessage();
+        $result["score"] = $this->global_score/$this->scan_count;
+        $result["tests"] = $tests;
+
+        $this->scan_result = $result;
+
+        if ($mode === "GET") {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($result,
+                             JSON_PRETTY_PRINT |
+                             JSON_UNESCAPED_UNICODE |
+                             JSON_UNESCAPED_SLASHES);
+
+            return $result;   
+        } else if ($mode === "POST") {
+            $this->controller->send_to_callbackurls($this->getScanResult());
         }
     }
 }
