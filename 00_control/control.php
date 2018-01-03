@@ -80,6 +80,13 @@ class Control{
             $this->scannerErrorMessage = $errorMessage;
         }
     }
+
+    /**
+     * Function to check if the scanner had an error.
+     */
+    public function getScannerErrorMessage() {
+        return $this->scannerErrorMessage;
+    }
      * Function to access the private variable $url
      */
     public function getURL() {
