@@ -114,6 +114,13 @@ class Control{
             $this->dangerLevel = $dangerlevel;
         }
     }
+
+    /**
+     * Function to set callbackurls
+     */
+    public function setCallbackurls($callbackurls) {
+        $this->callbackurls = $callbackurls;
+    }
      * Function to access the private variable $url
      */
     public function getURL() {
