@@ -354,38 +354,49 @@ class View{
     }
 
 
-        /****************************************/
+    /**
+     *
+     */
+    private function printEmail() {
         $emails = $this->model->getEmail();
         $j = 0;
 
+        $result['name']  = "EMAIL_ADDRESS";
+        $result['hasError'] = FALSE;
+        $result['errorMessage'] = NULL;
+        $result['testDetails'] = array();
+        $result['scoreType'] = $this->scoreType(4);
+
         if (!empty($emails)) {
-            $emails_ = array();
+            $result['score']   = 70;
+            $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
-            $emails_['result'] = TRUE;
-            $emails_['risk']   = 7;
-
-            if ($detailed === TRUE) {
-                $emails_['comment'] = $this->messages->getMessageByName('EMAIL_ONLY');
-
-                $emails_['finding'] = NULL;
-                foreach($emails as $email) {
-                    $emails_['finding'] .= $email . ", ";
-                }
-                $emails_['finding'] = substr($emails_['finding'], 0,
-                                             strlen($emails_['finding'])-2);
-            }
+            $result['testDetails'][0]['values']['email_address'][] = $emails;
+            //$emails_['comment'] = $this->messages->getMessageByName('EMAIL_ONLY');
         } else {
-            $emails_['result'] = FALSE;
-            $emails_['risk']   = 0;
+            $result['score'] = 0;
 
-            if ($detailed === TRUE) {
-                $emails_['comment'] = $this->messages->getMessageByName('NO_EMAIL');
-                $emails_['finding'] = $this->messages->getMessageByName('NO_FINDING');
-            }
+            $result['testDetails'][0] = NULL;
+            $result['testDetails'][0] = NULL;
+
+            //$emails_['score']   = 0;
+
+            //  $emails_['comment'] = $this->messages->getMessageByName('NO_EMAIL');
+            //  $emails_['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
-        $result["checks"]["email"] = $emails_;
 
-        /****************************************/
+        $this->global_score += $result['score'];
+        $sorted_result = array("name"         => $result['name'],
+                               "hasError"     => $result['hasError'],
+                               "errorMessage" => $result['errorMessage'],
+                               "score"        => $result['score'],
+                               "scoreType"    => $result['scoreType'],
+                               "testDetails"  => $result['testDetails']);
+
+        return $sorted_result;
+    }
+
+
         $phone_numbers = $this->model->getPhoneNumbers();
         if (!empty($phone_numbers)) {
             $phone_numbers_ = array();
