@@ -132,4 +132,10 @@
     <content>You should not tell me your username/password for other services</content>
   </message>
 
+  <message id="22">
+    <name>JSON_DECODE_ERROR</name>
+    <type>error</type>
+    <content>Given JSON could not be decoded</content>
+  </message>  
+  
 </messages>
