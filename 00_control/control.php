@@ -355,14 +355,18 @@ class Control{
                     $status_code = $this->header[1];
 
                     if (empty($status_code)) {
-                        echo $this->messages->getMessageByName('NOT_REACHABLE');
+                        $this->setScannerErrorMessage
+                            ($this->messages->getMessageByName('NOT_REACHABLE'));
+                        $this->setScannerHasError(TRUE);
                         return FALSE;
                     } else if ($status_code['http_code'] != '404') {
                         /* Everything seems fine! */
                         $this->url = $url;
                         return $url;
                     } else {
-                        echo $this->messages->getMessageByName('NOT_REACHABLE', "404");
+                        $this->setScannerErrorMessage
+                            ($this->messages->getMessageByName('NOT_REACHABLE', "404"));
+                        $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
                 }
