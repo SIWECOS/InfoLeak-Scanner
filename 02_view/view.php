@@ -37,6 +37,20 @@ class View{
 
     public function __construct($model, $controller) {
     private $scan_result;
+
+    private static $scoreType_enum = array(
+        0 => "critical",
+        1 => "warning",
+        2 => "success",
+        3 => "bonus",
+        4 => "info",
+        5 => "hidden"
+    );
+
+    public function scoreType($ordinal) {
+        return self::$scoreType_enum[$ordinal];
+    }
+
         $this->model      = $model;
         $this->controller = $controller;
 
