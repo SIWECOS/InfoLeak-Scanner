@@ -44,6 +44,9 @@ class Model{
         $this->controller = $controller;
         $this->source = $this->controller->getSource();
 
+        if ($this->controller->getScannerHasError()) {
+            return;
+        }
         $this->analyser = new Analyser($this->source);
         $this->DOM = $this->analyser->getDOM();
 
