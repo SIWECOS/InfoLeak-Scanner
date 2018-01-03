@@ -401,14 +401,6 @@ class View{
                 $phone_numbers_['finding'] = $this->messages->getMessageByName('NO_FINDING');
             }
         }
-        $result["checks"]["phone"] = $phone_numbers_;
-
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result,
-                         JSON_PRETTY_PRINT |
-                         JSON_UNESCAPED_UNICODE |
-                         JSON_UNESCAPED_SLASHES);
-        return $result;
     }
 }
 
