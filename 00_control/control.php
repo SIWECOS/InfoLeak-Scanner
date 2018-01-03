@@ -87,6 +87,16 @@ class Control{
     public function getScannerErrorMessage() {
         return $this->scannerErrorMessage;
     }
+
+
+    /**
+     * Function to indicate that the scanner had an error.
+     */
+    public function setScannerHasError($hasError=FALSE) {
+        if (is_bool($hasError)) {
+            $this->scannerHasError = $hasError;
+        }
+    }
      * Function to access the private variable $url
      */
     public function getURL() {
