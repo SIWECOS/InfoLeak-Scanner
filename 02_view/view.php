@@ -147,54 +147,58 @@ class View{
                     $finding .= " [...]";
                 }
 
-                $node_['finding'] = preg_replace("/\\n|\\t/", "",
-                                                 "[" . $cms_node->nodeName . "]"
-                                                 . ": " . $finding);
+                //$result['finding'] = preg_replace("/\\n|\\t/", "",
+                //                                 "[" . $cms_node->nodeName . "]"
+                //                                  . ": " . $finding);
+                $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;
+                $result['testDetails'][0]['values']['node_content'] = $finding;
+
             }
-
-            //$node_['result'] = $isVuln;
-            $node_['result'] = TRUE;
-
-            if ($detailed === TRUE) {
-                $sorted_node_ = array("result"  => $node_['result'],
-                                      "risk"    => $node_['risk'],
-                                      "comment" => $node_['comment'],
-                                      "finding" => $node_['finding']);
-            } else {
-                $sorted_node_ = array("result"  => $node_['result'],
-                                      "risk"    => $node_['risk']);
-            }
-
-            $result["checks"]["cms"] = $sorted_node_;
         } else {
-            $node_['result'] = FALSE;
-            $node_['risk']   = 0;
+            $result['score']      = 0;
+            $result['testDetails'][0] = NULL;
 
-            if ($detailed === TRUE) {
-                $node_['comment'] = $this->messages->getMessageByName('NO_CMS');
-                $node_['finding'] = $this->messages->getMessageByName('NO_FINDING');
-            }
-
-            $result["checks"]["cms"] = $node_;
+            //$result['comment'] = $this->messages->getMessageByName('NO_CMS');
+            //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
 
-        /****************************************/
+        $this->global_score += $result['score'];
+        $sorted_result = array("name"         => $result['name'],
+                               "hasError"     => $result['hasError'],
+                               "errorMessage" => $result['errorMessage'],
+                               "score"        => $result['score'],
+                               "scoreType"    => $result['scoreType'],
+                               "testDetails"  => $result['testDetails']);
+
+        return $sorted_result;
+    }
+
+    /**
+     *
+     */
+    private function printPlugin() {
         $nodes = $this->model->getPlugin();
 
+        $result  = array();
+
+        $result['name']  = "CMS_PLUGINS";
+        $result['hasError'] = FALSE;
+        $result['errorMessage'] = NULL;
+        $result['testDetails'] = array();
+        $result['scoreType'] = $this->scoreType(1);
+
         if (count($nodes) > 1) {
-            $isVuln  = $nodes['result'];
-            $f_val   = $nodes['pVal'];
-            $version = $nodes['version'];
+            $isVuln   = $nodes['result'];
+            $f_val    = $nodes['pVal'];
+            $nodeName = $nodes['attrName'];
+            $version  = $nodes['version'];
             $plugin_name = $nodes['plugin_name'];
-            //$comment = $nodes['comment'];
-            $nodes_  = array();
+            $result['score'] = 70; // TODO: higher/lower risk if version was detected etc
 
-            $nodes_['result'] = TRUE;
-            $nodes_['risk']   = 7; // TODO: higher/lower risk if version was detected etc
-
-            $limit = $MAX_FINDING_OUT+1;
+            $limit = 2;
             if (count($isVuln) < $limit)
                 $limit = count($isVuln);
+
 
             for ($j=0; $j < $limit; $j++) {
                 if ($isVuln[$j] === NULL)
