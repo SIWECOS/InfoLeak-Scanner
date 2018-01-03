@@ -397,31 +397,49 @@ class View{
     }
 
 
+    /**
+     *
+     */
+    private function printPhonenumber() {
         $phone_numbers = $this->model->getPhoneNumbers();
+
+        $result['name']  = "PHONE_NUMBER";
+        $result['hasError'] = FALSE;
+        $result['errorMessage'] = NULL;
+        $result['testDetails'] = array();
+        $result['scoreType'] = $this->scoreType(4);
+
         if (!empty($phone_numbers)) {
-            $phone_numbers_ = array();
+            $phone_numbers_  = array();
 
-            $phone_numbers_['result'] = TRUE;
-            $phone_numbers_['risk']   = 4; // TODO: Specify risk
+            $result['score'] = 40; // TODO: Specify risk
 
-            if ($detailed === TRUE) {
-                $phone_numbers_['comment'] = $this->messages->getMessageByName('PHONE_ONLY');;
+            $result['testDetails'][0]['placeholder'] = "NUMBER_FOUND";
 
-                $phone_numbers_['finding'] = NULL;
-                foreach($phone_numbers as $phone_number) {
-                    $phone_numbers_['finding'] .= $phone_number . ", ";
-                }
-                $phone_numbers_['finding'] = substr($phone_numbers_['finding'], 0,
-                                                    strlen($phone_numbers_['finding'])-2);
-            }
+            //$phone_numbers_['comment'] = $this->messages->getMessageByName('PHONE_ONLY');;
+
+            $result['testDetails'][0]['values']['number'] = $phone_numbers;
         } else {
-            $phone_numbers_['result'] = FALSE;
-            $phone_numbers_['risk']   = 0;
+            $result['score'] = 0;
 
-            if ($detailed === TRUE) {
-                $phone_numbers_['comment'] = $this->messages->getMessageByName('NO_PHONE');
-                $phone_numbers_['finding'] = $this->messages->getMessageByName('NO_FINDING');
-            }
+            $result['testDetails'][0] = NULL;
+            $result['testDetails'][0] = NULL;
+
+            //$phone_numbers_['comment'] = $this->messages->getMessageByName('NO_PHONE');
+            //$phone_numbers_['finding'] = $this->messages->getMessageByName('NO_FINDING');
+        }
+
+        $this->global_score += $result['score'];        
+        $sorted_result = array("name"         => $result['name'],
+                               "hasError"     => $result['hasError'],
+                               "errorMessage" => $result['errorMessage'],
+                               "score"        => $result['score'],
+                               "scoreType"    => $result['scoreType'],
+                               "testDetails"  => $result['testDetails']);
+
+        return $sorted_result;
+    }
+
         }
     }
 }
