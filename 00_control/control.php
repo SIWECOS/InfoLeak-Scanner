@@ -73,6 +73,13 @@ class Control{
     }
 
     /**
+     * Function to set the scanners error message.
+     */
+    public function setScannerErrorMessage($errorMessage) {
+        if (is_string($errorMessage)) {
+            $this->scannerErrorMessage = $errorMessage;
+        }
+    }
      * Function to access the private variable $url
      */
     public function getURL() {
