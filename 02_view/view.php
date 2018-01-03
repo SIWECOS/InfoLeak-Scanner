@@ -200,42 +200,58 @@ class View{
                     $f_val[$j] .= " [...]";
                 }
 
-                //$nodes_['result'][] = $isVuln[$j];
-                if ($detailed === TRUE) {
-                    if ($isVuln[$j]) {
-                        //$nodes_['comment'][] = $comment[$j];
-                        $nodes_['comment'][] = $this->messages->getMessageByName('PLUGIN_VERSION_VULN', $plugin_name[$j] . " " . $version[$j]);
-                        $nodes_['finding'][] = $f_val[$j];
+                //$result['result'][] = $isVuln[$j];
+                if ($isVuln[$j]) {
+                    //$result['comment'][] = $comment[$j];
+                    //$result['comment'][] = $this->messages->getMessageByName('PLUGIN_VERSION_VULN', $plugin_name[$j] . " " . $version[$j]);
+                    $result['testDetails'][0]['placeholder'] = "PLUGIN_VERSION_VULN";
+                    $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
+                    $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
+                    $result['testDetails'][0]['values']['node'] = $nodeName[$j];
+                    $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+                } else {
+                    if ($version[$j] === NULL) {
+                        $result['testDetails'][0]['placeholder'] = "PLUGIN_ONLY";
+                        $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
+                        $result['testDetails'][0]['values']['node'] = $nodeName[$j];
+                        $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+
+                        //$result['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j]);
+                        //$result['finding'][] = $f_val[$j];
                     } else {
-                        if ($version[$j] === NULL) {
-                            $nodes_['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j]);
-                            $nodes_['finding'][] = $f_val[$j];
-                        } else {
-                            $nodes_['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j] . " " . $version[$j]);
-                            $nodes_['finding'][] = $f_val[$j];
-                        }
+                        $result['testDetails'][0]['placeholder'] = "PLUGIN_VERSION";
+                        $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
+                        $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
+                        $result['testDetails'][0]['values']['node'] = $nodeName[$j];
+                        $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+
+                        //$result['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j] . " " . $version[$j]);
+                        //$result['finding'][] = $f_val[$j];
                     }
                 }
             }
-
-            if ($limit === 1) {
-                if ($detailed === TRUE) {
-                    $nodes_['comment'] = implode("", $nodes_['comment']);
-                    $nodes_['finding'] = implode("", $nodes_['finding']);
-                }
-            }
         } else {
-            $nodes_['result'] = FALSE;
-            $nodes_['risk']   = 0;
+            $result['score'] = 0;
 
-            if ($detailed === TRUE) {
-                $nodes_['comment'] = $this->messages->getMessageByName('NO_PLUGINS');
-                $nodes_['finding'] = $this->messages->getMessageByName('NO_FINDING');
-            }
+            $result['testDetails'][0] = NULL;
+            $result['testDetails'][0] = NULL;
+
+            //$result['comment'] = $this->messages->getMessageByName('NO_PLUGINS');
+            //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
-        $result["checks"]["plugin"] = $nodes_;
 
-        /****************************************/
+        $this->global_score += $result['score'];        
+        $sorted_result = array("name"         => $result['name'],
+                               "hasError"     => $result['hasError'],
+                               "errorMessage" => $result['errorMessage'],
+                               "score"        => $result['score'],
+                               "scoreType"    => $result['scoreType'],
+                               "testDetails"  => $result['testDetails']);
+
+
+        return $sorted_result;
+    }
+
         $nodes   = $this->model->getJSLib();
         $isVuln  = $nodes['isVuln'];
         $version = $nodes['version'];
