@@ -36,6 +36,7 @@ class Model{
     private $jslib;
     private $email;
     private $phone_numbers;
+    private $dangerLevel;
 
     
     public function __construct($controller) {
