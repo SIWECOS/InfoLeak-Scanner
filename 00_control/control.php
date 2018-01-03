@@ -55,6 +55,7 @@ class Control{
             }
         } else {
             $this->to_analyse = FALSE;
+            $this->setScannerHasError(TRUE); /* redundant */
             return NULL;
         }
 
