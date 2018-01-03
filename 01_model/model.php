@@ -47,6 +47,10 @@ class Model{
         if ($this->controller->getScannerHasError()) {
             return;
         }
+        
+        $this->dangerLevel = $this->controller->getDangerLevel();
+        $this->callbackurls = $this->controller->getCallbackurls();
+
         $this->analyser = new Analyser($this->source);
         $this->DOM = $this->analyser->getDOM();
 
