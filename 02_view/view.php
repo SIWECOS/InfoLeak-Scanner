@@ -93,6 +93,9 @@ class View{
 
 
         /****************************************/
+    public function getScanResult() {
+        return $this->scan_result;
+    }
         $nodes    = $this->model->getCMS();
 
         $isVuln   = $nodes['isVuln'];
