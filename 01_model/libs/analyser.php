@@ -91,7 +91,7 @@ class Analyser {
 
         preg_match_all($regex, $source, $result);
 
-        $result = array_unique($result[0], SORT_REGULAR);
+        $result = array_values(array_unique($result[0], SORT_REGULAR));
 
         return $result;
     }
