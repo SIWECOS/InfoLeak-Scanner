@@ -61,38 +61,6 @@ class View{
         $this->printJSON($mode);
     }
 
-    /**
-     * The JSON output is specified as follows:
-     *
-     * {
-     * "checks": {
-     *   "cms": {
-     *       "result": true,
-     *       "risk": 6,
-     *       "comment": "Die verwendete CMS konnte ermittelt werden (wordpress).",
-     *       "finding": "[meta]: content : WordPress"
-     *   },
-     *   "plugin": {
-     *       [...]
-     *   },
-     *   "javascript": {
-     *       [...]
-     *   },
-     *   "email": {
-     *       [...]
-     *   },
-     *   "phone": {
-     *       [...]
-     *   }
-     *  }
-     * }
-     */
-    public function printJSON($detailed=FALSE) {
-        $result          = array();
-        $MAX_FINDING_OUT = 2;
-
-
-        /****************************************/
     public function getScanResult() {
         return $this->scan_result;
     }
