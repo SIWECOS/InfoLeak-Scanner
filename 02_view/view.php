@@ -31,6 +31,7 @@ class View{
     private $model;
     private $controller;
     private $messages;
+    private $mode;
 
     public function __construct($model, $controller) {
         $this->model      = $model;
