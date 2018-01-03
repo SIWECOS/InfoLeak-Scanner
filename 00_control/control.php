@@ -22,7 +22,6 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 class Control{
     public $to_analyse = TRUE;
 
@@ -207,6 +206,7 @@ class Control{
                     $redir_host = parse_url($this->checkURL($redir[1]));
                 } else {
                     echo(" (Redirect)<br />");
+                    $this->setScannerHasError(TRUE);
                     return FALSE;
                 }
 
@@ -219,6 +219,7 @@ class Control{
                 if ($url_host['host'] === $redir_host['host']) {
                     return TRUE;
                 } else {
+                    $this->setScannerHasError(TRUE);
                     return FALSE;
                 }
             } else {
@@ -303,14 +304,18 @@ class Control{
 
             /* Is the URL valid? */
             if ((filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_HOST_REQUIRED) === FALSE)) {
-                echo $this->messages->getMessageByName('NO_VALID_URL');
+                $this->setScannerErrorMessage
+                    ($this->messages->getMessageByName('NO_VALID_URL'));
+                $this->setScannerHasError(TRUE);
                 return FALSE;
             } else {
                 $url_tmp = parse_url($url);
 
                 if (isset($url_tmp['host'])) {
                     if (($url_tmp['host'] === '127.0.0.1') || ($url_tmp['host'] === 'localhost')) {
-                        echo $this->messages->getMessageByName('LOCALHOST_SCAN_NOT_ALLOWED');
+                        $this->setScannerErrorMessage
+                            ($this->messages->getMessageByName('LOCALHOST_SCAN_NOT_ALLOWED'));
+                        $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
 
@@ -331,7 +336,9 @@ class Control{
                         $bcast = $this->bcast;
                         $smask = $this->smask;
                         if ($this->IP_isLocal($url_tmp['host'], $bcast, $smask) === TRUE) {
-                            echo $this->messages->getMessageByName('NOT_REACHABLE');
+                            $this->setScannerErrorMessage
+                                ($this->messages->getMessageByName('NOT_REACHABLE'));
+                            $this->setScannerHasError(TRUE);
                             return FALSE;
                         }
                     }
@@ -341,13 +348,17 @@ class Control{
                 if (isset($url_tmp['port'])) {
                     if (($url_tmp['port'] != '80')
                         && ($url_tmp['port'] != '443')) {
-                        echo $this->messages->getMessageByName('PORT_DISALLOWED');
+                        $this->setScannerErrorMessage
+                            ($this->messages->getMessageByName('PORT_DISALLOWED'));
+                        $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
                 }
 
                 if (isset($url_tmp['user']) || isset($url_tmp['pass'])) {
-                    echo $this->messages->getMessageByName('DONT_LEAK_USER_CREDS');
+                    $this->setScannerErrorMessage
+                        ($this->messages->getMessageByName('DONT_LEAK_USER_CREDS'));
+                    $this->setScannerHasError(TRUE);
                     return FALSE;
                 } else {
                     /* URL seems legit. Check headers now. */
@@ -396,6 +407,5 @@ class Control{
 
         return (($ip & $smask) == ($nmask & $smask));
     }
-}
 
 ?>
