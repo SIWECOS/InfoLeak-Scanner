@@ -420,4 +420,38 @@ class Control{
                                    $url);
         }
     }
+    
+    /**
+     * Send $result to $url per POST
+     */
+    public function sendResult_POST($result, $url) {
+        $this->checkURL($url);
+
+        $con = curl_init($url);
+
+        $user_agent  = "Mozilla/5.0 (Windows; U; Windows NT ";
+        $user_agent .= "5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1";
+
+        $options = array(
+            CURLOPT_HEADER          => false,
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_CUSTOMREQUEST   => "POST",
+            CURLOPT_POSTFIELDS      => $result,
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_FOLLOWLOCATION  => true,
+            CURLOPT_AUTOREFERER     => true,
+            CURLOPT_SSL_VERIFYPEER  => false,
+            CURLOPT_USERAGENT       => $user_agent,
+            CURLOPT_CONNECTTIMEOUT  => 10,
+            CURLOPT_TIMEOUT         => 10
+        );
+
+        /* Use settings defined in $options for the connection */
+        curl_setopt_array($con, $options);
+        curl_exec($con);
+        curl_close($con);
+
+        return 0;
+    }
+}
 ?>
