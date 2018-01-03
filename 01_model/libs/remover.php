@@ -4,7 +4,9 @@
  *   Automatic Detection of Information Leakage Vulnerabilities in
  *   Web Applications.
  *
- *   Copyright (C) 2017 Yakup Ates <Yakup.Ates@rub.de>
+ *   Copyright (C) 2015-2018 Ruhr University Bochum
+ *
+ *   @author Yakup Ates <Yakup.Ates@rub.de
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
