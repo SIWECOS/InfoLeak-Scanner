@@ -112,15 +112,15 @@ class View{
             }
 
             if ($cms_node->nodeName === "script") {
-                //$result['finding'] = preg_replace("/\\n|\\t/", "",
-                //                                  $cms_node->nextSibling->nodeValue);
+                $result['finding'] = preg_replace("/\\n|\\t/", "",
+                                                  $cms_node->nextSibling->nodeValue);
                 $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;
-                $result['testDetails'][0]['values']['node_content'] = $cms_node->nextSibling->nodeValue;
-
+                
                 if (strlen($result['finding']) > 100) {
                     $result['finding']  = substr($result['finding'], 0, 100);
                     $result['finding'] .= " [...]";
                 }
+                $result['testDetails'][0]['values']['node_content'] = $result['finding'];
             } else {
                 $i = 0;
 
