@@ -61,10 +61,31 @@ Scores are set using:
 [E-Mail](http://www.huawei.com/en-CA/psirt/security-advisories/2016/huawei-sa-20161214-01-smartphone-en)
 
 
+## Running the scanner
+You can run the scanner via POST and GET requests.
+
+### POST
+If you want to run the scanner with a POST request you have to send the
+parameters in a JSON encoded format:
+``` 
 {
+  "url": "string",
+  "dangerLevel": 0,
+  "callbackurls": [
+    "string"
+  ]
 }
 ```
+`url` defines the URL which should be scanned.
+`dangerLevel` is not relevant, simply define it to 0.
+`callbackurls` is an array of URLs. These URLs will get the result of the
+scanner (sent via POST).
 
+### GET
+Running the scanner with a GET request is much simpler. All you have to do is to
+run the application a given URL:
+
+`http://localhost/?url=<URL>`
 
 
 ### Verbose mode
