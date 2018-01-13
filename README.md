@@ -62,28 +62,6 @@ Scores are set using:
 
 
 {
-    "checks": {
-        "cms": {
-            "result": false,
-            "risk": 0
-        },
-        "plugin": {
-            "result": false,
-            "risk": 0
-        },
-        "javascript": {
-            "result": false,
-            "risk": 0
-        },
-        "email": {
-            "result": false,
-            "risk": 0
-        },
-        "phone": {
-            "result": false,
-            "risk": 0
-        }
-    }
 }
 ```
 
