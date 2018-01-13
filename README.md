@@ -83,7 +83,7 @@ scanner (sent via POST).
 
 ### GET
 Running the scanner with a GET request is much simpler. All you have to do is to
-run the application a given URL:
+run the application with a given URL:
 
 `http://localhost/?url=<URL>`
 
@@ -263,7 +263,7 @@ At least one finding in every scan:
 ### Messages
 
 | Placeholder                | Message                                                                                                                                   |
-|----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------- |
 | **SCAN CMS**               | 								                                                                                                          |
 | CMS_ONLY                   | Used Content-Management-System {cms} detected.                                                                                            |
 | CMS_VERSION                | Used Content-Management-System {cms} and its version {version} detected.                                                                  |
