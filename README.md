@@ -88,91 +88,171 @@ run the application a given URL:
 `http://localhost/?url=<URL>`
 
 
-### Verbose mode
-No findings in any checks:
+## Output
+
+No findings in any scans:
 ```
 {
-    "checks": {
-        "cms": {
-            "result": false,
-            "risk": 0,
-            "comment": "Es konnte keine CMS detektiert werden.",
-            "finding": "N/A."
+    "name": "InfoLeak-Scanner",
+    "hasError": false,
+    "errorMessage": null,
+    "score": 0,
+    "tests": [
+        {
+            "name": "CMS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 0,
+            "scoreType": "info",
+            "testDetails": [
+                null
+            ]
         },
-        "plugin": {
-            "result": false,
-            "risk": 0,
-            "comment": "Es konnten keine Plugins gefunden werden.",
-            "finding": "N/A."
+        {
+            "name": "CMS_PLUGINS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 0,
+            "scoreType": "warning",
+            "testDetails": [
+                null
+            ]
         },
-        "javascript": {
-            "result": false,
-            "risk": 0,
-            "comment": "Es konnte keine JavaScript Bibliothek gefunden werden.",
-            "finding": "N/A."
+        {
+            "name": "JS_LIB",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 0,
+            "scoreType": "warning",
+            "testDetails": [
+                null
+            ]
         },
-        "email": {
-            "result": false,
-            "risk": 0,
-            "comment": "Es konnte keine E-Mail Adresse gefunden werden.",
-            "finding": "N/A."
+        {
+            "name": "EMAIL_ADDRESS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 0,
+            "scoreType": "info",
+            "testDetails": [
+                null
+            ]
         },
-        "phone": {
-            "result": false,
-            "risk": 0,
-            "comment": "Es konnten keine Telefonnummern gefunden werden.",
-            "finding": "N/A."
+        {
+            "name": "PHONE_NUMBER",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 0,
+            "scoreType": "info",
+            "testDetails": [
+                null
+            ]
         }
-    }
+    ]
 }
 ```
 
-At least one finding in any check:
+At least one finding in every scan:
 ```
 {
-    "checks": {
-        "cms": {
-            "result": true,
-            "risk": 6,
-            "comment": "Die verwendete CMS konnte ermittelt werden (wordpress).",
-            "finding": "[img]: [...]"
-        },
-        "plugin": {
-            "result": true,
-            "risk": 7,
-            "comment": [
-                "Ein verwendetes Plugin konnte detektiert werden (contact-form-7).",
-                "Ein verwendetes Plugin konnte detektiert werden (styles).",
-                "Ein verwendetes Plugin konnte detektiert werden (groups)."
-            ],
-            "finding": [
-                "[...]/contact-form-7/includes/css/styles.css?ver=4.8",
-                "[...]/contact-form-7/includes/css/styles.css?ver=4.8",
-                "[...]?gid=416&trk=group-name"
+    "name": "InfoLeak-Scanner",
+    "hasError": false,
+    "errorMessage": null,
+    "score": 58,
+    "tests": [
+        {
+            "name": "CMS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 60,
+            "scoreType": "info",
+            "testDetails": [
+                {
+                    "placeholder": "CMS_VERSION",
+                    "values": {
+                        "cms": "wordpress",
+                        "version": "4.9.1",
+                        "node": "meta",
+                        "node_content": "content : WordPress 4.9.1"
+                    }
+                }
             ]
         },
-        "javascript": {
-            "result": true,
-            "risk": 5,
-            "comment": "Es wurde eine JavaScript Bibliothek gefunden für dessen Version eine Schwachstelle existiert (jquery 1.4.1).",
-            "finding": {
-                "attr": "[...]/wp-includes/js/jquery/jquery-migrate-1.4.1.js",
-                "version": "1.4.1"
-            }
         },
-        "email": {
-            "result": true,
-            "risk": 7,
-            "comment": "Die Offenlegung von E-Mail Adressen könnte zu ungewünschtem Spam und unter anderem auch zu einer gezielten Phishing Attacke führen.",
-            "finding": "mail1@host.de, mail2@host.de, mail3@host.de"
+        {
+            "name": "CMS_PLUGINS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 70,
+            "scoreType": "warning",
+            "testDetails": [
+                {
+                    "placeholder": "PLUGIN_ONLY",
+                    "values": {
+                        "plugin": "styles",
+                        "node": "href",
+                        "node_content": "[...]/wp-content/plugins/contact-form-7/"
+                    }
+                }
+            ]
         },
-        "phone": {
-            "result": true,
-            "risk": 4,
-            "comment": "Die Offenlegung von Telefonnummern....",
-            "finding": "123456, 654321"
+        {
+            "name": "JS_LIB",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 50,
+            "scoreType": "warning",
+            "testDetails": [
+                {
+                    "placeholder": "JS_LIB_VULN_VERSION",
+                    "values": {
+                        "js_lib_name": "jquery",
+                        "js_lib_version": "1.4.1",
+                        "node": "src",
+                        "node_content": "[...]/wp-includes/js/jquery/jquery-migrate-1.4.1.js"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "EMAIL_ADDRESS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 70,
+            "scoreType": "info",
+            "testDetails": [
+                {
+                    "placeholder": "EMAIL_FOUND",
+                    "values": {
+                        "email_address": [
+                            [
+                                "user@domain.de",
+                                "admin@domain.de"
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "PHONE_NUMBER",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 40,
+            "scoreType": "info",
+            "testDetails": [
+                {
+                    "placeholder": "NUMBER_FOUND",
+                    "values": {
+                        "number": [
+                            "0123-10 00 22-2",
+                            "0123-20 00 33-444"
+                        ]
+                    }
+                }
+            ]
         }
-    }
+    ]
 }
 ```
 
