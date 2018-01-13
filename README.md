@@ -41,7 +41,7 @@ Searches for mail adresses. Interesting for spam and/or social engineering attac
 Searches for phone numbers. Interesting for social engineering attacks and/or scam.
 
 
-## Risk
+## Score
 ```
 | Finding                         | Score (0-10) |
 |---------------------------------+--------------|
