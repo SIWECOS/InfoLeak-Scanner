@@ -66,33 +66,6 @@ Scores are set using:
 ```
 
 
-At least one finding in any check:
-```
-{
-    "checks": {
-        "cms": {
-            "result": true,
-            "risk": 6
-        },
-        "plugin": {
-            "result": true,
-            "risk": 7
-        },
-        "javascript": {
-            "result": true,
-            "risk": 5
-        },
-        "email": {
-            "result": true,
-            "risk": 7
-        },
-        "phone": {
-            "result": true,
-            "risk": 4
-        }
-    }
-}
-```
 
 ### Verbose mode
 No findings in any checks:
