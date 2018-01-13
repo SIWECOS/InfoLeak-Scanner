@@ -60,11 +60,7 @@ Scores are set using:
 
 [E-Mail](http://www.huawei.com/en-CA/psirt/security-advisories/2016/huawei-sa-20161214-01-smartphone-en)
 
-## Output
 
-### Nonverbose mode
-No findings in any checks:
-```
 {
     "checks": {
         "cms": {
