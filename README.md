@@ -155,6 +155,41 @@ At least one finding in any check:
 }
 ```
 
+# Scanner Interface Values
+
+## InfoLeak-Scanner
+
+### Messages
+
+| Placeholder                | Message                                                                                                                                   |
+|----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------|
+| **SCAN CMS**               | 								                                                                                                          |
+| CMS_ONLY                   | Used Content-Management-System {cms} detected.                                                                                            |
+| CMS_VERSION                | Used Content-Management-System {cms} and its version {version} detected.                                                                  |
+| CMS_VERSION_VULN           | Vulnerable Content-Management-System {cms} version {version} detected                                                                     |
+| **SCAN PLUGIN**            |                                                                                                                                           |
+| PLUGIN_ONLY                | CMS Plugin {plugin} in DOM-node {node} via node-content {node_content} detected.                                                          |
+| PLUGIN_VERSION             | CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.                         |
+| PLUGIN_VERSION_VULN        | Vulnerable CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.              |
+| **SCAN JS**                |                                                                                                                                           |
+| JS_LIB_ONLY                | Used JavaScript library {js_lib_name} in DOM-node {node} via node-content {node_content} detected.                                        |
+| JS_LIB_VERSION             | Used JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected.       |
+| JS_LIB_VULN_VERSION        | Vulnerable JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected. |
+| **SCAN EMAIL**             |                                                                                                                                           |
+| EMAIL_FOUND                | Email address {email_address} found.                                                                                                      |
+| **SCAN PHONE**             |                                                                                                                                           |
+| NUMBER_FOUND               | Telephone number {number} found.                                                                                                          |
+|                            |                                                                                                                                           |
+| **ERRORS**                 |                                                                                                                                           |
+| NO_SOURCE_CODE             | Given URL has no source code.                                                                                                             |
+| NO_VALID_URL               | Given URL is not a valid URL.                                                                                                             |
+| LOCALHOST_SCAN_NOT_ALLOWED | Scanning localhost ist not permitted.                                                                                                     |
+| NOT_REACHABLE              | Given URL is not reachable.                                                                                                               |
+| PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
+| DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
+| JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
+
+
 
 ## Further details
 Especially tested on:
