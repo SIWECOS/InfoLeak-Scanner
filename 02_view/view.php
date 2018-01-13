@@ -96,15 +96,15 @@ class View{
                     //$result['risk'] = 10;
                     $result['testDetails'][0]['placeholder'] = "CMS_VERSION_VULN";
                     $result['testDetails'][0]['values']['cms'] = $cms;
-                    $result['testDetails'][0]['values']['VERSION'] = $version;
+                    $result['testDetails'][0]['values']['version'] = $version;
 
                     //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION_VULN',
                     //                                                       $cms . " " . $version);
                 } else {
                     //$result['risk'] = 8;
-                    $result['testDetails'][0]['placeholder'] = "CMS_VERSION_VULN";
+                    $result['testDetails'][0]['placeholder'] = "CMS_VERSION";
                     $result['testDetails'][0]['values']['cms'] = $cms;
-                    $result['testDetails'][0]['values']['VERSION'] = $version;
+                    $result['testDetails'][0]['values']['version'] = $version;
 
                     //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION',
                     //                                                       $cms . " " . $version);
