@@ -43,16 +43,16 @@ Searches for phone numbers. Interesting for social engineering attacks and/or sc
 
 ## Score
 ```
-| Finding                         | Score (0-10) |
-|---------------------------------+--------------|
-| Content-Management-System (CMS) |            6 |
-| Plugins                         |            7 |
-| JavaScript libraries            |            5 |
-| Mails adresses                  |            7 |
-| Phone numbers                   |            4 |
+| Finding                         | Score (0-100) |
+|---------------------------------+---------------|
+| Content-Management-System (CMS) |            60 |
+| Plugins                         |            70 |
+| JavaScript libraries            |            50 |
+| Mails adresses                  |            70 |
+| Phone numbers                   |            40 |
 ```
 
-Risks are set using:
+Scores are set using:
 
 [Vulnerability Scoring System Version 3.0 Calculator](https://www.first.org/cvss/)
 
