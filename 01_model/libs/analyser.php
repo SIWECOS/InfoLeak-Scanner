@@ -213,6 +213,10 @@ class Analyser {
                 continue;
             }
 
+            if (strpos($phoneNumber, '&#') !== false) {
+                continue;
+            }
+
             /**
              * Phone numbers in general start with 0 or a +. Filter anything
              * else.
