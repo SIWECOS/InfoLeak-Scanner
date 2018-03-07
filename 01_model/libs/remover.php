@@ -112,6 +112,23 @@ class Remover {
         return $this->source;
     }
 
+    /**
+     * Remove all attributes in the given DOM ($source)
+     */
+    public function removeAllAttribute($source, $nodeName) {
+        $query = $this->xpath->query('//' . $nodeName);
+
+        foreach ($query as $node) {
+            foreach ($node->attributes as $a) {
+                //$node->removeAttribute($a->name);
+            }
+        }
+
+        $this->source = $this->DOM->saveHTML();
+
+        return $this->source;
+    }
+
 
     /**
      * Remove all comments in the given DOM ($source)
