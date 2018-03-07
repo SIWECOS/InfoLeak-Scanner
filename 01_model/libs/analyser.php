@@ -33,13 +33,11 @@ ini_set('max_execution_time', 300);
 class Analyser {
     private $source;
     private $searcher;
-    private $remover;
 
     public function __construct($source) {
         $this->source = $source;
 
         $this->searcher = new Searcher($this->source);
-        $this->remover = new Remover($this->source);
     }
 
 
@@ -55,6 +53,7 @@ class Analyser {
      * TODO: What is better? TLD within regex or filtering afterwards?
      */
     public function find_email($source) {
+        $remover = new Remover($this->source);
         /* Generic */
         $top_level_domains  = "com|org|net|int|edu|gov|mil|";
         /* Country */
@@ -130,6 +129,7 @@ class Analyser {
      * @return array
      */
     public function find_phoneNumber($source, $nation="DE") {
+        $remover = new Remover($this->source);
         /**
          * Delete potential false-positive tags/attributes
          */
