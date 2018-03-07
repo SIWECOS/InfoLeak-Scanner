@@ -47,14 +47,14 @@ class Messages {
         }
     }
 
-    
+
     /**
      * Entries in messages.xml are listed with id attributes.
      * Select message with a given id and optionally add note to message.
      */
     public function getMessageById($id, $note="") {
         $node = $this->messages->xpath("//message[@id=" . intval($id) . "]");
-        
+
         if ($node) {
             $content = $node[0]->content;
 
@@ -66,7 +66,7 @@ class Messages {
         }
     }
 
-    
+
     /**
      * Select message by its name and optionally add note to message.
      */
@@ -78,7 +78,7 @@ class Messages {
             if ($note === "") {
                 return $node[0] . ".";
             } else {
-                return $node[0] . " (" . strval($note) . ").";                
+                return $node[0] . " (" . strval($note) . ").";
             }
         }
     }
