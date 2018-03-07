@@ -35,7 +35,14 @@ class Analyser {
     private $searcher;
 
     public function __construct($source) {
-        $this->source = $source;
+        /**
+         * Detect chinese characters and decode
+         */
+        if (preg_match("/\p{Han}+/u", $source)) {
+            $this->source = html_entity_decode($source);
+        } else {
+            $this->source = $source;
+        }
 
         $this->searcher = new Searcher($this->source);
     }
