@@ -43,7 +43,6 @@ class Control{
 
     public function __construct($url) {
         $this->messages = new Messages();
-
         $this->url = $url;
         $this->url = $this->checkURL($this->url);
 
@@ -179,6 +178,7 @@ class Control{
         curl_setopt_array($con, $options);
         /* Save content */
         $this->source = curl_exec($con);
+
         curl_close($con);
 
         return 0;
@@ -205,7 +205,8 @@ class Control{
                 if ($tmp !== FALSE) {
                     $redir_host = parse_url($this->checkURL($redir[1]));
                 } else {
-                    echo(" (Redirect)<br />");
+                    $this->setScannerErrorMessage
+                        ($this->messages->getMessageByName('REDIRECT_ERROR'));
                     $this->setScannerHasError(TRUE);
                     return FALSE;
                 }
@@ -420,7 +421,7 @@ class Control{
                                    $url);
         }
     }
-    
+
     /**
      * Send $result to $url per POST
      */
