@@ -106,9 +106,9 @@ class Analyser {
         $local_part .= "[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x";
         $local_part .= "0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x";
         $local_part .= "0c\x0e-\x7f])*\")";
-        
+
         $seperator = "(@|\s*(\[|\()at(\]|\))\s*)";
-        
+
         $domain_part = "(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(\.|(\s*(\[|\()(";
         //$domain_part .= "do|punk)t(\]|\))\s*)))+)([a-z]{2,})\b/i";
         $domain_part .= "do|punk)t(\]|\))\s*)))+)" . "(" . $top_level_domains
@@ -156,6 +156,9 @@ class Analyser {
      * @return array
      */
     public function find_phoneNumber($source, $nation="DE") {
+        //$source = preg_replace("/&#?[a-z0-9]{2,8};/", "", $source);
+        //$source = preg_replace("/\p{Han}+/", '', $source);
+
         $remover = new Remover($this->source);
         /**
          * Delete potential false-positive tags/attributes
@@ -420,7 +423,7 @@ class Analyser {
                         if ($node->nodeName === $filter_word) {
                             $to_filter = TRUE;
                         } else if (($line === "wordpress") &&
-                                  ($node->nodeName === "img")) {
+                                   ($node->nodeName === "img")) {
                             $to_filter = TRUE;
                         }
                     }
@@ -450,8 +453,8 @@ class Analyser {
 
                         /* Negative version number? Nope... */
                         if (($tmp[1] < 0) ||
-                           ($tmp[2] < 0) ||
-                           ($tmp[3] < 0)) {
+                            ($tmp[2] < 0) ||
+                            ($tmp[3] < 0)) {
                             $version = NULL;
                         }
 
@@ -461,8 +464,8 @@ class Analyser {
                          */
                         if ($version !== NULL) {
                             if (($line === "xt-commerce") ||
-                               ($line === "veyton") ||
-                               ($line === "xt:Commerce")) {
+                                ($line === "veyton") ||
+                                ($line === "xt:Commerce")) {
                                 if ($tmp[1] < 4) {
                                     $isVuln = TRUE;
                                 } else if ($tmp[1] == 4) {
@@ -473,7 +476,7 @@ class Analyser {
                                     }
                                 }
                             } else if (($line === "wp-content") ||
-                                      ($line === "wordpress")) {
+                                       ($line === "wordpress")) {
                                 /**
                                  * https://www.intelligentexploit.com/
                                  * view-details.html?id=23287
@@ -542,7 +545,7 @@ class Analyser {
                              */
                             $line = "wordpress";
                         } else if (($line === "veyton") or
-                                  ($line === "xt:Commerce")) {
+                                   ($line === "xt:Commerce")) {
                             /**
                              * Same as with "wordpress" ...
                              */
@@ -637,7 +640,7 @@ class Analyser {
                                             }
                                         }
                                     } else if (($line === "sitecatalyst") ||
-                                              ($line === "omniture")) {
+                                               ($line === "omniture")) {
                                         /**
                                          * https://web.nvd.nist.gov/view/vuln/
                                          * detail?vulnId=CVE-2006-6640
@@ -746,16 +749,16 @@ class Analyser {
             foreach ($nodes as $node) {
                 foreach ($node->attributes as $child) {
                     if (preg_match("/pass|password|passwort|passwd|pw/i",
-                                  $child->value) !== 0) {
+                                   $child->value) !== 0) {
                         $result[] = $node;
                     } else if (preg_match("/mail|email|e-mail/i",
-                                         $child->value) !== 0) {
+                                          $child->value) !== 0) {
                         $result[] = $node;
                     } else if (preg_match("/cart|korb|einkauf/i",
-                                         $child->value) !== 0) {
+                                          $child->value) !== 0) {
                         $result[] = $node;
                     } else if (preg_match("/user|usr|benutzer/i",
-                                         $child->value) !== 0) {
+                                          $child->value) !== 0) {
                         $result[] = $node;
                     }
 
@@ -789,7 +792,7 @@ class Analyser {
                 foreach ($nodes as $node) {
                     /* Filter Conditional Comments */
                     if (preg_match("/if\s?(lte|lt|gt|gte|[\|\&\!])?\s?IE/",
-                                  $node->nodeValue) !== 0) {
+                                   $node->nodeValue) !== 0) {
                         $to_filter = TRUE;
                     }
 
