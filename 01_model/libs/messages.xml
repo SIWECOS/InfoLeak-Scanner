@@ -136,6 +136,12 @@
     <name>JSON_DECODE_ERROR</name>
     <type>error</type>
     <content>Given JSON could not be decoded</content>
-  </message>  
-  
+  </message>
+
+  <message id="23">
+    <name>REDIRECT_ERROR</name>
+    <type>error</type>
+    <content>URL does a forbidden redirect</content>
+  </message>
+
 </messages>
