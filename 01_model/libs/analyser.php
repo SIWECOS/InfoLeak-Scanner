@@ -61,6 +61,26 @@ class Analyser {
      */
     public function find_email($source) {
         $remover = new Remover($this->source);
+        /**
+         * Minimize DOM for performance
+         */
+        $toRemove = array("script", "path", "polygon", "polyline", "svg",
+                          "symbol", "source", "style", "audio", "applet",
+                          "basefont", "button", "canvas", "map", "menu", "nav",
+                          "progress", "time");
+        foreach ($toRemove as $node) {
+            $source = $remover->removeNode($source, $node);
+        }
+
+        $toRemove = array("data-module-id", "data-tl-id", "data-bem", "src",
+                          "bgcolor", "border", "buffered", "cite", "class",
+                          "color", "datetime", "height", "href", "icon",
+                          "id", "maxlength", "media", "rel", "size", "sizes",
+                          "style", "value", "width", "alt");
+        foreach ($toRemove as $node) {
+            $source = $remover->removeAttribute($source, $node);
+        }
+
         /* Generic */
         $top_level_domains  = "com|org|net|int|edu|gov|mil|";
         /* Country */
