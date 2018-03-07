@@ -276,10 +276,18 @@ class Analyser {
      */
     public function analyse_plugins($CMS) {
         $remover = new Remover($this->source);
+        /**
+         * Delete potential false-positive tags/attributes
+         */
+        $toRemove = array("script");
+        foreach ($toRemove as $node) {
+            $source = $remover->removeNode($this->source, $node);
+        }
+
         $file          = NULL;
         $vulnCheckSite = NULL;
 
-        /* We can only look for plugins if we know */
+        /* We can only look for plugins if we know the CMS*/
         if (!empty($CMS)) {
             switch ($CMS) {
             case "wordpress":
