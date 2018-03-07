@@ -275,6 +275,7 @@ class Analyser {
      * @return array
      */
     public function analyse_plugins($CMS) {
+        $remover = new Remover($this->source);
         $file          = NULL;
         $vulnCheckSite = NULL;
 
