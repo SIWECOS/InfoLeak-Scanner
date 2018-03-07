@@ -160,17 +160,13 @@ class Analyser {
         /**
          * Delete potential false-positive tags/attributes
          */
-        $source = $this->remover->removeNode($source, "script");
-        $source = $this->remover->removeNode($source, "path");
-        $source = $this->remover->removeNode($source, "polygon");
-        $source = $this->remover->removeNode($source, "polyline");
-        $source = $this->remover->removeNode($source, "svg");
-        $source = $this->remover->removeNode($source, "symbol");
-        $source = $this->remover->removeNode($source, "source");
-        $source = $this->remover->removeNode($source, "a");
-
-        $source = $this->remover->removeEvents($source);
-        $source = $this->remover->removeComments($source);
+        $toRemove = array("script", "path", "polygon", "polyline", "svg",
+                          "symbol", "source", "style", "a", "audio", "applet",
+                          "basefont", "button", "canvas", "map", "menu", "nav",
+                          "progress", "time", "area", "img");
+        foreach ($toRemove as $node) {
+            $source = $remover->removeNode($source, $node);
+        }
 
         $result = array();
         $phoneNumberUtil    = \libphonenumber\PhoneNumberUtil::getInstance();
