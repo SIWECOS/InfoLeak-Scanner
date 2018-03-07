@@ -57,14 +57,14 @@ class View{
         $this->mode       = $mode;
 
         $this->messages   = new Messages();
-        
+
         $this->printJSON($mode);
     }
 
     public function getScanResult() {
         return $this->scan_result;
     }
-    
+
     private function printCMS() {
         $nodes    = $this->model->getCMS();
 
@@ -115,7 +115,7 @@ class View{
                 $result['finding'] = preg_replace("/\\n|\\t/", "",
                                                   $cms_node->nextSibling->nodeValue);
                 $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;
-                
+
                 if (strlen($result['finding']) > 100) {
                     $result['finding']  = substr($result['finding'], 0, 100);
                     $result['finding'] .= " [...]";
@@ -240,7 +240,7 @@ class View{
             //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
 
-        $this->global_score += $result['score'];        
+        $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
                                "errorMessage" => $result['errorMessage'],
@@ -292,12 +292,12 @@ class View{
                     $finding['node_content'] = $attribute->value;
                     $finding['node_name'] = $attribute->name;
 
-/*
-                    if (strlen($finding['node_content']) > 100) {
-                        $finding['node_content']  = substr($finding['node_content'], 0, 100);
-                        $finding['attr'] .= " [...]";
-                    }
-*/
+                    /*
+                      if (strlen($finding['node_content']) > 100) {
+                      $finding['node_content']  = substr($finding['node_content'], 0, 100);
+                      $finding['attr'] .= " [...]";
+                      }
+                    */
                 }
 
                 if ((!empty($version[$i])) &&
@@ -329,7 +329,7 @@ class View{
 
 
                 $i++;
-                    $result['testDetails'][0]['values']['node'] = $finding['node_name'];
+                $result['testDetails'][0]['values']['node'] = $finding['node_name'];
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
         } else {
@@ -342,7 +342,7 @@ class View{
             //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
 
-        $this->global_score += $result['score'];        
+        $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
                                "errorMessage" => $result['errorMessage'],
@@ -429,7 +429,7 @@ class View{
             //$phone_numbers_['finding'] = $this->messages->getMessageByName('NO_FINDING');
         }
 
-        $this->global_score += $result['score'];        
+        $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
                                "errorMessage" => $result['errorMessage'],
@@ -470,7 +470,7 @@ class View{
                              JSON_UNESCAPED_UNICODE |
                              JSON_UNESCAPED_SLASHES);
 
-            return $result;   
+            return $result;
         } else if ($mode === "POST") {
             $this->controller->send_to_callbackurls($this->getScanResult());
         }
