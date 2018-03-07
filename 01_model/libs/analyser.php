@@ -244,15 +244,19 @@ class Analyser {
             }
 
             $date = str_replace(' ', '', $date);
-            if (!empty($date) && count($date) === 3) {  // it contains 2 dots
-                if (($date[0] <= 12) && ($date[1] <= 31)) {
-                    if (checkdate($date[0], $date[1], $date[2])) {
-                        continue;
+            if (!empty($date)) {
+                if (count($date) === 3) {  // it contains 2 dots
+                    if (($date[0] <= 12) && ($date[1] <= 31)) {
+                        if (checkdate($date[0], $date[1], $date[2])) {
+                            continue;
+                        }
+                    } else if (($date[1] <= 12) && ($date[0] <= 31)) {
+                        if (checkdate($date[1], $date[0], $date[2])) {
+                            continue;
+                        }
                     }
-                } else if (($date[1] <= 12) && ($date[0] <= 31)) {
-                    if (checkdate($date[1], $date[0], $date[2])) {
-                        continue;
-                    }
+                } else {
+                    continue;
                 }
             }
             $result[] = $phoneNumberMatch->rawString();
