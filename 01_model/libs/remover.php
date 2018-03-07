@@ -65,6 +65,21 @@ class Remover {
         return $this->source;
     }
 
+    /**
+     * TODO: Not working correctly yet
+     */
+    public function removeKISSY($source) {
+        $query = $this->xpath->query("//div[contains(@id, 'J_defaultData')]");
+        //$query = $this->xpath->query("//div/@id[starts-with(text(), 'J_')]");
+
+        foreach ($query as $node) {
+            $node->parentNode->removeChild($node);
+        }
+
+        $this->source = $this->DOM->saveHTML();
+
+        return $this->source;
+    }
 
     /**
      * Remove all events in the given DOM ($source)
