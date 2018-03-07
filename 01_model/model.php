@@ -39,7 +39,7 @@ class Model{
     private $dangerLevel;
     private $callbackurls;
 
-    
+
     public function __construct($controller) {
         $this->controller = $controller;
         $this->source = $this->controller->getSource();
@@ -47,7 +47,7 @@ class Model{
         if ($this->controller->getScannerHasError()) {
             return;
         }
-        
+
         $this->dangerLevel = $this->controller->getDangerLevel();
         $this->callbackurls = $this->controller->getCallbackurls();
 
@@ -59,7 +59,7 @@ class Model{
         if (!empty($this->cms['cms'])) {
             $this->plugins = $this->analyser->analyse_plugins($this->cms['cms']);
         }
-        
+
         $this->jslib = $this->analyser->analyse_JSLib();
         $this->email = $this->analyser->find_email($this->source);
         $this->phone_numbers = $this->analyser->find_phoneNumber($this->source);
