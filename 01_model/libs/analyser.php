@@ -168,6 +168,26 @@ class Analyser {
             $source = $remover->removeNode($source, $node);
         }
 
+        $toRemove = array("data-module-id", "data-tl-id", "data-bem", "src",
+                          "data-city-x-coord", "data-city-y-coord", "_lazy",
+                          "bgcolor", "border", "buffered", "cite", "class",
+                          "color", "datetime", "height", "href", "icon",
+                          "id", "maxlength", "media", "rel", "size", "sizes",
+                          "style", "value", "width", "alt", "data-reactid",
+                          "_videoid");
+        foreach ($toRemove as $node) {
+            $source = $remover->removeAttribute($source, $node);
+        }
+
+        $source = $remover->removeEvents($source);
+        $source = $remover->removeComments($source);
+        //$source = $remover->removeKISSY($source);
+
+        $source = $remover->removeAllAttribute($source, "div");
+
+        //$source = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $source);
+        //$source = preg_replace("/\p{Han}+/u", '', $source);
+        //echo htmlspecialchars($source);
         $result = array();
         $phoneNumberUtil    = \libphonenumber\PhoneNumberUtil::getInstance();
 
