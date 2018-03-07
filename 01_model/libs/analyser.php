@@ -235,7 +235,14 @@ class Analyser {
             }
 
             /* Check if phoneNumber is a date (false-positive) */
-            $date = explode('.', $phoneNumber);
+            if (strpos($phoneNumber, '.')) {
+                $date = explode('.', $phoneNumber);
+            } else if (strpos($phoneNumber, '-')) {
+                $date = explode('-', $phoneNumber);
+            } else {
+                $date = ' ';
+            }
+
             $date = str_replace(' ', '', $date);
             if (!empty($date) && count($date) === 3) {  // it contains 2 dots
                 if (($date[0] <= 12) && ($date[1] <= 31)) {
