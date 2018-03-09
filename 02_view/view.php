@@ -83,7 +83,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($cms)) {
-            $result['score'] = 60; // TODO: higher/lower risk if version was detected etc
+            $result['score'] = 0; // TODO: higher/lower risk if version was detected etc
 
             if (!$version) {
 
@@ -146,7 +146,7 @@ class View{
 
             }
         } else {
-            $result['score']      = 0;
+            $result['score']      = 60;
             $result['testDetails'][0] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_CMS');
@@ -184,7 +184,7 @@ class View{
             $nodeName = $nodes['attrName'];
             $version  = $nodes['version'];
             $plugin_name = $nodes['plugin_name'];
-            $result['score'] = 70; // TODO: higher/lower risk if version was detected etc
+            $result['score'] = 0; // TODO: higher/lower risk if version was detected etc
 
             $limit = 2;
             if (count($isVuln) < $limit)
@@ -231,7 +231,7 @@ class View{
                 }
             }
         } else {
-            $result['score'] = 0;
+            $result['score'] = 70;
 
             $result['testDetails'][0] = NULL;
             $result['testDetails'][0] = NULL;
@@ -274,7 +274,7 @@ class View{
 
         if (!empty($nodes)) {
             $i = $j = 0;
-            $result['score']     = 50;
+            $result['score']     = 0;
 
             $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
             $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
@@ -333,7 +333,7 @@ class View{
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
         } else {
-            $result['score'] = 0;
+            $result['score'] = 50;
 
             $result['testDetails'][0] = NULL;
             $result['testDetails'][0] = NULL;
@@ -368,13 +368,13 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($emails)) {
-            $result['score']   = 70;
+            $result['score']   = 0;
             $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
             $result['testDetails'][0]['values']['email_address'][] = $emails;
             //$emails_['comment'] = $this->messages->getMessageByName('EMAIL_ONLY');
         } else {
-            $result['score'] = 0;
+            $result['score'] = 70;
 
             $result['testDetails'][0] = NULL;
             $result['testDetails'][0] = NULL;
@@ -412,7 +412,7 @@ class View{
         if (!empty($phone_numbers)) {
             $phone_numbers_  = array();
 
-            $result['score'] = 40; // TODO: Specify risk
+            $result['score'] = 0; // TODO: Specify risk
 
             $result['testDetails'][0]['placeholder'] = "NUMBER_FOUND";
 
@@ -420,7 +420,7 @@ class View{
 
             $result['testDetails'][0]['values']['number'] = $phone_numbers;
         } else {
-            $result['score'] = 0;
+            $result['score'] = 40;
 
             $result['testDetails'][0] = NULL;
             $result['testDetails'][0] = NULL;
