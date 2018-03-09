@@ -279,7 +279,7 @@ At least one finding in every scan:
 | PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
 | DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
 | JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
-| REDIRECT_ERROR             | URL does a forbidden redirect                                                                                                                                          |
+| REDIRECT_ERROR             | URL does a forbidden redirect.                                                                                                                                         |
 
 
 
