@@ -96,57 +96,47 @@ No findings in any scans:
     "name": "InfoLeak-Scanner",
     "hasError": false,
     "errorMessage": null,
-    "score": 0,
+    "score": 58,
     "tests": [
         {
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 60,
             "scoreType": "info",
-            "testDetails": [
-                null
-            ]
+            "testDetails": null
         },
         {
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 70,
             "scoreType": "warning",
-            "testDetails": [
-                null
-            ]
+            "testDetails": null
         },
         {
             "name": "JS_LIB",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 50,
             "scoreType": "warning",
-            "testDetails": [
-                null
-            ]
+            "testDetails": null
         },
         {
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 70,
             "scoreType": "info",
-            "testDetails": [
-                null
-            ]
+            "testDetails": null
         },
         {
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 40,
             "scoreType": "info",
-            "testDetails": [
-                null
-            ]
+            "testDetails": null
         }
     ]
 }
