@@ -148,13 +148,13 @@ At least one finding in every scan:
     "name": "InfoLeak-Scanner",
     "hasError": false,
     "errorMessage": null,
-    "score": 58,
+    "score": 0,
     "tests": [
         {
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 60,
+            "score": 0,
             "scoreType": "info",
             "testDetails": [
                 {
@@ -173,7 +173,7 @@ At least one finding in every scan:
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 70,
+            "score": 0,
             "scoreType": "warning",
             "testDetails": [
                 {
@@ -190,7 +190,7 @@ At least one finding in every scan:
             "name": "JS_LIB",
             "hasError": false,
             "errorMessage": null,
-            "score": 50,
+            "score": 0,
             "scoreType": "warning",
             "testDetails": [
                 {
@@ -208,7 +208,7 @@ At least one finding in every scan:
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 70,
+            "score": 0,
             "scoreType": "info",
             "testDetails": [
                 {
@@ -228,7 +228,7 @@ At least one finding in every scan:
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 40,
+            "score": 0,
             "scoreType": "info",
             "testDetails": [
                 {
