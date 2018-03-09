@@ -147,7 +147,7 @@ class View{
             }
         } else {
             $result['score']      = 60;
-            $result['testDetails'][0] = NULL;
+            $result['testDetails'] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_CMS');
             //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
@@ -233,8 +233,7 @@ class View{
         } else {
             $result['score'] = 70;
 
-            $result['testDetails'][0] = NULL;
-            $result['testDetails'][0] = NULL;
+            $result['testDetails'] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_PLUGINS');
             //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
@@ -335,8 +334,7 @@ class View{
         } else {
             $result['score'] = 50;
 
-            $result['testDetails'][0] = NULL;
-            $result['testDetails'][0] = NULL;
+            $result['testDetails'] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_JS');
             //$result['finding'] = $this->messages->getMessageByName('NO_FINDING');
@@ -376,8 +374,7 @@ class View{
         } else {
             $result['score'] = 70;
 
-            $result['testDetails'][0] = NULL;
-            $result['testDetails'][0] = NULL;
+            $result['testDetails'] = NULL;
 
             //$emails_['score']   = 0;
 
@@ -422,8 +419,7 @@ class View{
         } else {
             $result['score'] = 40;
 
-            $result['testDetails'][0] = NULL;
-            $result['testDetails'][0] = NULL;
+            $result['testDetails'] = NULL;
 
             //$phone_numbers_['comment'] = $this->messages->getMessageByName('NO_PHONE');
             //$phone_numbers_['finding'] = $this->messages->getMessageByName('NO_FINDING');
