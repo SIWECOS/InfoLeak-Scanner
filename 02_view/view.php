@@ -77,8 +77,8 @@ class View{
 
 
         $result['name'] = "CMS";
-        $result['hasError'] = FALSE;
-        $result['errorMessage'] = NULL;
+        $result['hasError'] = $this->controller->getScannerHasError();
+        $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(4);
 
@@ -86,7 +86,6 @@ class View{
             $result['score'] = 80;
 
             if (!$version) {
-
                 $result['testDetails'][0]['placeholder'] = "CMS_ONLY";
                 $result['testDetails'][0]['values']['cms'] = $cms;
                 //$result['comment'] = $this->messages->getMessageByName('CMS_ONLY',
@@ -173,8 +172,8 @@ class View{
         $result  = array();
 
         $result['name']  = "CMS_PLUGINS";
-        $result['hasError'] = FALSE;
-        $result['errorMessage'] = NULL;
+        $result['hasError'] = $this->controller->getScannerHasError();
+        $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(1);
 
@@ -267,8 +266,8 @@ class View{
         $MAX_FINDING_OUT = 2;
 
         $result['name']  = "JS_LIB";
-        $result['hasError'] = FALSE;
-        $result['errorMessage'] = NULL;
+        $result['hasError'] = $this->controller->getScannerHasError();
+        $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(1);
 
@@ -355,8 +354,8 @@ class View{
         $j = 0;
 
         $result['name']  = "EMAIL_ADDRESS";
-        $result['hasError'] = FALSE;
-        $result['errorMessage'] = NULL;
+        $result['hasError'] = $this->controller->getScannerHasError();
+        $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(4);
 
@@ -396,8 +395,8 @@ class View{
         $phone_numbers = $this->model->getPhoneNumbers();
 
         $result['name']  = "PHONE_NUMBER";
-        $result['hasError'] = FALSE;
-        $result['errorMessage'] = NULL;
+        $result['hasError'] = $this->controller->getScannerHasError();
+        $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(4);
 
