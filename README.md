@@ -43,22 +43,20 @@ Searches for phone numbers. Interesting for social engineering attacks and/or sc
 
 ## Score
 ```
-| Finding                         | Score (0-100) |
-|---------------------------------+---------------|
-| Content-Management-System (CMS) |            60 |
-| Plugins                         |            70 |
-| JavaScript libraries            |            50 |
-| Mails adresses                  |            70 |
-| Phone numbers                   |            40 |
+| Finding             | Score (0-100) |
+|---------------------+---------------|
+| CMS_ONLY            |            80 |
+| CMS_VERSION         |            60 |
+| CMS_VERSION_VULN    |             0 |
+| PLUGIN_ONLY         |            90 |
+| PLUGIN_VERSION      |            60 |
+| PLUGIN_VERSION_VULN |             0 |
+| JS_LIB_ONLY         |            90 |
+| JS_LIB_VERSION      |            70 |
+| JS_LIB_VULN_VERSION |             0 |
+| EMAIL_FOUND         |            80 |
+| NUMBER_FOUND        |            80 |
 ```
-
-Scores are set using:
-
-[Vulnerability Scoring System Version 3.0 Calculator](https://www.first.org/cvss/)
-
-[JavaScript](https://www.sourceclear.com/registry/security/information-disclosure/javascript/sid-2371/risk)
-
-[E-Mail](http://www.huawei.com/en-CA/psirt/security-advisories/2016/huawei-sa-20161214-01-smartphone-en)
 
 
 ## Running the scanner
