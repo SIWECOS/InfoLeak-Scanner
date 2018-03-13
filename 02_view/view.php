@@ -83,7 +83,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($cms)) {
-            $result['score'] = 0; // TODO: higher/lower risk if version was detected etc
+            $result['score'] = 80;
 
             if (!$version) {
 
@@ -97,7 +97,7 @@ class View{
                     $result['testDetails'][0]['placeholder'] = "CMS_VERSION_VULN";
                     $result['testDetails'][0]['values']['cms'] = $cms;
                     $result['testDetails'][0]['values']['version'] = $version;
-
+                    $result['score'] = 0;
                     //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION_VULN',
                     //                                                       $cms . " " . $version);
                 } else {
@@ -105,7 +105,7 @@ class View{
                     $result['testDetails'][0]['placeholder'] = "CMS_VERSION";
                     $result['testDetails'][0]['values']['cms'] = $cms;
                     $result['testDetails'][0]['values']['version'] = $version;
-
+                    $result['score'] = 60;
                     //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION',
                     //                                                       $cms . " " . $version);
                 }
@@ -146,7 +146,7 @@ class View{
 
             }
         } else {
-            $result['score']      = 60;
+            $result['score']      = 100;
             $result['testDetails'] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_CMS');
@@ -184,7 +184,7 @@ class View{
             $nodeName = $nodes['attrName'];
             $version  = $nodes['version'];
             $plugin_name = $nodes['plugin_name'];
-            $result['score'] = 0; // TODO: higher/lower risk if version was detected etc
+            $result['score'] = 0;
 
             $limit = 2;
             if (count($isVuln) < $limit)
@@ -209,13 +209,14 @@ class View{
                     $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
                     $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                     $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+                    $result['score'] = 0;
                 } else {
                     if ($version[$j] === NULL) {
                         $result['testDetails'][0]['placeholder'] = "PLUGIN_ONLY";
                         $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
                         $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                         $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
-
+                        $result['score'] = 90;
                         //$result['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j]);
                         //$result['finding'][] = $f_val[$j];
                     } else {
@@ -224,14 +225,14 @@ class View{
                         $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
                         $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                         $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
-
+                        $result['score'] = 60;
                         //$result['comment'][] = $this->messages->getMessageByName('PLUGIN_ONLY', $plugin_name[$j] . " " . $version[$j]);
                         //$result['finding'][] = $f_val[$j];
                     }
                 }
             }
         } else {
-            $result['score'] = 70;
+            $result['score'] = 100;
 
             $result['testDetails'] = NULL;
 
@@ -273,11 +274,10 @@ class View{
 
         if (!empty($nodes)) {
             $i = $j = 0;
-            $result['score']     = 0;
 
             $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
             $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
-
+            $result['score'] = 90;
             //$result['comment']  = $this->messages->getMessageByName('JS_ONLY',
             //                                                        $lib[$i]);
 
@@ -301,12 +301,10 @@ class View{
 
                 if ((!empty($version[$i])) &&
                     ($version[$i] !== "N/A")) {
-                    //$result['risk'] = 6;
-
                     $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
                     $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
                     $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
-
+                    $result['score'] = 70;
                     //$result['comment']   = $this->messages->getMessageByName('JS_VERSION',
                     //                                                         $lib[$i] . " " . $version[$i]);
                 } else {
@@ -315,13 +313,10 @@ class View{
 
                 if ((!empty($isVuln[$i])) &&
                     ($isVuln[$i] !== "N/A")) {
-                    //$result['risk'] = 8;
-                    //$result['result'] = $isVuln[$i];
-
                     $result['testDetails'][0]['placeholder'] = "JS_LIB_VULN_VERSION";
                     $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
                     $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
-
+                    $result['score'] = 0;
                     //$result['comment']   = $this->messages->getMessageByName('JS_VULN_VERSION',
                     //                                                         $lib[$i] . " " . $version[$i]);
                 }
@@ -332,7 +327,7 @@ class View{
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
         } else {
-            $result['score'] = 50;
+            $result['score'] = 100;
 
             $result['testDetails'] = NULL;
 
@@ -366,13 +361,13 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($emails)) {
-            $result['score']   = 0;
+            $result['score']   = 80;
             $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
             $result['testDetails'][0]['values']['email_address'][] = $emails;
             //$emails_['comment'] = $this->messages->getMessageByName('EMAIL_ONLY');
         } else {
-            $result['score'] = 70;
+            $result['score'] = 100;
 
             $result['testDetails'] = NULL;
 
@@ -409,16 +404,14 @@ class View{
         if (!empty($phone_numbers)) {
             $phone_numbers_  = array();
 
-            $result['score'] = 0; // TODO: Specify risk
-
+            $result['score'] = 80;
             $result['testDetails'][0]['placeholder'] = "NUMBER_FOUND";
 
             //$phone_numbers_['comment'] = $this->messages->getMessageByName('PHONE_ONLY');;
 
             $result['testDetails'][0]['values']['number'] = $phone_numbers;
         } else {
-            $result['score'] = 40;
-
+            $result['score'] = 100;
             $result['testDetails'] = NULL;
 
             //$phone_numbers_['comment'] = $this->messages->getMessageByName('NO_PHONE');
