@@ -105,13 +105,13 @@ No findings in any scans:
     "name": "InfoLeak-Scanner",
     "hasError": false,
     "errorMessage": null,
-    "score": 58,
+    "score": 100,
     "tests": [
         {
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 60,
+            "score": 100,
             "scoreType": "info",
             "testDetails": null
         },
@@ -119,7 +119,7 @@ No findings in any scans:
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 70,
+            "score": 100,
             "scoreType": "warning",
             "testDetails": null
         },
@@ -127,7 +127,7 @@ No findings in any scans:
             "name": "JS_LIB",
             "hasError": false,
             "errorMessage": null,
-            "score": 50,
+            "score": 100,
             "scoreType": "warning",
             "testDetails": null
         },
@@ -135,7 +135,7 @@ No findings in any scans:
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 70,
+            "score": 100,
             "scoreType": "info",
             "testDetails": null
         },
@@ -143,7 +143,7 @@ No findings in any scans:
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 40,
+            "score": 100,
             "scoreType": "info",
             "testDetails": null
         }
@@ -157,32 +157,30 @@ At least one finding in every scan:
     "name": "InfoLeak-Scanner",
     "hasError": false,
     "errorMessage": null,
-    "score": 0,
+    "score": 20,
     "tests": [
         {
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
-                    "placeholder": "CMS_VERSION",
+                    "placeholder": "CMS_ONLY",
                     "values": {
                         "cms": "wordpress",
-                        "version": "4.9.1",
                         "node": "meta",
-                        "node_content": "content : WordPress 4.9.1"
+                        "node_content": "content : WordPress"
                     }
                 }
             ]
-        },
         },
         {
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 90,
             "scoreType": "warning",
             "testDetails": [
                 {
@@ -190,7 +188,7 @@ At least one finding in every scan:
                     "values": {
                         "plugin": "styles",
                         "node": "href",
-                        "node_content": "[...]/wp-content/plugins/contact-form-7/"
+                        "node_content": "[...]/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0"
                     }
                 }
             ]
@@ -217,7 +215,7 @@ At least one finding in every scan:
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
@@ -225,7 +223,6 @@ At least one finding in every scan:
                     "values": {
                         "email_address": [
                             [
-                                "user@domain.de",
                                 "admin@domain.de"
                             ]
                         ]
@@ -237,15 +234,15 @@ At least one finding in every scan:
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 0,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
                     "placeholder": "NUMBER_FOUND",
                     "values": {
                         "number": [
-                            "0123-10 00 22-2",
-                            "0123-20 00 33-444"
+                            "0111-22 33 44-5",
+                            "0111-22 33 44-55"
                         ]
                     }
                 }
