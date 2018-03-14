@@ -1,32 +1,32 @@
 CMS_ONLY
-Verwendete CMS {cms} detektiert.
+Die verwendete CMS %cms% wurde detektiert.
 
 CMS_VERSION
-Verwendete CMS {cms} und dessen Version {version} detektiert.
+Die verwendete CMS %cms% und dessen Version %version% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
 
 CMS_VERSION_VULN
-Verwundbare CMS {cms} der Version {version} detektiert.
+Die verwendete CMS %cms% der Version %version% wurde detektiert. Für diese Version ist eine Schwachstelle bekannt.
 
 PLUGIN_ONLY
-Verwendetes CMS Plugin {plugin} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Das verwendete CMS Plugin %plugin% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert.
 
 PLUGIN_VERSION
-Verwendetes CMS Plugin {plugin} mit der Version {plugin_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Das verwendete CMS Plugin %plugin% mit der Version %plugin_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
 
 PLUGIN_VERSION_VULN
-Verwundbares CMS Plugin {plugin} mit der Version {plugin_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Das verwendete CMS Plugin %plugin% der Version %plugin_version% in DOM-node %node% mit dem Inhalt %node_content% detektiert. Für diese Version ist eine Schwachstelle bekannt.
 
 JS_LIB_ONLY
-Verwendete JavaScript-Bibliothek {js_lib_name} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Die verwendete JavaScript-Bibliothek %js_lib_name% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert.
 
 JS_LIB_VERSION
-Verwendete JavaScript-Bibliothek {js_lib_name} mit der Version {js_lib_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
 
 JS_LIB_VULN_VERSION
-Verwundbare JavaScript-Bibliothek {js_lib_name} mit der Version {js_lib_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Für diese Version ist eine Schwachstelle bekannt.
 
 EMAIL_FOUND
-Email-Adresse {email_adress} gefunden.
+Die Email-Adresse %email_adress% wurde gefunden. Wollen Sie diese Email-Adresse wirklich veröffentlichen?
 
 NUMBER_FOUND
-Telefonnummer {number} gefunden.
+Die Telefonnummer %number% wurde gefunden. Wollen Sie diese Telefonnummer wirklich veröffentlichen?
