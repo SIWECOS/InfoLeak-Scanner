@@ -47,15 +47,23 @@ Searches for phone numbers. Interesting for social engineering attacks and/or sc
 |---------------------+---------------|
 | CMS_ONLY            |            80 |
 | CMS_VERSION         |            60 |
-| CMS_VERSION_VULN    |             0 |
 | PLUGIN_ONLY         |            90 |
 | PLUGIN_VERSION      |            60 |
-| PLUGIN_VERSION_VULN |             0 |
 | JS_LIB_ONLY         |            90 |
 | JS_LIB_VERSION      |            70 |
-| JS_LIB_VULN_VERSION |             0 |
 | EMAIL_FOUND         |            80 |
 | NUMBER_FOUND        |            80 |
+
+If there was a finding like:
+
+	CMS_VERSION_VULN
+	PLUGIN_VERSION_VULN
+	JS_LIB_VULN_VERSION
+
+then the overall score will capped to 20 and every additional vulnerability
+will decrease the overall score by 10. Which means, that if 
+CMS_VERSION_VULN and PLUGIN_VERSION_VULN and JS_LIB_VULN_VERSION is returned, the
+overall score will be 0.
 ```
 
 
