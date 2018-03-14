@@ -29,4 +29,4 @@ EMAIL_FOUND
 Email-Adresse {email_adress} gefunden.
 
 NUMBER_FOUND
-Telefonnummer {numer} gefunden.
+Telefonnummer {number} gefunden.
