@@ -47,10 +47,13 @@ Searches for phone numbers. Interesting for social engineering attacks and/or sc
 |---------------------+---------------|
 | CMS_ONLY            |            80 |
 | CMS_VERSION         |            60 |
+| CMS_VERSION_VULN    |     see below |
 | PLUGIN_ONLY         |            90 |
 | PLUGIN_VERSION      |            60 |
+| PLUGIN_VERSION_VULN |     see below |
 | JS_LIB_ONLY         |            90 |
 | JS_LIB_VERSION      |            70 |
+| JS_LIB_VULN_VERSION |     see below |
 | EMAIL_FOUND         |            80 |
 | NUMBER_FOUND        |            80 |
 
