@@ -1,0 +1,32 @@
+CMS_ONLY
+Verwendete CMS {cms} detektiert.
+
+CMS_VERSION
+Verwendete CMS {cms} und dessen Version {version} detektiert.
+
+CMS_VERSION_VULN
+Verwundbare CMS {cms} der Version {version} detektiert.
+
+PLUGIN_ONLY
+Verwendetes CMS Plugin {plugin} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+PLUGIN_VERSION
+Verwendetes CMS Plugin {plugin} mit der Version {plugin_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+PLUGIN_VERSION_VULN
+Verwundbares CMS Plugin {plugin} mit der Version {plugin_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+JS_LIB_ONLY
+Verwendete JavaScript-Bibliothek {js_lib_name} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+JS_LIB_VERSION
+Verwendete JavaScript-Bibliothek {js_lib_name} mit der Version {js_lib_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+JS_LIB_VULN_VERSION
+Verwundbare JavaScript-Bibliothek {js_lib_name} mit der Version {js_lib_version} in DOM-Node {node} mit dem Inhalt {node_content} detektiert.
+
+EMAIL_FOUND
+Email-Adresse {email_adress} gefunden.
+
+NUMBER_FOUND
+Telefonnummer {numer} gefunden.
