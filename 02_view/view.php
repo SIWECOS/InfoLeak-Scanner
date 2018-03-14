@@ -35,6 +35,12 @@ class View{
     private $mode;
     private $scan_count = 5;
     private $global_score = 0;
+    /**
+     * Max 3
+     * Count of vulnerabilities found
+     * -> CMS/JS_LIB/PLUGIN are the 3 possibilities
+     */
+    private $vuln_count = 0;
 
     private $scan_result;
 
@@ -97,6 +103,7 @@ class View{
                     $result['testDetails'][0]['values']['cms'] = $cms;
                     $result['testDetails'][0]['values']['version'] = $version;
                     $result['score'] = 0;
+                    $this->vuln_count += 1;
                     //$result['comment'] = $this->messages->getMessageByName('CMS_VERSION_VULN',
                     //                                                       $cms . " " . $version);
                 } else {
@@ -209,6 +216,7 @@ class View{
                     $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                     $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
                     $result['score'] = 0;
+                    $this->vuln_count += 1;
                 } else {
                     if ($version[$j] === NULL) {
                         $result['testDetails'][0]['placeholder'] = "PLUGIN_ONLY";
@@ -316,6 +324,7 @@ class View{
                     $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
                     $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
                     $result['score'] = 0;
+                    $this->vuln_count += 1;
                     //$result['comment']   = $this->messages->getMessageByName('JS_VULN_VERSION',
                     //                                                         $lib[$i] . " " . $version[$i]);
                 }
@@ -446,7 +455,13 @@ class View{
         $result["name"] = "InfoLeak-Scanner";
         $result["hasError"] = $this->controller->getScannerHasError();
         $result["errorMessage"] = $this->controller->getScannerErrorMessage();
-        $result["score"] = $this->global_score/$this->scan_count;
+        
+        if ($this->vuln_count > 0) {
+            $result["score"] = (20 - (($this->vuln_count-1) * 10));
+        } else {
+            $result["score"] = $this->global_score/$this->scan_count;            
+        }
+        
         $result["tests"] = $tests;
 
         $this->scan_result = $result;
