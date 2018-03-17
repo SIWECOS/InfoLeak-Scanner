@@ -270,13 +270,12 @@ class Analyser {
                             continue;
                         }
                     }
-                } else {
-                    continue;
                 }
             }
             $result[] = $phoneNumberMatch->rawString();
         }
-
+        $result = array_unique($result);
+        
         return $result;
     }
 
