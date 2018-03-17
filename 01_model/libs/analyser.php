@@ -257,6 +257,10 @@ class Analyser {
             $date = str_replace(' ', '', $date);
             if (!empty($date)) {
                 if (count($date) === 3) {  // it contains 2 dots
+                    // expect years to be at maximum 10 years from now
+                    if ($date[2] > (date("Y")+10)) {
+                        continue;
+                    }
                     if (($date[0] <= 12) && ($date[1] <= 31)) {
                         if (checkdate($date[0], $date[1], $date[2])) {
                             continue;
