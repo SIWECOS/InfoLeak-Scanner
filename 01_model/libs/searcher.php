@@ -97,6 +97,16 @@ class Searcher{
     }
 
     /**
+     * @short Search $word in all a-tags of the given DOM
+     * @return node
+     */
+    public function in_a($word){
+        $nodes = $this->xpath_search("//a[@*[contains(., '" . $word . "')]]");
+
+        return $nodes;
+    }
+
+    /**
      * @short Search $word in all comments
      * @return node
      */
