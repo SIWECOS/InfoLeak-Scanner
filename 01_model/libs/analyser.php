@@ -160,11 +160,18 @@ class Analyser {
         //$source = preg_replace("/\p{Han}+/", '', $source);
 
         $remover = new Remover($this->source);
+
+        // remove anchor tags if a phone number is not linked via "tel:"
+        $number_in_url = $this->searcher->in_a("tel");
+        if (empty($number_in_url)) {
+            $source = $remover->removeNode($source, "a");
+        }
+        
         /**
          * Delete potential false-positive tags/attributes
          */
         $toRemove = array("script", "path", "polygon", "polyline", "svg",
-                          "symbol", "source", "style", "a", "audio", "applet",
+                          "symbol", "source", "style", "audio", "applet",
                           "basefont", "button", "canvas", "map", "menu", "nav",
                           "progress", "time", "area", "img");
         foreach ($toRemove as $node) {
