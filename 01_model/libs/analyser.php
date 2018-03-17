@@ -228,11 +228,12 @@ class Analyser {
             }
 
             /**
-             * Phone numbers in general start with 0 or a +. Filter anything
+             * Phone numbers in general start with 0, ( or a +. Filter anything
              * else.
              */
             if (($phoneNumber[0] != "0")
-                && ($phoneNumber[0] != "+")) {
+                && ($phoneNumber[0] != "+")
+                && ($phoneNumber[0] != "(")) {
                 continue;
             }
 
@@ -243,7 +244,7 @@ class Analyser {
                 || (strpos($phoneNumber, 'e') !== false)) {
                 continue;
             }
-
+            
             /* Check if phoneNumber is a date (false-positive) */
             if (strpos($phoneNumber, '.')) {
                 $date = explode('.', $phoneNumber);
