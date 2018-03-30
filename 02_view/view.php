@@ -375,7 +375,7 @@ class View{
             $result['score']   = 80;
             $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
-            $result['testDetails'][0]['values']['email_address'][] = $emails;
+            $result['testDetails'][0]['values']['email_adress'][] = $emails;
             //$emails_['comment'] = $this->messages->getMessageByName('EMAIL_ONLY');
         } else {
             $result['score'] = 100;
