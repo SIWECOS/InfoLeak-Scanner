@@ -295,8 +295,12 @@ class View{
                     break;
 
                 foreach($node->attributes as $attribute) {
-                    $finding['node_content'] = $attribute->value;
-                    $finding['node_name'] = $attribute->name;
+                    if (strpos($attribute->value, $lib[$i]) !== FALSE) {
+                        $finding['node_name'] = $attribute->name;
+                        $finding['node_content'] = $attribute->value;
+
+                        break; // attribute found; stop searching
+                    }
 
                     /*
                       if (strlen($finding['node_content']) > 100) {
@@ -329,14 +333,13 @@ class View{
                     //                                                         $lib[$i] . " " . $version[$i]);
                 }
 
-
                 $i++;
+
                 $result['testDetails'][0]['values']['node'] = $finding['node_name'];
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
         } else {
             $result['score'] = 100;
-
             $result['testDetails'] = NULL;
 
             //$result['comment'] = $this->messages->getMessageByName('NO_JS');
@@ -455,13 +458,13 @@ class View{
         $result["name"] = "InfoLeak-Scanner";
         $result["hasError"] = $this->controller->getScannerHasError();
         $result["errorMessage"] = $this->controller->getScannerErrorMessage();
-        
+
         if ($this->vuln_count > 0) {
             $result["score"] = (20 - (($this->vuln_count-1) * 10));
         } else {
-            $result["score"] = $this->global_score/$this->scan_count;            
+            $result["score"] = $this->global_score/$this->scan_count;
         }
-        
+
         $result["tests"] = $tests;
 
         $this->scan_result = $result;
