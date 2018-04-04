@@ -222,8 +222,7 @@ class Control{
                 if ($tmp !== FALSE) {
                     $redir_host = parse_url($this->checkURL($redir[1]));
                 } else {
-                    $this->setScannerErrorMessage
-                        ($this->messages->getMessageByName('REDIRECT_ERROR'));
+                    $this->setScannerErrorMessage(23, array('domain' => $redir[1]));
                     $this->setScannerHasError(TRUE);
                     return FALSE;
                 }
