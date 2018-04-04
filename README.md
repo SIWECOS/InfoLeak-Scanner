@@ -279,9 +279,9 @@ At least one finding in every scan:
 |                            |                                                                                                                                           |
 | **ERRORS**                 |                                                                                                                                           |
 | NO_SOURCE_CODE             | Given URL has no source code.                                                                                                             |
-| NO_VALID_URL               | Given URL is not a valid URL.                                                                                                             |
+| INVALID_URL               | Given URL is not a valid URL.                                                                                                             |
 | LOCALHOST_SCAN_NOT_ALLOWED | Scanning localhost ist not permitted.                                                                                                     |
-| NOT_REACHABLE              | Given URL is not reachable.                                                                                                               |
+| NO_RESPONSE              | Given URL is not reachable.                                                                                                               |
 | PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
 | DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
 | JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
