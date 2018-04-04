@@ -66,6 +66,18 @@ class Messages {
         }
     }
 
+    /**
+     * Entries in messages.xml are listed with id attributes.
+     * Select message with a given id and return its name (placeholder)
+     */
+    public function getNameById($id) {
+        $node = $this->messages->xpath("//message[@id=" . intval($id) . "]/name");
+
+        if ($node) {
+            return $node;
+        }
+    }
+
 
     /**
      * Select message by its name and optionally add note to message.
