@@ -277,8 +277,7 @@ class Control{
 
         $curl_errno = curl_errno($con);
         if ($curl_errno === 28) {
-            $this->setScannerErrorMessage
-                ($this->messages->getMessageByName('NOT_REACHABLE'));
+            $this->setScannerErrorMessage(19, array('domain' => $this->url));
             $this->setScannerHasError(TRUE);
 
             curl_close($con);
