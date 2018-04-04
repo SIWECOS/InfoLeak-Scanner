@@ -30,3 +30,27 @@ Die Email-Adresse %email_adress% wurde gefunden. Wollen Sie diese Email-Adresse 
 
 NUMBER_FOUND
 Die Telefonnummer %number% wurde gefunden. Wollen Sie diese Telefonnummer wirklich veröffentlichen?
+
+NO_SOURCE_CODE
+Die Domain %domain% hat keinen Quelltext zurückgegeben.
+
+INVALID_URL
+Die URL %domain% ist keine gültige URL.
+
+LOCALHOST_SCAN_NOT_ALLOWED
+Sie haben versucht mit %domain% einen Scan im Localhost durchzuführen. Dies wurde verweigert.
+
+NO_RESPONSE
+Die Domain %domain% antwortet nicht.
+
+PORT_DISALLOWED
+Sie haben versucht mit %domain% einen Scan auf einem ungewöhnlichem Port durchzuführen. Dies wurde verweigert.
+
+DONT_LEAK_USER_CREDS
+Sie haben versucht mit %domain% einen Scan durchzuführen. Dabei beinhaltet die angegebene Domain Zugangsdaten, die Sie vermutlich nicht veröffentlichen wollen. Zu Ihrem Schutz wurde der Scan nicht durchgeführt.
+
+JSON_DECODE_ERROR
+Der Scanner wurde mit einer nicht korrekt formatierten JSON Anfrage gestartet. Siehe Webserver-Logs für mehr Informationen.
+
+REDIRECT_ERROR
+Die Domain %domain% versucht ungewöhnliche Weiterleitungen zu machen. Dies wurde verweigert.
