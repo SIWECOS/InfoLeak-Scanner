@@ -68,8 +68,7 @@ class Control{
          * analyse.
          */
         if (empty($this->source)) {
-            $this->setScannerErrorMessage
-                ($this->messages->getMessageByName('NO_SOURCE_CODE'));
+            $this->setScannerErrorMessage(16, array('domain' => $this->url));
             $this->to_analyse = FALSE;
             $this->setScannerHasError(TRUE);
             return NULL;
