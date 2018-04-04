@@ -340,8 +340,7 @@ class Control{
 
                 if (isset($url_tmp['host'])) {
                     if (($url_tmp['host'] === '127.0.0.1') || ($url_tmp['host'] === 'localhost')) {
-                        $this->setScannerErrorMessage
-                            ($this->messages->getMessageByName('LOCALHOST_SCAN_NOT_ALLOWED'));
+                        $this->setScannerErrorMessage(18, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
