@@ -280,12 +280,12 @@ At least one finding in every scan:
 | **ERRORS**                 |                                                                                                                                           |
 | NO_SOURCE_CODE             | Given URL has no source code.                                                                                                             |
 | INVALID_URL               | Given URL is not a valid URL.                                                                                                             |
-| LOCALHOST_SCAN_NOT_ALLOWED | Scanning localhost ist not permitted.                                                                                                     |
+| INFOLEAK_LOCALHOST_SCAN_NOT_ALLOWED | Scanning localhost ist not permitted.                                                                                                     |
 | NO_RESPONSE              | Given URL is not reachable.                                                                                                               |
-| PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
-| DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
-| JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
-| REDIRECT_ERROR             | URL does a forbidden redirect.                                                                                                                                         |
+| INFOLEAK_PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
+| INFOLEAK_DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
+| INFOLEAK_JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
+| INFOLEAK_REDIRECT_ERROR             | URL does a forbidden redirect.                                                                                                                                         |
 
 
 
