@@ -373,8 +373,7 @@ class Control{
                 if (isset($url_tmp['port'])) {
                     if (($url_tmp['port'] != '80')
                         && ($url_tmp['port'] != '443')) {
-                        $this->setScannerErrorMessage
-                            ($this->messages->getMessageByName('PORT_DISALLOWED'));
+                        $this->setScannerErrorMessage(20, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
