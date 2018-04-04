@@ -332,8 +332,7 @@ class Control{
 
             /* Is the URL valid? */
             if ((filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_HOST_REQUIRED) === FALSE)) {
-                $this->setScannerErrorMessage
-                    ($this->messages->getMessageByName('NO_VALID_URL'));
+                $this->setScannerErrorMessage(17, array('domain' => $url));
                 $this->setScannerHasError(TRUE);
                 return FALSE;
             } else {
