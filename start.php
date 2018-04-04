@@ -29,12 +29,29 @@ include '02_view/view.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $messages = new Messages();
     $data = json_decode(file_get_contents("php://input"));
 
     /* Exit if JSON can not be decoded. */
     if ($data === NULL) {
-        echo $messages->getMessageByName('JSON_DECODE_ERROR');
+        $result["name"] = "InfoLeak-Scanner";
+        $result["hasError"] = TRUE;
+        
+        $result["score"] = 100;
+        $result["tests"][] = NULL;
+
+        error_log("[-] [InfoLeak-Scanner]");
+        error_log("  [-] Given JSON could not be decoded.", 0);
+        error_log("      name: " . $result["name"], 0);
+        error_log("      hasError: " . $result["hasError"], 0);
+        error_log("      errorMessage: {", 0);
+        error_log("          \"placeholder\": \"JSON_DECODE_ERROR\"", 0);
+        error_log("          \"values\": {", 0);
+        error_log("                \"json\":" . file_get_contents("php://input"), 0);
+        error_log("          }", 0);
+        error_log("          \"score\": 100", 0);
+        error_log("          \"tests\": null", 0);
+        error_log("      }", 0);
+        
         return;
     }
 
