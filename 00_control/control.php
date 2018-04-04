@@ -380,8 +380,7 @@ class Control{
                 }
 
                 if (isset($url_tmp['user']) || isset($url_tmp['pass'])) {
-                    $this->setScannerErrorMessage
-                        ($this->messages->getMessageByName('DONT_LEAK_USER_CREDS'));
+                    $this->setScannerErrorMessage(20, array('domain' => $url));
                     $this->setScannerHasError(TRUE);
                     return FALSE;
                 } else {
