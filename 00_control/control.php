@@ -49,8 +49,8 @@ class Control{
         if ($this->url !== FALSE) {
             if ($this->checkRedir() === TRUE) {
                 /* URL seems to be OK. Set source code. */
-                $return_code = $this->setSource();
-                if ($return_code === 28) { // timeout occured
+                $error_code = $this->setSource();
+                if ($error_code === 28) { // timeout occured
                     $this->to_analyse = FALSE;
                     // error message is set in setSource()
                     $this->setScannerHasError(TRUE);
@@ -63,6 +63,8 @@ class Control{
             return NULL;
         }
 
+
+        
         /**
          * If the URL was valid but the source code is empty there is nothing to
          * analyse.
