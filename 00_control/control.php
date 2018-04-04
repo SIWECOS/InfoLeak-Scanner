@@ -390,8 +390,7 @@ class Control{
                     $status_code = $this->header[1];
 
                     if (empty($status_code)) {
-                        $this->setScannerErrorMessage
-                            ($this->messages->getMessageByName('NOT_REACHABLE'));
+                        $this->setScannerErrorMessage(19, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
                     } else if ($status_code['http_code'] != '404') {
