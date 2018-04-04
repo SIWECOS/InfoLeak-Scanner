@@ -99,11 +99,11 @@
   <message id="16">
     <name>NO_SOURCE_CODE</name>
     <type>error</type>
-    <content>Sorry, the given address has no source code</content>
+    <content>Sorry, the given URL has no source code</content>
   </message>
 
   <message id="17">
-    <name>NO_VALID_URL</name>
+    <name>INVALID_URL</name>
     <type>error</type>
     <content>Sorry, this does not look like a valid URL</content>
   </message>
@@ -115,9 +115,9 @@
   </message>
 
   <message id="19">
-    <name>NOT_REACHABLE</name>
+    <name>NO_RESPONSE</name>
     <type>error</type>
-    <content>Sorry, the given address is not reachable</content>
+    <content>The given URL does not respond</content>
   </message>
 
   <message id="20">
