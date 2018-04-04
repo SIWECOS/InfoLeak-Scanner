@@ -49,7 +49,13 @@ class Control{
         if ($this->url !== FALSE) {
             if ($this->checkRedir() === TRUE) {
                 /* URL seems to be OK. Set source code. */
-                $this->setSource();
+                $return_code = $this->setSource();
+                if ($return_code === 28) { // timeout occured
+                    $this->to_analyse = FALSE;
+                    // error message is set in setSource()
+                    $this->setScannerHasError(TRUE);
+                    return NULL;
+                }
             }
         } else {
             $this->to_analyse = FALSE;
@@ -179,6 +185,16 @@ class Control{
         /* Save content */
         $this->source = curl_exec($con);
 
+        $curl_errno = curl_errno($con);
+        if ($curl_errno === 28) {
+            $this->setScannerErrorMessage
+                ($this->messages->getMessageByName('NOT_REACHABLE'));
+            $this->setScannerHasError(TRUE);
+
+            curl_close($con);
+            return 28; // timeout
+        }
+
         curl_close($con);
 
         return 0;
@@ -259,11 +275,23 @@ class Control{
         $data = curl_exec($con);
         $info = curl_getinfo($con);
 
+        $curl_errno = curl_errno($con);
+        if ($curl_errno === 28) {
+            $this->setScannerErrorMessage
+                ($this->messages->getMessageByName('NOT_REACHABLE'));
+            $this->setScannerHasError(TRUE);
+
+            curl_close($con);
+            return 28; // timeout
+        }
+
         $result = array(
             '0' => $data,
             '1' => $info
         );
         $this->header = $result;
+
+        curl_close($con);
         return $result;
     }
 
