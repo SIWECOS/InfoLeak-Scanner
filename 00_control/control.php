@@ -362,8 +362,7 @@ class Control{
                         $bcast = $this->bcast;
                         $smask = $this->smask;
                         if ($this->IP_isLocal($url_tmp['host'], $bcast, $smask) === TRUE) {
-                            $this->setScannerErrorMessage
-                                ($this->messages->getMessageByName('NOT_REACHABLE'));
+                            $this->setScannerErrorMessage(19, array('domain' => $url));
                             $this->setScannerHasError(TRUE);
                             return FALSE;
                         }
