@@ -237,6 +237,7 @@ class Control{
                     return TRUE;
                 } else {
                     $this->setScannerHasError(TRUE);
+                    $this->setScannerErrorMessage(23, array('domain' => $redir[1]));
                     return FALSE;
                 }
             } else {
