@@ -398,8 +398,7 @@ class Control{
                         $this->url = $url;
                         return $url;
                     } else {
-                        $this->setScannerErrorMessage
-                            ($this->messages->getMessageByName('NOT_REACHABLE', "404"));
+                        $this->setScannerErrorMessage(19, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
                     }
