@@ -78,9 +78,12 @@ class Control{
     /**
      * Function to set the scanners error message.
      */
-    public function setScannerErrorMessage($errorMessage) {
-        if (is_string($errorMessage)) {
-            $this->scannerErrorMessage = $errorMessage;
+    public function setScannerErrorMessage($id, $values) {
+        if (is_int($id)) {
+            $placeholder = $this->messages->getNameById($id);
+            
+            $this->scannerErrorMessage = array("placeholder" => (string)$placeholder[0],
+                                               "values" => $values);
         }
     }
 
