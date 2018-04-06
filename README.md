@@ -258,34 +258,50 @@ At least one finding in every scan:
 
 ### Messages
 
-| Placeholder                | Message                                                                                                                                   |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------- |
-| **SCAN CMS**               | 								                                                                                                          |
-| CMS_ONLY                   | Used Content-Management-System {cms} detected.                                                                                            |
-| CMS_VERSION                | Used Content-Management-System {cms} and its version {version} detected.                                                                  |
-| CMS_VERSION_VULN           | Vulnerable Content-Management-System {cms} version {version} detected                                                                     |
-| **SCAN PLUGIN**            |                                                                                                                                           |
-| PLUGIN_ONLY                | CMS Plugin {plugin} in DOM-node {node} via node-content {node_content} detected.                                                          |
-| PLUGIN_VERSION             | CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.                         |
-| PLUGIN_VERSION_VULN        | Vulnerable CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.              |
-| **SCAN JS**                |                                                                                                                                           |
-| JS_LIB_ONLY                | Used JavaScript library {js_lib_name} in DOM-node {node} via node-content {node_content} detected.                                        |
-| JS_LIB_VERSION             | Used JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected.       |
-| JS_LIB_VULN_VERSION        | Vulnerable JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected. |
-| **SCAN EMAIL**             |                                                                                                                                           |
-| EMAIL_FOUND                | Email address {email_address} found.                                                                                                      |
-| **SCAN PHONE**             |                                                                                                                                           |
-| NUMBER_FOUND               | Telephone number {number} found.                                                                                                          |
-|                            |                                                                                                                                           |
-| **ERRORS**                 |                                                                                                                                           |
-| NO_SOURCE_CODE             | Given URL has no source code.                                                                                                             |
-| INVALID_URL               | Given URL is not a valid URL.                                                                                                             |
+| Placeholder                         | Message                                                                                                                                   |
+|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SCAN CMS**                        | 								                                                                                                          |
+| CMS_ONLY                            | Used Content-Management-System {cms} detected.                                                                                            |
+| CMS_VERSION                         | Used Content-Management-System {cms} and its version {version} detected.                                                                  |
+| CMS_VERSION_VULN                    | Vulnerable Content-Management-System {cms} version {version} detected                                                                     |
+| **SCAN PLUGIN**                     |                                                                                                                                           |
+| PLUGIN_ONLY                         | CMS Plugin {plugin} in DOM-node {node} via node-content {node_content} detected.                                                          |
+| PLUGIN_VERSION                      | CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.                         |
+| PLUGIN_VERSION_VULN                 | Vulnerable CMS Plugin {plugin} and its version {plugin_version} in DOM-node {node} via node-content {node_content} detected.              |
+| **SCAN JS**                         |                                                                                                                                           |
+| JS_LIB_ONLY                         | Used JavaScript library {js_lib_name} in DOM-node {node} via node-content {node_content} detected.                                        |
+| JS_LIB_VERSION                      | Used JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected.       |
+| JS_LIB_VULN_VERSION                 | Vulnerable JavaScript library {js_lib_name} and its version {js_lib_version} in DOM-node {node} via node-content {node_content} detected. |
+| **SCAN EMAIL**                      |                                                                                                                                           |
+| EMAIL_FOUND                         | Email address {email_address} found.                                                                                                      |
+| **SCAN PHONE**                      |                                                                                                                                           |
+| NUMBER_FOUND                        | Telephone number {number} found.                                                                                                          |
+|                                     |                                                                                                                                           |
+| **ERRORS**                          |                                                                                                                                           |
+| NO_SOURCE_CODE                      | Given URL has no source code.                                                                                                             |
+| INVALID_URL                         | Given URL is not a valid URL.                                                                                                             |
 | INFOLEAK_LOCALHOST_SCAN_NOT_ALLOWED | Scanning localhost ist not permitted.                                                                                                     |
-| NO_RESPONSE              | Given URL is not reachable.                                                                                                               |
+| NO_RESPONSE                         | Given URL is not reachable.                                                                                                               |
 | INFOLEAK_PORT_DISALLOWED            | Given URL contains a disallowed port.                                                                                                     |
 | INFOLEAK_DONT_LEAK_USER_CREDS       | Given URL contains user credentials.                                                                                                      |
 | INFOLEAK_JSON_DECODE_ERROR          | Given POST request could not be decoded.                                                                                                  |
-| INFOLEAK_REDIRECT_ERROR             | URL does a forbidden redirect.                                                                                                                                         |
+| INFOLEAK_REDIRECT_ERROR             | URL does a forbidden redirect.                                                                                                            |
+| UNSUPPORTED_PROTOCOL                | The Website is using a protocol which is not supported.                                                                                   |
+| FAILED_INIT                         | Scanner failed to initialize the connection                                                                                               |
+| URL_MALFORMAT                       | URL is not properly formatted                                                                                                             |
+| COULDNT_RESOLVE_HOST                | The given remote host was not resolved                                                                                                    |
+| COULDNT_CONNECT                     | Failed to connect to host or proxy                                                                                                        |
+| REMOTE_ACCESS_DENIED                | Access to the resource given in the URL was denied                                                                                        |
+| HTTP2_ERROR                         | A problem was detected in the HTTP2 framing layer                                                                                         |
+| TOO_MANY_REDIRECTS                  | There were too many redirects                                                                                                             |
+| SEND_ERROR                          | Failed sending network data                                                                                                               |
+| RECV_ERROR                          | Failure receiving network data                                                                                                            |
+| BAD_CONTENT_ENCODING                | Unrecognized transfer encoding                                                                                                            |
+| SSL_ENGINE_INITFAILED               | Initiating the SSL Engine failed                                                                                                          |
+| TIMEOUT                             | The specified timeout period was reached according to the conditions                                                                      |
+| CONV_FAILED                         | Character conversion failed                                                                                                               |
+| REMOTE_FILE_NOT_FOUND               | The resource referenced in the URL does not exist                                                                                         |
+| HTTP2_STREAM                        | Stream error in the HTTP/2 framing layer                                                                                                                                          |
 
 
 
