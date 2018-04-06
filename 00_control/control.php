@@ -50,7 +50,7 @@ class Control{
             if ($this->checkRedir() === TRUE) {
                 /* URL seems to be OK. Set source code. */
                 $error_code = $this->setSource();
-                if ($error_code === 28) { // timeout occured
+                if ($error_code > 0) {
                     $this->to_analyse = FALSE;
                     // error message is set in setSource()
                     $this->setScannerHasError(TRUE);
@@ -64,7 +64,7 @@ class Control{
         }
 
 
-        
+
         /**
          * If the URL was valid but the source code is empty there is nothing to
          * analyse.
@@ -83,7 +83,7 @@ class Control{
     public function setScannerErrorMessage($id, $values) {
         if (is_int($id)) {
             $placeholder = $this->messages->getNameById($id);
-            
+
             $this->scannerErrorMessage = array("placeholder" => (string)$placeholder[0],
                                                "values" => $values);
         }
@@ -160,6 +160,79 @@ class Control{
     }
 
     /**
+     * Get curl error code and set errorMessage placeholder
+     */
+    private function curlError($errno) {
+        switch ($errno) {
+        case 28:
+            $this->setScannerErrorMessage(36, array('domain' => $this->url,
+                                                    'timeoutvalue' => 10));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 1:
+            $this->setScannerErrorMessage(24, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 2:
+            $this->setScannerErrorMessage(25, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 3:
+            $this->setScannerErrorMessage(26, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 6:
+            $this->setScannerErrorMessage(27, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 7:
+            $this->setScannerErrorMessage(28, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 9:
+            $this->setScannerErrorMessage(29, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 16:
+            $this->setScannerErrorMessage(30, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 47:
+            $this->setScannerErrorMessage(31, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 55:
+            $this->setScannerErrorMessage(32, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 61:
+            $this->setScannerErrorMessage(34, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 66:
+            $this->setScannerErrorMessage(35, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 75:
+            $this->setScannerErrorMessage(37, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 78:
+            $this->setScannerErrorMessage(38, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        case 92:
+            $this->setScannerErrorMessage(39, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        default:
+            $this->setScannerErrorMessage(19, array('domain' => $this->url));
+            $this->setScannerHasError(TRUE);
+            break;
+        }
+    }
+
+    /**
      * @short Get source code of given URL.
      * @var options Defines settings for the cURL connection
      * @var con The cURL connection
@@ -178,6 +251,7 @@ class Control{
             CURLOPT_RETURNTRANSFER  => true,
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_AUTOREFERER     => true,
+            CURLOPT_FAILONERROR     => true,
             CURLOPT_SSL_VERIFYPEER  => false,
             CURLOPT_USERAGENT       => $user_agent,
             CURLOPT_CONNECTTIMEOUT  => 10,
@@ -190,12 +264,11 @@ class Control{
         $this->source = curl_exec($con);
 
         $curl_errno = curl_errno($con);
-        if ($curl_errno === 28) {
-            $this->setScannerErrorMessage(19, array('domain' => $this->url));
-            $this->setScannerHasError(TRUE);
+        if ($curl_errno > 0) {
+            $this->curlError($curl_errno);
 
             curl_close($con);
-            return 28; // timeout
+            return $curl_errno;
         }
 
         curl_close($con);
@@ -268,6 +341,7 @@ class Control{
             CURLOPT_NOBODY         => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_FAILONERROR    => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_USERAGENT      => $user_agent,
             CURLOPT_CONNECTTIMEOUT => 10,
@@ -279,12 +353,11 @@ class Control{
         $info = curl_getinfo($con);
 
         $curl_errno = curl_errno($con);
-        if ($curl_errno === 28) {
-            $this->setScannerErrorMessage(19, array('domain' => $this->url));
-            $this->setScannerHasError(TRUE);
+        if ($curl_errno > 0) {
+            $this->curlError($curl_errno);
 
             curl_close($con);
-            return 28; // timeout
+            return $curl_errno;
         }
 
         $result = array(
@@ -392,7 +465,7 @@ class Control{
                     $status_code = $this->header[1];
 
                     if (empty($status_code)) {
-                        $this->setScannerErrorMessage(19, array('domain' => $url));
+                        //$this->setScannerErrorMessage(19, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
                     } else if ($status_code['http_code'] != '404') {
