@@ -56,6 +56,7 @@ INFOLEAK_REDIRECT_ERROR
 Die Domain %domain% versucht ungewöhnliche Weiterleitungen zu machen. Dies wurde verweigert.
 
 UNSUPPORTED_PROTOCOL
+Die Webseite %domain% verwendet ein nicht unterstütztes Protokoll.
 
 FAILED_INIT
 Der Scanner konnte die Verbindung zu %domain% nicht initialisieren.
