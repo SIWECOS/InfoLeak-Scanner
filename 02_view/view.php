@@ -145,6 +145,10 @@ class View{
             $result['testDetails'] = NULL;
         }
 
+        if ($result['hasError']) {
+            $result['score'] = 0;
+        }
+
         $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
@@ -221,6 +225,10 @@ class View{
             $result['score'] = 100;
 
             $result['testDetails'] = NULL;
+        }
+
+        if ($result['hasError']) {
+            $result['score'] = 0;
         }
 
         $this->global_score += $result['score'];
@@ -313,6 +321,10 @@ class View{
             $result['testDetails'] = NULL;
         }
 
+        if ($result['hasError']) {
+            $result['score'] = 0;
+        }
+
         $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
@@ -347,6 +359,10 @@ class View{
             $result['score'] = 100;
 
             $result['testDetails'] = NULL;
+        }
+
+        if ($result['hasError']) {
+            $result['score'] = 0;
         }
 
         $this->global_score += $result['score'];
@@ -385,6 +401,10 @@ class View{
             $result['testDetails'] = NULL;
         }
 
+        if ($result['hasError']) {
+            $result['score'] = 0;
+        }
+
         $this->global_score += $result['score'];
         $sorted_result = array("name"         => $result['name'],
                                "hasError"     => $result['hasError'],
@@ -417,6 +437,8 @@ class View{
 
         if ($this->vuln_count > 0) {
             $result["score"] = (20 - (($this->vuln_count-1) * 10));
+        } else if ($result['hasError']) {
+            $result['score'] = 0;
         } else {
             $result["score"] = $this->global_score/$this->scan_count;
         }
