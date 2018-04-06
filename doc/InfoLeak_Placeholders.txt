@@ -54,3 +54,50 @@ Der Scanner wurde mit einer nicht korrekt formatierten JSON Anfrage gestartet. S
 
 INFOLEAK_REDIRECT_ERROR
 Die Domain %domain% versucht ungewöhnliche Weiterleitungen zu machen. Dies wurde verweigert.
+
+UNSUPPORTED_PROTOCOL
+
+FAILED_INIT
+Der Scanner konnte die Verbindung zu %domain% nicht initialisieren.
+
+URL_MALFORMAT
+Die gegebene URL %domain% ist nicht richtig formatiert.
+
+COULDNT_RESOLVE_HOST
+Die gegeben Domain %domain% ist nicht bekannt und konnte nicht aufgelöst werden.
+
+COULDNT_CONNECT
+Die Verbindung zu %domain% konnte nicht aufgebaut werden.
+
+REMOTE_ACCESS_DENIED
+Die %domain% verweigert den Zugriff auf die Ressource.
+
+HTTP2_ERROR
+Beim Verbindungsaufbau zu %domain% ist im HTTP2 framing layer ein Fehler aufgetreten.
+
+TOO_MANY_REDIRECTS
+Beim Verbindungsaufbau zu %domain% wurden zu viele Weiterleitungen gemacht.
+
+SEND_ERROR
+Beim Verbinden zu %domain% konnten keine Daten über das Netzwerk gesendet werden.
+
+RECV_ERROR
+Beim Verbinden zu %domain% konnten keine Daten vom Netzwerk empfangen werden.
+
+BAD_CONTENT_ENCODING
+Beim Verbinden zu %domain% wurde ein unbekanntes encoding verwendet.
+
+SSL_ENGINE_INITFAILED
+Beim Verbinden zu %domain% konnte die SSL Engine nicht initialisiert werden.
+
+TIMEOUT
+Der Verbindungsaufbau zu %domain% hat innerhalb von %timeoutvalue% Sekunden kein Ergebnis geliefert und wurde abgebrochen.
+
+CONV_FAILED
+Beim Verbinden zu %domain% konnten die Zeichen nicht korrekt konvertiert werden.
+
+REMOTE_FILE_NOT_FOUND
+Die Ressource, die mit der Domain %domain% angegeben wurde scheint nicht zu existieren.
+
+HTTP2_STREAM
+Beim Verbinden zu %domain% ist ein Stream fehler im HTTP/2 framing layer aufgetreten.
