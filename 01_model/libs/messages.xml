@@ -143,5 +143,101 @@
     <type>error</type>
     <content>URL does a forbidden redirect</content>
   </message>
+  
+  <message id="24">
+    <name>UNSUPPORTED_PROTOCOL</name>
+    <type>error</type>
+    <content>The Website is using a protocol which is not supported</content>
+  </message>
 
+  <message id="25">
+    <name>FAILED_INIT</name>
+    <type>error</type>
+    <content>Scanner failed to initialize the connection</content>
+  </message>
+
+  <message id="26">
+    <name>URL_MALFORMAT</name>
+    <type>error</type>
+    <content>URL is not properly formatted</content>
+  </message>
+
+  <message id="27">
+    <name>COULDNT_RESOLVE_HOST</name>
+    <type>error</type>
+    <content>The given remote host was not resolved</content>
+  </message>
+
+  <message id="28">
+    <name>COULDNT_CONNECT</name>
+    <type>error</type>
+    <content>Failed to connect to host or proxy</content>
+  </message>
+  
+  <message id="29">
+    <name>REMOTE_ACCESS_DENIED</name>
+    <type>error</type>
+    <content>Access to the resource given in the URL was denied</content>
+  </message>
+
+  <message id="30">
+    <name>HTTP2_ERROR</name>
+    <type>error</type>
+    <content>A problem was detected in the HTTP2 framing layer</content>
+  </message>
+
+  <message id="31">
+    <name>TOO_MANY_REDIRECTS</name>
+    <type>error</type>
+    <content>There were too many redirects</content>
+  </message>
+
+  <message id="32">
+    <name>SEND_ERROR</name>
+    <type>error</type>
+    <content>Failed sending network data</content>
+  </message>
+
+  <message id="33">
+    <name>RECV_ERROR</name>
+    <type>Failure receiving network data</type>
+    <content></content>
+  </message>
+
+  <message id="34">
+    <name>BAD_CONTENT_ENCODING</name>
+    <type>error</type>
+    <content>Unrecognized transfer encoding</content>
+  </message>
+  
+  <message id="35">
+    <name>SSL_ENGINE_INITFAILED</name>
+    <type>error</type>
+    <content>Initiating the SSL Engine failed</content>
+  </message>
+
+  <message id="36">
+    <name>TIMEOUT</name>
+    <type>error</type>
+    <content>The specified timeout period was reached according to the conditions</content>
+  </message>
+
+  <message id="37">
+    <name>CONV_FAILED</name>
+    <type>error</type>
+    <content>Character conversion failed</content>
+  </message>
+
+  <message id="38">
+    <name>REMOTE_FILE_NOT_FOUND</name>
+    <type>error</type>
+    <content>The resource referenced in the URL does not exist</content>
+  </message>
+
+  <message id="39">
+    <name>HTTP2_STREAM</name>
+    <type>error</type>
+    <content>Stream error in the HTTP/2 framing layer</content>
+  </message>
+  
 </messages>
