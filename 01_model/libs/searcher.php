@@ -65,6 +65,12 @@ class Searcher{
         return $nodes;
     }
 
+    public function in_node_with_attr($node, $attr){
+        $nodes = $this->xpath_search("//" . $node . "[@" . $attr . "]");
+
+        return $nodes;
+    }    
+
     /**
      * @short Search $word in all attributes of the given DOM (case insensitive).
      * @return node
