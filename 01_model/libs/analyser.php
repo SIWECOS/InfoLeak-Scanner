@@ -590,6 +590,34 @@ class Analyser {
         }
     }
 
+   /**
+    * TODO: False-Positive = https://www.fietz-medien.de/eshops-groupware/webshop-systeme/xtcommerce-3.04-sp2.1/index.html
+    * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
+    * and as wordpress is tested first it will say it is a wordpress website
+    */
+   public function analyse_cms() {
+       $analysis_config = json_decode(
+           file_get_contents("01_model/libs/cms_analysis_config.json"), true);
+
+       foreach ($analysis_config as $field => $value) {
+           $result = $this->analyse_cms_specific($value['name'],
+                                                 $value['vuln_if_smaller'],
+                                                 $value['vuln_array'],
+                                                 $value['meta'],
+                                                 $value['version_regex'],
+                                                 $value['attribute_names'],
+                                                 $value['indicators'],
+                                                 $value['default_version'],
+                                                 $value['attribute_whitelist'],
+                                                 $value['html_regex']);
+
+           if (!empty($result)) {
+               return $result;
+           }
+       }
+   }
+
+
     /**
      * @short: Detect CMS using the source.
      * @var ret_nodes: TRUE means the function will return the nodes.
