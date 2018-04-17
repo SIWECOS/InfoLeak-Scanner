@@ -128,6 +128,7 @@ class Analyser {
     /**
      * @short: Detect version number in given string
      * @algorithm: Uses a regex to find version numbers like 1.0.4
+     * @var: all return the whole finding (TRUE) or just version number (FALSE)
      * @return array
      */
     public function getVersionNumber($string, $all=FALSE) {
