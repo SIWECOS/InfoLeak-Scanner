@@ -78,6 +78,7 @@ class View{
         $version  = $nodes['version'];
         $cms      = $nodes['cms'];
         $cms_node = $nodes['node'];
+        $cms_node_content = $nodes['node_content'];
         $MAX_FINDING_OUT = 1;
         $result    = array();
 
