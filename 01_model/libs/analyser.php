@@ -446,6 +446,150 @@ class Analyser {
         return $result;
     }
 
+
+    /**
+     * @short: Search for specific CMS indicators
+     * Restrictions: 1 Request to host and analyse only DOM
+     * CMS indicators:
+     * 1) Meta generator: attribute_value
+     * @return array
+     */
+    public function analyse_cms_specific($cms_name, $vuln_if_smaller, $vuln_array,
+                                         $attribute_value, $version_regex,
+                                         $attribute_names, $indicators,
+                                         $default_version, $attribute_whitelist,
+                                         $html_regex) {
+        $result = array();
+
+        // 1) search in generator/Author meta tags
+        if ($attribute_value !== NULL) {
+            foreach ($attribute_value as $field => $value) {
+                $meta_generators = $this->searcher->in_meta_with_name($field);
+                if (!empty($meta_generators)) {
+                    /*
+                     * Now check for known vulnerabilities
+                     * For references check vuln_references in cms_analysis_config.json
+                     * Versions < $vuln_if_smaller are vulnerable
+                     */
+                    // there is a meta with name $field, check if it contains $value
+                    foreach ($meta_generators as $mg) {
+                        foreach ($mg->attributes as $attribute) {
+                            if ($attribute->name === "content") {
+                                if (stripos($attribute->value, $value) !== FALSE) {
+                                    // CMS detected
+                                    $result['cms'] = $cms_name;
+
+                                    $tmp = $this->analyse_cms_version(
+                                        $version_regex,
+                                        $attribute->value,
+                                        $vuln_if_smaller,
+                                        $vuln_array);
+                                    if (!empty($tmp['version'])) {
+                                        $result['version'] = $tmp['version'];
+                                    } else {
+                                        $result['version'] = NULL;
+                                    }
+
+                                    if ($result['version'] === NULL) {
+                                        if ($default_version !== NULL) {
+                                            $result['version'] = $default_version;
+                                        } else {
+                                            $result['version'] = NULL;
+                                        }
+                                    }
+
+                                    if (!empty($tmp['isVuln'])) {
+                                        $result['isVuln'] = $tmp['isVuln'];
+                                    } else {
+                                        $result['isVuln'] = NULL;
+                                    }
+
+                                    $result['node'] = $mg;
+                                    $result['node_content'] = $attribute->value;
+
+                                    if (isset($result['version'])) {
+                                        // there was a finding with max entropy
+                                        return $result;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /**
+                     * return here and not in loop, because there could be meta tags
+                     * containing more informations (like versions)
+                     */
+                    if (isset($result['cms'])) {
+                        // there was at least one finding
+                        return $result;
+                    }
+                }
+            }
+        }
+
+        // 2) 3) search indicator in paths
+        if ($attribute_names !== NULL) {
+            foreach ($attribute_names as $attribute_name) {
+                if ($attribute_whitelist !== NULL) {
+                    $path_indicator = $this->searcher->in_node_with_attr($attribute_whitelist, $attribute_name);
+                } else {
+                    $path_indicator = $this->searcher->in_attr($attribute_name);
+                }
+
+                if (empty($path_indicator)) {
+                    return $result;
+                }
+
+                foreach ($path_indicator as $pi) {
+                    foreach ($pi->attributes as $attribute) {
+                        foreach ($indicators as $indicator) {
+                            if (stripos($attribute->value, $indicator) !== FALSE) {
+                                $result['cms'] = $cms_name;
+
+                                // probably no version to find here, do not try
+                                if ($default_version !== NULL) {
+                                    $result['version'] = $default_version;
+                                } else {
+                                    $result['version'] = NULL;
+                                }
+                                $result['isVuln'] = NULL;
+
+                                $result['node'] = $pi;
+                                $result['node_content'] = $attribute->value;
+
+                                return $result;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 4) search html regex in source
+        if ($html_regex !== NULL) {
+            foreach ($html_regex as $value) {
+                preg_match($value['regex'], $this->source, $search_result);
+                if (!empty($search_result)) {
+                    $result['cms'] = $cms_name;
+
+                    // probably no version to find here, do not try
+                    if ($default_version !== NULL) {
+                        $result['version'] = $default_version;
+                    } else {
+                        $result['version'] = NULL;
+                    }
+                    $result['isVuln'] = NULL;
+
+                    $result['node'] = $value['node'];
+                    $result['node_content'] = $search_result[0];
+
+                    return $result;
+                }
+            }
+        }
+    }
+
     /**
      * @short: Detect CMS using the source.
      * @var ret_nodes: TRUE means the function will return the nodes.
