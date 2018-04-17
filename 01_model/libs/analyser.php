@@ -167,7 +167,7 @@ class Analyser {
         if (empty($number_in_url)) {
             $source = $remover->removeNode($source, "a");
         }
-        
+
         /**
          * Delete potential false-positive tags/attributes
          */
@@ -245,7 +245,7 @@ class Analyser {
                 || (strpos($phoneNumber, 'e') !== false)) {
                 continue;
             }
-            
+
             /* Check if phoneNumber is a date (false-positive) */
             if (strpos($phoneNumber, '.')) {
                 $date = explode('.', $phoneNumber);
@@ -276,7 +276,7 @@ class Analyser {
             $result[] = $phoneNumberMatch->rawString();
         }
         $result = array_unique($result);
-        
+
         return $result;
     }
 
@@ -629,7 +629,7 @@ class Analyser {
      * * take effect.
      * @return array
      */
-    public function analyse_cms($file="./wordfiles/CMS.conf") {
+    public function analyse_cms1($file="./wordfiles/CMS.conf") {
         $i         = 0;
         $to_filter = FALSE;
         $result    = array();
@@ -1210,51 +1210,6 @@ class Analyser {
 
         return $IP;
     }
-
-
-    /**
-     * @short: Looks for tag independent keywords in the source code.
-     * @param to_filter: Controls whether a node should be filtered.
-     * @return array
-     */
-    public function analyse_generic($file="./wordfiles/keywords.conf") {
-        $i         = 0;
-        $result    = array();
-        $lineCount = count(file($file));
-        $to_filter = FALSE;
-
-        while ($i < $lineCount) {
-            ++$i;
-            $line = getLine($file, $i);
-            $line = preg_replace("/\n/", "", $line);
-
-            $nodes = $this->searcher->in_all($line);
-            if (!empty($nodes->length)) {
-                foreach ($nodes as $node) {
-                    /* Filter Tags */
-                    if ($node->nodeName === "div") {
-                        $to_filter = TRUE;
-                    } else if ($node->nodeName === "p") {
-                        $to_filter = TRUE;
-                    }
-
-                    /* Filter attributes */
-                    /*foreach ($node->attributes as $attr) {
-
-                      }*/
-
-                    if ($to_filter === FALSE) {
-                        $result[]  = $node;
-                    } else {
-                        $to_filter = FALSE;
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
-
 
     public function getDOM() {
         return $this->searcher->getDOM();
