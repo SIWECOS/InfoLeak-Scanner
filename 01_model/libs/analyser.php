@@ -393,6 +393,58 @@ class Analyser {
         }
     }
 
+    /**
+     *
+     */
+    public function analyse_cms_version($regex, $attribute_value,
+                                        $vuln_if_smaller, $vuln_array) {
+        // check if it contains version
+        $version_regex = $regex;
+        if (preg_match($version_regex, $attribute_value, $match) === 1) {
+            $version = $match[1];
+
+            // version detected and set
+            $result['version'] = $version;
+        } else {
+            // no version number
+            $result['version'] = NULL;
+        }
+
+        if ($result['version'] !== NULL) {
+            $vuln_versions = $vuln_array;
+            $isVuln = FALSE;
+
+            // check specific version defined in array
+            foreach ($vuln_versions as $vuln) {
+                if ($vuln === $result['version']) {
+                    $isVuln = TRUE;
+                }
+            }
+
+            $split_version = explode(".", $result['version']);
+            if ((int)$split_version[0] !== NULL) {
+                if ((int)$split_version[0] < $vuln_if_smaller[0]) {
+                    $isVuln = TRUE;
+                } else if ((int)$split_version[0] === 4) {
+                    if ((int)$split_version[1] !== NULL) {
+                        if ((int)$split_version[1] <= $vuln_if_smaller[1]) {
+                            if ((int)$split_version[2] !== NULL) {
+                                if ((int)$split_version[2] <= $vuln_if_smaller[2]) {
+                                    $isVuln = TRUE;
+                                }
+                            } else {
+                                $isVuln = TRUE;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $result['isVuln'] = $isVuln;
+        }
+
+        return $result;
+    }
 
     /**
      * @short: Detect CMS using the source.
