@@ -133,6 +133,10 @@ class View{
               }
 
             */
+            if (strlen($cms_node_content) > 100) {
+                $cms_node_content  = substr($cms_node_content, 0, 100);
+                $cms_node_content .= " [...]";
+            }
 
             if ($cms_node->nodeName === "script") {
                 $result['finding'] = preg_replace("/\\n|\\t/", "",
