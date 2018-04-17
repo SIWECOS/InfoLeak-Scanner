@@ -57,6 +57,8 @@ class Searcher{
         return $nodes;
     }
     
+    /**
+     * @short Search $word attribute in the given DOM (case sensitive).
      * @return node
      */
     public function in_attr($word){
@@ -110,6 +112,16 @@ class Searcher{
         return $nodes;
     }
 
+    /**
+     * @short Search $word in all meta tags of the given DOM
+     * @return node
+     */
+    public function in_meta_with_name($name){
+        $nodes = $this->xpath_search("//meta[@name='" . $name . "']");
+
+        return $nodes;
+    }
+    
     /**
      * @short Search $word in all a-tags of the given DOM
      * @return node
