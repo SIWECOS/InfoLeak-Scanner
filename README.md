@@ -23,10 +23,19 @@ cp -R . /var/www/html/
 - Drupal
 - Joomla
 - vbulletin
-- Veyton
 - Webspell
+- Webspell-NOR
 - Wordpress
 - xt-commerce
+- Contenido
+- magento2
+- shopsys
+- shopify
+- squarespace
+- blogger
+- 1C-Bitrix
+- TYPO3
+- prestashop
 
 ### Plugins
 Searches plugins for the detected CMS. Biggest list (wordpress) contains 980 different plugins.
