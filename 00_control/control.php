@@ -64,7 +64,6 @@ class Control{
         }
 
 
-
         /**
          * If the URL was valid but the source code is empty there is nothing to
          * analyse.
