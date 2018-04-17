@@ -48,7 +48,15 @@ class Searcher{
     }
 
     /**
-     * @short Search $word in all attributes of the given DOM (case sensitive).
+     * @short Search $word attribute containing $content in the given DOM (case sensitive).
+     * @return node
+     */
+    public function in_attr_contains($word, $content){
+        $nodes = $this->xpath_search("//*[@" . $word . "[contains(.," . $content . ")]]");
+
+        return $nodes;
+    }
+    
      * @return node
      */
     public function in_attr($word){
