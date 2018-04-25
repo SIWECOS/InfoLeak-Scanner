@@ -768,10 +768,25 @@ class Analyser {
                 }
             }
         }
-        $result_['nodes']   = $result;
-        $result_['version'] = $version;
-        $result_['isVuln']  = $isVuln;
-        $result_['lib']     = $lib;
+
+        /**
+         * Skip jquery if it is not vulnerable
+         */
+        if (end($lib) !== "jquery") {
+            $result_['nodes']   = $result;
+            $result_['version'] = $version;
+            $result_['isVuln']  = $isVuln;
+            $result_['lib']     = $lib;
+        } else {
+            if ($isVuln === TRUE) {
+                $result_['nodes']   = $result;
+                $result_['version'] = $version;
+                $result_['isVuln']  = $isVuln;
+                $result_['lib']     = $lib;
+            } else {
+                return FALSE;
+            }
+        }
 
         return $result_;
     }
