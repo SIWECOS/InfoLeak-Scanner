@@ -301,9 +301,15 @@
             "generator": "TYPO"
         },
         "default_version": null,
-        "vuln_if_smaller": null,
-        "vuln_array": null,
-        "vuln_references": null,
+        "vuln_if_smaller": {
+			"0": "7",
+			"1": "6",
+			"2": "8"
+		},
+        "vuln_array": {
+			"0": "7.6.15"
+		},
+        "vuln_references": "https://www.cvedetails.com/vulnerability-list/vendor_id-3887/Typo3.html",
         "version_regex": "/\\s+([\\d.]+)/",
         "attribute_whitelist": null,
         "attribute_names": null,
