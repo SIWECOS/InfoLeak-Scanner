@@ -295,12 +295,12 @@
             }
         }
     },
-    "TYPO": {
-        "name": "TYPO",
+    "TYPO3": {
+        "name": "TYPO3",
         "meta": {
             "generator": "TYPO"
         },
-        "default_version": "3",
+        "default_version": null,
         "vuln_if_smaller": null,
         "vuln_array": null,
         "vuln_references": null,
