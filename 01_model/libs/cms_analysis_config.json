@@ -196,7 +196,7 @@
     "magento2": {
         "name": "magento",
         "meta": null,
-        "default_version": "2",
+        "default_version": null,
         "vuln_if_smaller": null,
         "vuln_array": null,
         "vuln_references": {
