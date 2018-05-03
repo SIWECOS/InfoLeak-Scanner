@@ -460,7 +460,7 @@ class Analyser {
                                          $default_version, $attribute_whitelist,
                                          $html_regex) {
         $result = array();
-
+        
         // 1) search in generator/Author meta tags
         if ($attribute_value !== NULL) {
             foreach ($attribute_value as $field => $value) {
@@ -516,19 +516,23 @@ class Analyser {
                         }
                     }
 
+                    return FALSE;
                     /**
                      * return here and not in loop, because there could be meta tags
                      * containing more informations (like versions)
                      */
+                    /*
                     if (isset($result['cms'])) {
                         // there was at least one finding
                         return $result;
                     }
+                    */
                 }
             }
         }
 
         // 2) 3) search indicator in paths
+        /*
         if ($attribute_names !== NULL) {
             foreach ($attribute_names as $attribute_name) {
                 if ($attribute_whitelist !== NULL) {
@@ -588,6 +592,7 @@ class Analyser {
                 }
             }
         }
+        */
     }
 
    /**
