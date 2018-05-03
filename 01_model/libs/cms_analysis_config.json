@@ -2,7 +2,8 @@
     "wordpress": {
         "name": "wordpress",
         "meta": {
-            "generator": "wordpress"
+            "generator": "wordpress",
+			"Generator": "wordpress"
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -34,7 +35,8 @@
     "joomla": {
         "name": "joomla",
         "meta": {
-            "generator": "Joomla!"
+            "generator": "Joomla!",
+			"Generator": "Joomla!"
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -58,7 +60,8 @@
     "drupal": {
         "name": "drupal",
         "meta": {
-            "generator": "Drupal"
+            "generator": "Drupal",
+			"Generator": "Drupal"
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -81,7 +84,8 @@
     "vbulletin": {
         "name": "vbulletin",
         "meta": {
-            "generator": "vBulletin"
+            "generator": "vBulletin",
+			"Generator": "vBulletin"
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -104,7 +108,8 @@
     "contenido": {
         "name": "contenido",
         "meta": {
-            "generator": "CONTENIDO"
+            "generator": "CONTENIDO",
+			"Generator": "CONTENIDO"			
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -127,7 +132,8 @@
     "xt-commerce": {
         "name": "xt-commerce",
         "meta": {
-            "generator": "xt:Commerce"
+            "generator": "xt:Commerce",
+			"Generator": "xt:Commerce"			
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -150,7 +156,8 @@
     "webspell": {
         "name": "webspell",
         "meta": {
-            "generator": "webSPELL"
+            "generator": "webSPELL",
+			"Generator": "webSPELL"						
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -173,7 +180,8 @@
     "webspell-nor": {
         "name": "webspell-nor",
         "meta": {
-            "generator": "webSPELL-NOR"
+            "generator": "webSPELL-NOR",
+			"Generator": "webSPELL-NOR"									
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -215,7 +223,9 @@
     "shopsys": {
         "name": "shopsys",
         "meta": {
-            "Author": "ShopSys"
+            "Author": "ShopSys",
+			"Generator": "ShopSys",
+			"generator": "ShopSys"
         },
         "default_version": null,
         "vuln_if_smaller": null,
@@ -265,7 +275,8 @@
     "blogger": {
         "name": "blogger",
         "meta": {
-            "generator": "Blogger"
+            "generator": "Blogger",
+			"Generator": "Blogger"
         },
         "default_version": null,
         "vuln_if_smaller": null,
@@ -298,7 +309,8 @@
     "TYPO3": {
         "name": "TYPO3",
         "meta": {
-            "generator": "TYPO"
+            "generator": "TYPO",
+			"Generator": "TYPO"			
         },
         "default_version": null,
         "vuln_if_smaller": {
@@ -319,7 +331,8 @@
     "prestashop": {
         "name": "prestashop",
         "meta": {
-            "generator": "PrestaShop"
+            "generator": "PrestaShop",
+            "Generator": "PrestaShop"			
         },
         "default_version": null,
         "vuln_if_smaller": null,
