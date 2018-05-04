@@ -1,35 +1,35 @@
 CMS_ONLY
-Die verwendete CMS %cms% wurde detektiert.
+Das von Ihnen verwendete Content Management System (%cms%) ist erkennbar. 
 
 CMS_VERSION
-Die verwendete CMS %cms% und dessen Version %version% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
+Die verwendete CMS %cms% und dessen Version %version% wurde erkannt. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs. Dies stellt jedoch nicht direkt eine Schwachstelle dar und bedarf einer genaueren Prüfung.
 
 CMS_VERSION_VULN
-Die verwendete CMS %cms% der Version %version% wurde detektiert. Für diese Version ist eine Schwachstelle bekannt.
+Die verwendete CMS %cms% der Version %version% wurde erkannt. Für diese Version ist eine Schwachstelle bekannt.
 
 PLUGIN_ONLY
-Das verwendete CMS Plugin %plugin% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert.
+Das verwendete CMS Plugin %plugin% in DOM-Node %node% mit dem Inhalt %node_content% wurde erkannt. Dies stellt jedoch nicht direkt eine Schwachstelle dar und bedarf einer genaueren Prüfung.
 
 PLUGIN_VERSION
-Das verwendete CMS Plugin %plugin% mit der Version %plugin_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
+Das verwendete CMS Plugin %plugin% mit der Version %plugin_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde erkannt. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs. Dies stellt jedoch nicht direkt eine Schwachstelle dar und bedarf einer genaueren Prüfung.
 
 PLUGIN_VERSION_VULN
-Das verwendete CMS Plugin %plugin% der Version %plugin_version% in DOM-node %node% mit dem Inhalt %node_content% detektiert. Für diese Version ist eine Schwachstelle bekannt.
+Das verwendete CMS Plugin %plugin% der Version %plugin_version% in DOM-node %node% mit dem Inhalt %node_content% wurde erkannt. Für diese Version ist eine Schwachstelle bekannt.
 
 JS_LIB_ONLY
-Die verwendete JavaScript-Bibliothek %js_lib_name% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert.
+Die verwendete JavaScript-Bibliothek %js_lib_name% in DOM-Node %node% mit dem Inhalt %node_content% wurde erkannt. Dies stellt jedoch nicht direkt eine Schwachstelle dar und bedarf einer genaueren Prüfung.
 
 JS_LIB_VERSION
-Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs.
+Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde erkannt. Die Angabe einer Version vereinfacht einem Angreifer das Vorbereiten eines Angriffs. Dies stellt jedoch nicht direkt eine Schwachstelle dar und bedarf einer genaueren Prüfung.
 
 JS_LIB_VULN_VERSION
-Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde detektiert. Für diese Version ist eine Schwachstelle bekannt.
+Die verwendete JavaScript-Bibliothek %js_lib_name% mit der Version %js_lib_version% in DOM-Node %node% mit dem Inhalt %node_content% wurde erkannt. Für diese Version ist eine Schwachstelle bekannt.
 
 EMAIL_FOUND
-Die Email-Adresse %email_adress% wurde gefunden. Wollen Sie diese Email-Adresse wirklich veröffentlichen?
+Die Email-Adresse %email_adress% wurde gefunden. Wollen Sie diese Email-Adresse wirklich veröffentlichen? 
 
 NUMBER_FOUND
-Die Telefonnummer %number% wurde gefunden. Wollen Sie diese Telefonnummer wirklich veröffentlichen?
+Die Telefonnummer %number% wurde gefunden. Wollen Sie diese Telefonnummer wirklich veröffentlichen? 
 
 NO_SOURCE_CODE
 Die Domain %domain% hat keinen Quelltext zurückgegeben.
