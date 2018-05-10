@@ -215,14 +215,14 @@ class View{
                         $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
                         $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                         $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
-                        $result['score'] = 90;
+                        $result['score'] = 99;
                     } else {
                         $result['testDetails'][0]['placeholder'] = "PLUGIN_VERSION";
                         $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
                         $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
                         $result['testDetails'][0]['values']['node'] = $nodeName[$j];
                         $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
-                        $result['score'] = 60;
+                        $result['score'] = 96;
                     }
                 }
             }
