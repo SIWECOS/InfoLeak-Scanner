@@ -90,7 +90,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($cms)) {
-            $result['score'] = 80;
+            $result['score'] = 99;
 
             if (!$version) {
                 $result['testDetails'][0]['placeholder'] = "CMS_ONLY";
