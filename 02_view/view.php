@@ -106,7 +106,7 @@ class View{
                     $result['testDetails'][0]['placeholder'] = "CMS_VERSION";
                     $result['testDetails'][0]['values']['cms'] = $cms;
                     $result['testDetails'][0]['values']['version'] = $version;
-                    $result['score'] = 60;
+                    $result['score'] = 96;
                 }
             }
             /*
