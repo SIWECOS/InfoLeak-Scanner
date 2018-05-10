@@ -445,7 +445,7 @@ class View{
         } else if ($result['hasError']) {
             $result['score'] = 0;
         } else {
-            $result["score"] = $this->global_score/$this->scan_count;
+            $result["score"] = round($this->global_score/$this->scan_count);
         }
 
         $result["tests"] = $tests;
