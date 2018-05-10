@@ -273,7 +273,7 @@ class View{
 
             $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
             $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
-            $result['score'] = 90;
+            $result['score'] = 99;
 
             foreach($nodes as $node) {
                 if ($j < $MAX_FINDING_OUT)
@@ -302,7 +302,7 @@ class View{
                     $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
                     $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
                     $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
-                    $result['score'] = 70;
+                    $result['score'] = 96;
                 } else {
                     unset($result['version']);
                 }
