@@ -397,7 +397,7 @@ class View{
         if (!empty($phone_numbers)) {
             $phone_numbers_  = array();
 
-            $result['score'] = 80;
+            $result['score'] = 98;
             $result['testDetails'][0]['placeholder'] = "NUMBER_FOUND";
 
             $result['testDetails'][0]['values']['number'] = $phone_numbers;
