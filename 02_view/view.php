@@ -356,7 +356,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
 
         if (!empty($emails)) {
-            $result['score']   = 80;
+            $result['score']   = 96;
             $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
             $result['testDetails'][0]['values']['email_adress'][] = $emails;
