@@ -823,25 +823,34 @@ class Analyser {
             }
         }
 
-        /**
-         * Skip jquery if it is not vulnerable
-         */
-        if (end($lib) !== "jquery") {
-            $result_['nodes']   = $result;
-            $result_['version'] = $version;
-            $result_['isVuln']  = $isVuln;
-            $result_['lib']     = $lib;
-        } else {
-            if ($isVuln === TRUE) {
-                $result_['nodes']   = $result;
-                $result_['version'] = $version;
-                $result_['isVuln']  = $isVuln;
-                $result_['lib']     = $lib;
-            } else {
-                return FALSE;
+        foreach ($lib as $key => $value) {
+            if ($value === "jquery") { // vuln lib found
+                if ($isVuln[$key] === FALSE) {
+                    unset($lib[$key]);
+                    unset($isVuln[$key]);
+                    unset($version[$key]);
+                    unset($result[$key]);
+                }
+            }
+
+            if ($version[$key] === "N/A") {
+                unset($lib[$key]);
+                unset($isVuln[$key]);
+                unset($version[$key]);
+                unset($result[$key]);
             }
         }
 
+        $lib = array_values($lib);
+        $isVuln = array_values($isVuln);
+        $version = array_values($version);
+        $result = array_values($result);
+        
+        $result_['nodes']   = $result;
+        $result_['version'] = $version;
+        $result_['isVuln']  = $isVuln;
+        $result_['lib']     = $lib;
+        
         return $result_;
     }
 
