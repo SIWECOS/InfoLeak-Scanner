@@ -272,8 +272,6 @@ class View{
         if (!empty($nodes)) {
             $i = $j = 0;
 
-            $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
-            $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
             $result['score'] = 99;
 
             foreach($nodes as $node) {
@@ -281,6 +279,10 @@ class View{
                     $j++;
                 else
                     break;
+
+                $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
+                $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
+                
 
                 foreach($node->attributes as $attribute) {
                     if (strpos($attribute->value, $lib[$i]) !== FALSE) {
@@ -319,6 +321,14 @@ class View{
                 
                 $result['testDetails'][0]['values']['node'] = $finding['node_name'];
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
+
+                if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
+                    if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
+                        $j--;
+                        $i++;
+                        continue;
+                    }
+                }
             }
         } else {
             $result['score'] = 100;
