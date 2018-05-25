@@ -830,11 +830,21 @@ class Analyser {
 
         foreach ($lib as $key => $value) {
             if ($value === "jquery") { // vuln lib found
+
+                if (empty($isVuln[$key])) {
+                    continue;
+                }
+                
                 if ($isVuln[$key] === FALSE) {
                     unset($lib[$key]);
                     unset($isVuln[$key]);
                     unset($version[$key]);
                     unset($result[$key]);
+
+                    $lib = array_values($lib);
+                    $isVuln = array_values($isVuln);
+                    $version = array_values($version);
+                    $result = array_values($result);
                 }
             }
 
@@ -843,13 +853,13 @@ class Analyser {
                 unset($isVuln[$key]);
                 unset($version[$key]);
                 unset($result[$key]);
+                
+                $lib = array_values($lib);
+                $isVuln = array_values($isVuln);
+                $version = array_values($version);
+                $result = array_values($result);
             }
         }
-
-        $lib = array_values($lib);
-        $isVuln = array_values($isVuln);
-        $version = array_values($version);
-        $result = array_values($result);
         
         $result_['nodes']   = $result;
         $result_['version'] = $version;
