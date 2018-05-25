@@ -187,7 +187,7 @@ class View{
             $plugin_name = $nodes['plugin_name'];
             $result['score'] = 0;
 
-            $limit = 2;
+            $limit = 1;
             if (count($isVuln) < $limit)
                 $limit = count($isVuln);
 
@@ -259,8 +259,9 @@ class View{
         $nodes   = $nodes['nodes'];
         $result  = $finding = array();
 
+        
         /* Print only 2 finding nodes. */
-        $MAX_FINDING_OUT = 2;
+        $MAX_FINDING_OUT = 1;
 
         $result['name']  = "JS_LIB";
         $result['hasError'] = $this->controller->getScannerHasError();
