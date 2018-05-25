@@ -285,12 +285,14 @@ class View{
                 
 
                 foreach($node->attributes as $attribute) {
-                    if (strpos($attribute->value, $lib[$i]) !== FALSE) {
-                        $finding['node_name'] = $attribute->name;
-                        $finding['node_content'] = $attribute->value;
-
-                        break; // attribute found; stop searching
-                    }                    
+                    if (!empty($lib[$i])) {
+                        if (strpos($attribute->value, $lib[$i]) !== FALSE) {
+                            $finding['node_name'] = $attribute->name;
+                            $finding['node_content'] = $attribute->value;
+                            
+                            break; // attribute found; stop searching
+                        }                    
+                    }
                 }
 
                 if ((!empty($version[$i])) &&
@@ -325,7 +327,6 @@ class View{
                 if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
                     if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
                         $j--;
-                        $i++;
                         continue;
                     }
                 }
