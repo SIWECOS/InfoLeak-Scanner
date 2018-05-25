@@ -850,6 +850,10 @@ class Analyser {
                 }
             }
 
+            if (empty($version[$key])) {
+                continue;
+            }
+            
             if ($version[$key] === "N/A") {
                 unset($lib[$key]);
                 unset($isVuln[$key]);
