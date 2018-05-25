@@ -288,14 +288,7 @@ class View{
                         $finding['node_content'] = $attribute->value;
 
                         break; // attribute found; stop searching
-                    }
-
-                    /*
-                      if (strlen($finding['node_content']) > 100) {
-                      $finding['node_content']  = substr($finding['node_content'], 0, 100);
-                      $finding['attr'] .= " [...]";
-                      }
-                    */
+                    }                    
                 }
 
                 if ((!empty($version[$i])) &&
@@ -319,6 +312,11 @@ class View{
 
                 $i++;
 
+                if (strlen($finding['node_content']) >= 100) {
+                    $finding['node_content'] = substr($finding['node_content'], 0, 100);
+                    $finding['node_content'] .= " [...]";
+                }
+                
                 $result['testDetails'][0]['values']['node'] = $finding['node_name'];
                 $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
             }
