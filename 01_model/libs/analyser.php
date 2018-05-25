@@ -651,10 +651,10 @@ class Analyser {
                                                            $value['attribute_whitelist'],
                                                            $value['html_regex']);
 
-               return $cms["cms"];
+               if (isset($cms["cms"])) {
+                   return $cms["cms"];                   
+               }
            }
-
-
        }
        
        foreach ($analysis_config as $field => $value) {
