@@ -553,6 +553,11 @@ class Analyser {
             }
         }
 
+    public function analyse_cms_specific_extended($cms_name, $vuln_if_smaller, $vuln_array,
+                                                  $attribute_value, $version_regex,
+                                                  $attribute_names, $indicators,
+                                                  $default_version, $attribute_whitelist,
+                                                  $html_regex) {
         // 2) 3) search indicator in paths
         /*
         if ($attribute_names !== NULL) {
