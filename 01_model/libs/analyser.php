@@ -344,7 +344,26 @@ class Analyser {
                             /* Filter attributes */
                             foreach ($node->attributes as $attr) {
                                 if (in_array($attr->name, $target_attributes)) {
-                                    if (strpos($attr->value, $line) !== FALSE) {
+                                    $line_pos = strpos($attr->value, $line);
+                                    $next_char = substr($attr->value, $line_pos+strlen($line), 1) . "\r\n";
+
+                                    preg_match('/[a-zA-Z0-9]/', $next_char, $check_char);
+                                    if (!empty($check_char)) {
+                                        break 2;
+                                    }
+
+                                    $prev_char = substr($attr->value, $line_pos-1, 1) . "\r\n";
+                                    preg_match('/[a-zA-Z0-9#-]/', $prev_char, $check_char1);
+                                    if (!empty($check_char1)) {
+                                        break 2;
+                                    }
+
+                                    if (strpos($attr->value, ".js")) {
+                                        break 2;
+                                    }
+
+                                    
+                                    if ($line_pos !== FALSE) {
                                         /* Found plugin */
                                         //$plugins[] = $node;
                                         $pVal[]    = $attr->value;
