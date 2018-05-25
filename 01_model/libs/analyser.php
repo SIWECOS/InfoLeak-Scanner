@@ -372,7 +372,7 @@ class Analyser {
                                         if (file_exists($vuln_file)) {
                                             $known_vulnCount = count(file($vuln_file));
                                             $found_plugin_v  = $this->getVersionNumber($attr->value);
-
+                                            
                                             $vuln_plugins = file($file, FILE_IGNORE_NEW_LINES);
                                             foreach ($vuln_plugins as $vuln_line) {
                                                 $vuln_version = $this->getVersionNumber($vuln_line);
@@ -537,8 +537,8 @@ class Analyser {
                             }
                         }
                     }
-
-                    return FALSE;
+                    
+                    //return FALSE;
                     /**
                      * return here and not in loop, because there could be meta tags
                      * containing more informations (like versions)
@@ -552,6 +552,9 @@ class Analyser {
                 }
             }
         }
+        
+        return FALSE;
+    }
 
     public function analyse_cms_specific_extended($cms_name, $vuln_if_smaller, $vuln_array,
                                                   $attribute_value, $version_regex,
@@ -559,7 +562,6 @@ class Analyser {
                                                   $default_version, $attribute_whitelist,
                                                   $html_regex) {
         // 2) 3) search indicator in paths
-        /*
         if ($attribute_names !== NULL) {
             foreach ($attribute_names as $attribute_name) {
                 if ($attribute_whitelist !== NULL) {
@@ -595,6 +597,10 @@ class Analyser {
                     }
                 }
             }
+            if (isset($result['cms'])) {
+                // there was at least one finding
+                return $result;
+            }            
         }
 
         // 4) search html regex in source
@@ -618,8 +624,7 @@ class Analyser {
                     return $result;
                 }
             }
-        }
-        */
+        }            
     }
 
    /**
@@ -627,7 +632,7 @@ class Analyser {
     * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
     * and as wordpress is tested first it will say it is a wordpress website
     */
-   public function analyse_cms() {
+   public function analyse_cms($extend) {
        $analysis_config = json_decode(
            file_get_contents("01_model/libs/cms_analysis_config.json"), true);
 
