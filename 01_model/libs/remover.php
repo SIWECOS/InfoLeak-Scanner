@@ -84,8 +84,7 @@ class Remover {
      * TODO: Not working correctly yet
      */
     public function removeKISSY($source) {
-        $query = $this->xpath->query("//div[contains(@id, 'J_defaultData')]");
-        //$query = $this->xpath->query("//div/@id[starts-with(text(), 'J_')]");
+        $query = $this->xpath->query("//div/@id[starts-with(name(), 'J_')]");
 
         foreach ($query as $node) {
             $node->parentNode->removeChild($node);
