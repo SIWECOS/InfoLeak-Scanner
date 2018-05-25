@@ -66,6 +66,21 @@ class Remover {
     }
 
     /**
+     * Remove global data attribute (data-*)
+     */
+    public function removeData($source) {
+        $query = $this->xpath->query("//*[@*[starts-with(name(), 'data-')]]");
+
+        foreach ($query as $node) {
+            $node->parentNode->removeChild($node);
+        }
+
+        $this->source = $this->DOM->saveHTML();
+
+        return $this->source;
+    }
+               
+    /**
      * TODO: Not working correctly yet
      */
     public function removeKISSY($source) {
