@@ -631,6 +631,25 @@ class Analyser {
        $analysis_config = json_decode(
            file_get_contents("01_model/libs/cms_analysis_config.json"), true);
 
+       if ($extend) {
+           foreach ($analysis_config as $field => $value) {
+               $cms = $this->analyse_cms_specific_extended($value['name'],
+                                                           $value['vuln_if_smaller'],
+                                                           $value['vuln_array'],
+                                                           $value['meta'],
+                                                           $value['version_regex'],
+                                                           $value['attribute_names'],
+                                                           $value['indicators'],
+                                                           $value['default_version'],
+                                                           $value['attribute_whitelist'],
+                                                           $value['html_regex']);
+
+               return $cms["cms"];
+           }
+
+
+       }
+       
        foreach ($analysis_config as $field => $value) {
            $result = $this->analyse_cms_specific($value['name'],
                                                  $value['vuln_if_smaller'],
