@@ -242,9 +242,10 @@ class Control{
     private function setSource() {
         $con = curl_init($this->url);
 
-        $user_agent  = "Mozilla/5.0 (Windows; U; Windows NT ";
-        $user_agent .= "5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1";
-
+        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
+        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
+        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
+        
         $options = array(
             CURLOPT_HEADER          => false,
             CURLOPT_RETURNTRANSFER  => true,
@@ -332,8 +333,9 @@ class Control{
     private function setHeader($url) {
         $con = curl_init($this->url);
 
-        $user_agent  = "Mozilla/5.0 (Windows; U; Windows NT ";
-        $user_agent .= "5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1";
+        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
+        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
+        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
 
         $options = array(
             CURLOPT_HEADER         => true,
@@ -525,8 +527,9 @@ class Control{
 
         $con = curl_init($url);
 
-        $user_agent  = "Mozilla/5.0 (Windows; U; Windows NT ";
-        $user_agent .= "5.1; rv:1.7.3) Gecko/20041001 Firefox/0.10.1";
+        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
+        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
+        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
 
         $options = array(
             CURLOPT_HEADER          => false,
