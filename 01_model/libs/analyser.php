@@ -192,6 +192,7 @@ class Analyser {
 
         $source = $remover->removeEvents($source);
         $source = $remover->removeComments($source);
+        $source = $remover->removeData($source);
         //$source = $remover->removeKISSY($source);
 
         $source = $remover->removeAllAttribute($source, "div");
@@ -199,11 +200,13 @@ class Analyser {
         //$source = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $source);
         //$source = preg_replace("/\p{Han}+/u", '', $source);
         //echo htmlspecialchars($source);
+        //return;
+        
         $result = array();
         $phoneNumberUtil    = \libphonenumber\PhoneNumberUtil::getInstance();
 
         $phoneNumberMatcher = $phoneNumberUtil->findNumbers($source, $nation);
-
+        
         foreach ($phoneNumberMatcher as $phoneNumberMatch) {
             $phoneNumber = $phoneNumberMatch->rawString();
 
