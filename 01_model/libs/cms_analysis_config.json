@@ -356,5 +356,27 @@
                 "regex": "/<!-- Module Block [a-z ]+ -->/"
             }
         }
-    }
+    },
+    "MediaWiki": {
+        "name": "MediaWiki",
+        "meta": {
+            "generator": "MediaWiki",
+			"Generator": "MediaWiki"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+			"0": "1",
+			"1": "24",
+			"2": "2"
+		},
+        "vuln_array": {
+			"0": "1.23.9"
+		},
+        "vuln_references": "https://www.cvedetails.com/vulnerability-list/vendor_id-2360/product_id-4125/version_id-151629/Mediawiki-Mediawiki-1.21.html",
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    }	
 }
