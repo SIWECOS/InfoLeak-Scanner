@@ -58,6 +58,12 @@ class Model{
         /* CMS detected, search for its plugins */
         if (!empty($this->cms['cms'])) {
             $this->plugins = $this->analyser->analyse_plugins($this->cms['cms']);
+        } else {
+            $cms_string = $this->analyser->analyse_cms(TRUE);
+
+            if (!empty($cms_string)) {
+                $this->plugins = $this->analyser->analyse_plugins($cms_string);
+            }
         }
 
         $this->jslib = $this->analyser->analyse_JSLib();
