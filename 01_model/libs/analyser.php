@@ -561,6 +561,8 @@ class Analyser {
                                                   $attribute_names, $indicators,
                                                   $default_version, $attribute_whitelist,
                                                   $html_regex) {
+        $result = array();
+        
         // 2) 3) search indicator in paths
         if ($attribute_names !== NULL) {
             foreach ($attribute_names as $attribute_name) {
