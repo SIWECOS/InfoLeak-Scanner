@@ -773,6 +773,34 @@ class Analyser {
         }
     }
 
+    public function get_worst_finding_js_lib($result) {
+        $worst = NULL;
+        
+        foreach ($result as $finding) {
+            if ($finding["isVuln"]) {
+                $worst = $finding;
+            }
+        }
+        
+        if ($worst === NULL) {
+            foreach ($result as $finding) {
+                if (!empty($finding["version"])) {
+                    $worst = $finding;
+                }
+            }
+        }
+        
+        if ($worst === NULL) {
+            foreach ($result as $finding) {
+                if (!empty($finding["lib"])) {
+                    $worst = $finding;
+                }
+            }
+        }
+
+        return $worst;
+    }
+        
                                                  $value['vuln_if_smaller'],
                                                  $value['vuln_array'],
                                                  $value['meta'],
