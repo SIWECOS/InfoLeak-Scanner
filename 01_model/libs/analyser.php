@@ -201,12 +201,12 @@ class Analyser {
         //$source = preg_replace("/\p{Han}+/u", '', $source);
         //echo htmlspecialchars($source);
         //return;
-        
+
         $result = array();
         $phoneNumberUtil    = \libphonenumber\PhoneNumberUtil::getInstance();
 
         $phoneNumberMatcher = $phoneNumberUtil->findNumbers($source, $nation);
-        
+
         foreach ($phoneNumberMatcher as $phoneNumberMatch) {
             $phoneNumber = $phoneNumberMatch->rawString();
 
@@ -362,7 +362,7 @@ class Analyser {
                                         break 2;
                                     }
 
-                                    
+
                                     if ($line_pos !== FALSE) {
                                         /* Found plugin */
                                         //$plugins[] = $node;
@@ -372,7 +372,7 @@ class Analyser {
                                         if (file_exists($vuln_file)) {
                                             $known_vulnCount = count(file($vuln_file));
                                             $found_plugin_v  = $this->getVersionNumber($attr->value);
-                                            
+
                                             $vuln_plugins = file($file, FILE_IGNORE_NEW_LINES);
                                             foreach ($vuln_plugins as $vuln_line) {
                                                 $vuln_version = $this->getVersionNumber($vuln_line);
@@ -536,7 +536,7 @@ class Analyser {
                                          $default_version, $attribute_whitelist,
                                          $html_regex) {
         $result = array();
-        
+
         // 1) search in generator/Author meta tags
         if ($attribute_value !== NULL) {
             foreach ($attribute_value as $field => $value) {
@@ -583,30 +583,32 @@ class Analyser {
                                     $result['node'] = $mg;
                                     $result['node_content'] = $attribute->value;
 
-                                    if (isset($result['version'])) {
-                                        // there was a finding with max entropy
+                                    // there was a finding with max entropy                                    
+                                    if (isset($result["isVuln"])) {
+                                        return $result;
+                                    } else if (isset($result["version"])) {
                                         return $result;
                                     }
                                 }
                             }
                         }
                     }
-                    
+
                     //return FALSE;
                     /**
                      * return here and not in loop, because there could be meta tags
                      * containing more informations (like versions)
                      */
                     /*
-                    if (isset($result['cms'])) {
-                        // there was at least one finding
-                        return $result;
-                    }
+                      if (isset($result['cms'])) {
+                      // there was at least one finding
+                      return $result;
+                      }
                     */
                 }
             }
         }
-        
+
         return FALSE;
     }
 
@@ -616,7 +618,7 @@ class Analyser {
                                                   $default_version, $attribute_whitelist,
                                                   $html_regex) {
         $result = array();
-        
+
         // 2) 3) search indicator in paths
         if ($attribute_names !== NULL) {
             foreach ($attribute_names as $attribute_name) {
@@ -656,7 +658,7 @@ class Analyser {
             if (isset($result['cms'])) {
                 // there was at least one finding
                 return $result;
-            }            
+            }
         }
 
         // 4) search html regex in source
@@ -680,39 +682,55 @@ class Analyser {
                     return $result;
                 }
             }
-        }            
+        }
     }
 
-   /**
-    * TODO: False-Positive = https://www.fietz-medien.de/eshops-groupware/webshop-systeme/xtcommerce-3.04-sp2.1/index.html
-    * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
-    * and as wordpress is tested first it will say it is a wordpress website
-    */
-   public function analyse_cms($extend=FALSE) {
-       $analysis_config = json_decode(
-           file_get_contents("01_model/libs/cms_analysis_config.json"), true);
+    /**
+     * TODO: False-Positive = https://www.fietz-medien.de/eshops-groupware/webshop-systeme/xtcommerce-3.04-sp2.1/index.html
+     * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
+     * and as wordpress is tested first it will say it is a wordpress website
+     */
+    public function analyse_cms($extend=FALSE) {
+        $analysis_config = json_decode(
+            file_get_contents("01_model/libs/cms_analysis_config.json"), true);
+        
+        if ($extend) {
+            foreach ($analysis_config as $field => $value) {
+                $cms = $this->analyse_cms_specific_extended($value['name'],
+                                                            $value['vuln_if_smaller'],
+                                                            $value['vuln_array'],
+                                                            $value['meta'],
+                                                            $value['version_regex'],
+                                                            $value['attribute_names'],
+                                                            $value['indicators'],
+                                                            $value['default_version'],
+                                                            $value['attribute_whitelist'],
+                                                            $value['html_regex']);
 
-       if ($extend) {
-           foreach ($analysis_config as $field => $value) {
-               $cms = $this->analyse_cms_specific_extended($value['name'],
-                                                           $value['vuln_if_smaller'],
-                                                           $value['vuln_array'],
-                                                           $value['meta'],
-                                                           $value['version_regex'],
-                                                           $value['attribute_names'],
-                                                           $value['indicators'],
-                                                           $value['default_version'],
-                                                           $value['attribute_whitelist'],
-                                                           $value['html_regex']);
+                if (isset($cms["cms"])) {
+                    return $cms["cms"];
+                }
+            }
+        }
 
-               if (isset($cms["cms"])) {
-                   return $cms["cms"];                   
-               }
-           }
-       }
-       
-       foreach ($analysis_config as $field => $value) {
-           $result = $this->analyse_cms_specific($value['name'],
+        foreach ($analysis_config as $field => $value) {
+            $result = $this->analyse_cms_specific($value['name'],
+                                                  $value['vuln_if_smaller'],
+                                                  $value['vuln_array'],
+                                                  $value['meta'],
+                                                  $value['version_regex'],
+                                                  $value['attribute_names'],
+                                                  $value['indicators'],
+                                                  $value['default_version'],
+                                                  $value['attribute_whitelist'],
+                                                  $value['html_regex']);
+
+            if (!empty($result)) {
+                return $result;
+            }
+        }
+    }
+
     public function analyse_js_specific($name, $tag, $default_version,
                                         $vuln_if_smaller, $vuln_array,
                                         $version_regex) {
@@ -821,11 +839,6 @@ class Analyser {
         }
     }
 
-           if (!empty($result)) {
-               return $result;
-           }
-       }
-   }
 
 
     /**
@@ -835,7 +848,7 @@ class Analyser {
      *
      * @return array
      */
-    public function analyse_JSLib($file="./wordfiles/JSLibs.conf") {
+    public function analyse_JSLib1($file="./wordfiles/JSLibs.conf") {
         $j = 0;
         $result_ = $result = $version = $isVuln = $lib = array();
         //$lineCount = count(file($file));
@@ -851,7 +864,7 @@ class Analyser {
             '1.7.2', '1.7.1', '1.7.0', '1.6.4', '1.6.3', '1.6.2', '1.6.1',
             '1.6.0', '1.5.2', '1.5.1', '1.5.0', '1.4.4', '1.4.3', '1.4.2',
             '1.4.1', '1.4.0', '1.3.2', '1.3.1', '1.3.0', '1.2.6', '1.2.3',
-			'1.12.0', '3.0.0', '1.12.4', '2.1.4'
+            '1.12.0', '3.0.0', '1.12.4', '2.1.4'
         );
 
         /* https://www.cvedetails.com/vulnerability-list/vendor_id-11858/Netease.html */
@@ -988,7 +1001,7 @@ class Analyser {
                 if (empty($isVuln[$key])) {
                     continue;
                 }
-                
+
                 if ($isVuln[$key] === FALSE) {
                     unset($lib[$key]);
                     unset($isVuln[$key]);
@@ -1005,25 +1018,25 @@ class Analyser {
             if (empty($version[$key])) {
                 continue;
             }
-            
+
             if ($version[$key] === "N/A") {
                 unset($lib[$key]);
                 unset($isVuln[$key]);
                 unset($version[$key]);
                 unset($result[$key]);
-                
+
                 $lib = array_values($lib);
                 $isVuln = array_values($isVuln);
                 $version = array_values($version);
                 $result = array_values($result);
             }
         }
-        
+
         $result_['nodes']   = $result;
         $result_['version'] = $version;
         $result_['isVuln']  = $isVuln;
         $result_['lib']     = $lib;
-        
+
         return $result_;
     }
 
