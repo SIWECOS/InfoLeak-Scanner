@@ -256,12 +256,8 @@ class View{
         $isVuln  = $nodes['isVuln'];
         $version = $nodes['version'];
         $lib     = $nodes['lib'];
-        $nodes   = $nodes['nodes'];
+        $node   = $nodes['node'];
         $result  = $finding = array();
-
-        
-        /* Print only 2 finding nodes. */
-        $MAX_FINDING_OUT = 1;
 
         $result['name']  = "JS_LIB";
         $result['hasError'] = $this->controller->getScannerHasError();
@@ -269,73 +265,63 @@ class View{
         $result['testDetails'] = array();
         $result['scoreType'] = $this->scoreType(1);
 
-        if (!empty($nodes)) {
-            $i = $j = 0;
-
+        if (!empty($node)) {
+            
             $result['score'] = 99;
 
-            foreach($nodes as $node) {
-                if ($j < $MAX_FINDING_OUT)
-                    $j++;
-                else
-                    break;
-
-                $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
-                $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
+            $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
+            $result['testDetails'][0]['values']['js_lib_name'] = $lib;
                 
 
-                foreach($node->attributes as $attribute) {
-                    if (!empty($lib[$i])) {
-                        if (strpos($attribute->value, $lib[$i]) !== FALSE) {
-                            $finding['node_name'] = $attribute->name;
-                            $finding['node_content'] = $attribute->value;
-                            
-                            break; // attribute found; stop searching
-                        }                    
-                    }
+            foreach($node->attributes as $attribute) {
+                if (!empty($lib)) {
+                    if (strpos($attribute->value, $lib) !== FALSE) {
+                        $finding['node_name'] = $attribute->name;
+                        $finding['node_content'] = $attribute->value;
+                        
+                        break; // attribute found; stop searching
+                    }                    
                 }
+            }
 
-                if ((!empty($version[$i])) &&
-                    ($version[$i] !== "N/A")) {
-                    $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
-                    $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
-                    $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
-                    $result['score'] = 96;
-                } else {
-                    unset($result['version']);
-                }
+            if ((!empty($version)) &&
+                ($version !== "N/A")) {
+                $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
+                $result['testDetails'][0]['values']['js_lib_name'] = $lib;
+                $result['testDetails'][0]['values']['js_lib_version'] = $version;
+                $result['score'] = 96;
+            } else {
+                unset($result['version']);
+            }
 
-                if ((!empty($isVuln[$i])) &&
-                    ($isVuln[$i] !== "N/A")) {
-                    $result['testDetails'][0]['placeholder'] = "JS_LIB_VULN_VERSION";
-                    $result['testDetails'][0]['values']['js_lib_name'] = $lib[$i];
-                    $result['testDetails'][0]['values']['js_lib_version'] = $version[$i];
-                    $result['score'] = 0;
-                    $this->vuln_count += 1;
-                }
+            if ((!empty($isVuln)) &&
+                ($isVuln !== "N/A")) {
+                $result['testDetails'][0]['placeholder'] = "JS_LIB_VULN_VERSION";
+                $result['testDetails'][0]['values']['js_lib_name'] = $lib;
+                $result['testDetails'][0]['values']['js_lib_version'] = $version;
+                $result['score'] = 0;
+                $this->vuln_count += 1;
+            }
 
-                $i++;
-
-                if (strlen($finding['node_content']) >= 100) {
-                    $finding['node_content'] = substr($finding['node_content'], 0, 100);
-                    $finding['node_content'] .= " [...]";
-                }
+            if (strlen($finding['node_content']) >= 100) {
+                $finding['node_content'] = substr($finding['node_content'], 0, 100);
+                $finding['node_content'] .= " [...]";
+            }
                 
-                $result['testDetails'][0]['values']['node'] = $finding['node_name'];
-                $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
+            $result['testDetails'][0]['values']['node'] = $finding['node_name'];
+            $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
 
-                if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
-                    if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
-                        $j--;
-                        continue;
-                    }
+            if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
+                if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
+                    $result['score'] = 100;
+                    $result['testDetails'] = NULL;   
                 }
             }
         } else {
             $result['score'] = 100;
             $result['testDetails'] = NULL;
         }
-
+        
         if ($result['hasError']) {
             $result['score'] = 0;
         }
