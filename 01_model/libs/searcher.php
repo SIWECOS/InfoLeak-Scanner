@@ -96,6 +96,15 @@ class Searcher{
     /**
      * @return node
      */
+    public function in_script($word){
+        $nodes = $this->xpath_search("//script[@*[contains(., '" . $word . "')]]");
+
+        return $nodes;
+    }
+    
+    /**
+     * @return node
+     */
     public function in_input($word){
         $nodes = $this->xpath_search("//input[@*[contains(., '" . $word . "')]]");
 
