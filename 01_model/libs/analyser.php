@@ -713,6 +713,66 @@ class Analyser {
        
        foreach ($analysis_config as $field => $value) {
            $result = $this->analyse_cms_specific($value['name'],
+    public function analyse_js_specific($name, $tag, $default_version,
+                                        $vuln_if_smaller, $vuln_array,
+                                        $version_regex) {
+        $result = array();
+        $nodes = $this->searcher->in_script($name);
+
+        if (empty($nodes)) {
+            return FALSE;
+        }
+        
+        foreach ($nodes as $node) {
+            foreach ($node->attributes as $attr) {
+                if (strpos($attr->value, $name) !== FALSE) {
+                    $result["lib"] = $name;
+
+                    $tmp = $this->analyse_js_version(
+                        $version_regex,
+                        $attr->value,
+                        $vuln_if_smaller,
+                        $vuln_array);
+
+                    if (!empty($tmp["version"])) {
+                        $result["version"] = $tmp["version"];
+                    } else {
+                        $result["version"] = NULL;
+                    }
+
+                    if ($result['version'] === NULL) {
+                        if ($default_version !== NULL) {
+                            $result['version'] = $default_version;
+                        } else {
+                            $result['version'] = NULL;
+                        }
+                    }
+
+                    if (!empty($tmp['isVuln'])) {
+                        $result['isVuln'] = $tmp['isVuln'];
+                    } else {
+                        $result['isVuln'] = NULL;
+                    }
+
+                    $result["node"] = $node;
+                    $result["node_content"] = $attr->value;
+
+                    if (isset($result["isVuln"])) {
+                        return $result;
+                    } else if (isset($result["version"])) {
+                        return $result;
+                    }
+                }
+            }
+        }
+
+        if (isset($result["lib"])) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
                                                  $value['vuln_if_smaller'],
                                                  $value['vuln_array'],
                                                  $value['meta'],
