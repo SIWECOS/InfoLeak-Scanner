@@ -801,15 +801,25 @@ class Analyser {
         return $worst;
     }
         
+    public function analyse_JSLib() {
+        $analysis_config = json_decode(
+            file_get_contents("01_model/libs/js_analysis_config.json"), true);
+        
+
+        foreach ($analysis_config as $field => $value) {
+            $result[] = $this->analyse_js_specific($value['name'],
+                                                 $value['tag'],
+                                                 $value['default_version'],
                                                  $value['vuln_if_smaller'],
                                                  $value['vuln_array'],
-                                                 $value['meta'],
-                                                 $value['version_regex'],
-                                                 $value['attribute_names'],
-                                                 $value['indicators'],
-                                                 $value['default_version'],
-                                                 $value['attribute_whitelist'],
-                                                 $value['html_regex']);
+                                                 $value['version_regex']);
+
+
+            if (!empty($result)) {
+                return $this->get_worst_finding_js_lib($result);
+            }
+        }
+    }
 
            if (!empty($result)) {
                return $result;
