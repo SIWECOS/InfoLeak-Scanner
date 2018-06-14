@@ -693,6 +693,15 @@ class Analyser {
     }
 
     /**
+     *
+     */
+    public function compare_hosts($host1, $host2) {
+        $h1 = parse_url($host1, PHP_URL_HOST);
+        $h2 = parse_url($host2, PHP_URL_HOST);
+
+        return $h1 === $h2 ? TRUE : FALSE;
+    }
+        
      * TODO: False-Positive = https://www.fietz-medien.de/eshops-groupware/webshop-systeme/xtcommerce-3.04-sp2.1/index.html
      * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
      * and as wordpress is tested first it will say it is a wordpress website
