@@ -29,6 +29,7 @@ class Model{
     private $source;
     private $analyser;
     private $DOM;
+    private $url;
 
     private $cms;
     private $cms_found = FALSE;
@@ -50,21 +51,17 @@ class Model{
 
         $this->dangerLevel = $this->controller->getDangerLevel();
         $this->callbackurls = $this->controller->getCallbackurls();
-
-        $this->analyser = new Analyser($this->source);
+        $this->url = $this->controller->getURL();
+        
+        $this->analyser = new Analyser($this->url, $this->source);
         $this->DOM = $this->analyser->getDOM();
 
         $this->cms = $this->analyser->analyse_cms();
         /* CMS detected, search for its plugins */
         if (!empty($this->cms['cms'])) {
             $this->plugins = $this->analyser->analyse_plugins($this->cms['cms']);
-        } else {
-            $cms_string = $this->analyser->analyse_cms(TRUE);
-
-            if (!empty($cms_string)) {
-                $this->plugins = $this->analyser->analyse_plugins($cms_string);
-            }
         }
+         
 
         $this->jslib = $this->analyser->analyse_JSLib();
         $this->email = $this->analyser->find_email($this->source);
