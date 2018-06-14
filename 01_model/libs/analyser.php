@@ -641,22 +641,32 @@ class Analyser {
                 
                 foreach ($path_indicator as $pi) {
                     foreach ($pi->attributes as $attribute) {
-                        foreach ($indicators as $indicator) {
-                            if (stripos($attribute->value, $indicator) !== FALSE) {
-                                $result['cms'] = $cms_name;
+                        
+                        foreach ($url_attributes as $ua) {
+                            // indicator is a url, compare domain for equality
+                            if ($attribute_name === $ua) {
+                                $host_compare = $this->compare_hosts($this->url,
+                                                                     $attribute->value);
+                                if ($host_compare) {
+                                    foreach ($indicators as $indicator) {
+                                        if (stripos($attribute->value, $indicator) !== FALSE) {
+                                            $result['cms'] = $cms_name;
 
-                                // probably no version to find here, do not try
-                                if ($default_version !== NULL) {
-                                    $result['version'] = $default_version;
-                                } else {
-                                    $result['version'] = NULL;
+                                            // probably no version to find here, do not try
+                                            if ($default_version !== NULL) {
+                                                $result['version'] = $default_version;
+                                            } else {
+                                                $result['version'] = NULL;
+                                            }
+                                            $result['isVuln'] = NULL;
+
+                                            $result['node'] = $pi;
+                                            $result['node_content'] = $attribute->value;
+
+                                            return $result;
+                                        }
+                                    }                                    
                                 }
-                                $result['isVuln'] = NULL;
-
-                                $result['node'] = $pi;
-                                $result['node_content'] = $attribute->value;
-
-                                return $result;
                             }
                         }
                     }
