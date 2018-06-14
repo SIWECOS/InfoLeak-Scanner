@@ -706,7 +706,7 @@ class Analyser {
      * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
      * and as wordpress is tested first it will say it is a wordpress website
      */
-    public function analyse_cms($extend=FALSE) {
+    public function analyse_cms($extend=TRUE) {
         $analysis_config = json_decode(
             file_get_contents("01_model/libs/cms_analysis_config.json"), true);
         
