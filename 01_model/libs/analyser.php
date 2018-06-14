@@ -634,6 +634,11 @@ class Analyser {
                     return $result;
                 }
 
+                $url_attributes = array('action', 'cite', 'classid', 'codebase',
+                                        'data', 'href', 'longdesc', 'profile',
+                                        'src', 'usemap', 'background', 'formaction',
+                                        'icon', 'manifest', 'poster', 'srcset');
+                
                 foreach ($path_indicator as $pi) {
                     foreach ($pi->attributes as $attribute) {
                         foreach ($indicators as $indicator) {
