@@ -31,10 +31,13 @@ require __DIR__ . '/../../vendor/autoload.php';
 ini_set('max_execution_time', 300);
 
 class Analyser {
+    private $url;
     private $source;
     private $searcher;
 
-    public function __construct($source) {
+    public function __construct($url, $source) {
+        $this->url = $url;
+        
         /**
          * Detect chinese characters and decode
          */
