@@ -602,12 +602,11 @@ class Analyser {
                      * return here and not in loop, because there could be meta tags
                      * containing more informations (like versions)
                      */
-                    /*
                       if (isset($result['cms'])) {
-                      // there was at least one finding
-                      return $result;
+                          // there was at least one finding
+                          return $result;
                       }
-                    */
+                    
                 }
             }
         }
