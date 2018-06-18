@@ -263,6 +263,7 @@ class View{
         $result['hasError'] = $this->controller->getScannerHasError();
         $result['errorMessage'] = $this->controller->getScannerErrorMessage();
         $result['testDetails'] = array();
+        $result['testDetails'][0] = array();
         $result['scoreType'] = $this->scoreType(1);
 
         if (!empty($node)) {
