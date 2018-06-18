@@ -27,6 +27,9 @@ include '00_control/control.php';
 include '01_model/model.php';
 include '02_view/view.php';
 
+// Only report errors (no warnings etc)
+error_reporting(E_ERROR);
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data = json_decode(file_get_contents("php://input"));
