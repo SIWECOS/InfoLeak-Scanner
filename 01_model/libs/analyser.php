@@ -263,6 +263,10 @@ class Analyser {
 
             $date = str_replace(' ', '', $date);
             if (!empty($date)) {
+                $date[0] = intval($date[0]);
+                $date[1] = intval($date[1]);
+                $date[2] = intval($date[2]);
+
                 if (count($date) === 3) {  // it contains 2 dots
                     // expect years to be at maximum 10 years from now
                     if ($date[2] > (date("Y")+10)) {
