@@ -267,7 +267,6 @@ class View{
         $result['scoreType'] = $this->scoreType(1);
 
         if (!empty($node)) {
-            
             $result['score'] = 99;
 
             $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
@@ -304,9 +303,11 @@ class View{
                 $this->vuln_count += 1;
             }
 
-            if (strlen($finding['node_content']) >= 100) {
-                $finding['node_content'] = substr($finding['node_content'], 0, 100);
-                $finding['node_content'] .= " [...]";
+            if (!empty($finding['node_content'])) {
+                if (strlen($finding['node_content']) >= 100) {
+                    $finding['node_content'] = substr($finding['node_content'], 0, 100);
+                    $finding['node_content'] .= " [...]";
+                }     
             }
                 
             $result['testDetails'][0]['values']['node'] = $finding['node_name'];
