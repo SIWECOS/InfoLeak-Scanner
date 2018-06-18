@@ -114,22 +114,73 @@ No findings in any scans:
     "name": "InfoLeak-Scanner",
     "hasError": false,
     "errorMessage": null,
+    "score": 100,
+    "tests": [
+        {
+            "name": "CMS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 100,
+            "scoreType": "info",
+            "testDetails": null
+        },
+        {
+            "name": "CMS_PLUGINS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 100,
+            "scoreType": "warning",
+            "testDetails": null
+        },
+        {
+            "name": "JS_LIB",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 100,
+            "scoreType": "warning",
+            "testDetails": null
+        },
+        {
+            "name": "EMAIL_ADDRESS",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 100,
+            "scoreType": "info",
+            "testDetails": null
+        },
+        {
+            "name": "PHONE_NUMBER",
+            "hasError": false,
+            "errorMessage": null,
+            "score": 100,
+            "scoreType": "info",
+            "testDetails": null
+        }
+    ]
+}
+```
+
+At least one finding in every scan:
+```
+{
+    "name": "InfoLeak-Scanner",
+    "hasError": false,
+    "errorMessage": null,
     "score": 20,
     "tests": [
         {
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 96,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
-                    "placeholder": "CMS_VERSION",
+                    "placeholder": "CMS_ONLY",
                     "values": {
                         "cms": "wordpress",
-                        "version": "4.9.6",
                         "node": "meta",
-                        "node_content": "WordPress 4.9.6"
+                        "node_content": "content : WordPress"
                     }
                 }
             ]
@@ -138,15 +189,15 @@ No findings in any scans:
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 99,
+            "score": 90,
             "scoreType": "warning",
             "testDetails": [
                 {
                     "placeholder": "PLUGIN_ONLY",
                     "values": {
-                        "plugin": "contact-form-7",
+                        "plugin": "styles",
                         "node": "href",
-                        "node_content": "https://[...]/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0.2"
+                        "node_content": "[...]/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0"
                     }
                 }
             ]
@@ -162,9 +213,9 @@ No findings in any scans:
                     "placeholder": "JS_LIB_VULN_VERSION",
                     "values": {
                         "js_lib_name": "jquery",
-                        "js_lib_version": "1.12.4",
+                        "js_lib_version": "1.4.1",
                         "node": "src",
-                        "node_content": "https://[...]/wp-includes/js/jquery/jquery.js?ver=1.12.4"
+                        "node_content": "[...]/wp-includes/js/jquery/jquery-migrate-1.4.1.js"
                     }
                 }
             ]
@@ -173,15 +224,15 @@ No findings in any scans:
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 96,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
                     "placeholder": "EMAIL_FOUND",
                     "values": {
-                        "email_adress": [
+                        "email_address": [
                             [
-                                "admin@host.de"
+                                "admin@domain.de"
                             ]
                         ]
                     }
@@ -192,15 +243,15 @@ No findings in any scans:
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 98,
+            "score": 80,
             "scoreType": "info",
             "testDetails": [
                 {
                     "placeholder": "NUMBER_FOUND",
                     "values": {
                         "number": [
-                            "1234-12 11 22-3",
-                            "123-11 22 333-4"
+                            "0111-22 33 44-5",
+                            "0111-22 33 44-55"
                         ]
                     }
                 }
