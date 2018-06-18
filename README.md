@@ -54,7 +54,7 @@ Searches for phone numbers. Interesting for social engineering attacks and/or sc
 ```
 | Finding             | Score (0-100) |
 |---------------------+---------------|
-| CMS_ONLY            |            99 |
+| CMS_ONLY            |           100 |
 | CMS_VERSION         |            96 |
 | CMS_VERSION_VULN    |     see below |
 | PLUGIN_ONLY         |            99 |
