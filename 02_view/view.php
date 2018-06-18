@@ -256,7 +256,7 @@ class View{
         $isVuln  = $nodes['isVuln'];
         $version = $nodes['version'];
         $lib     = $nodes['lib'];
-        $node   = $nodes['node'];
+        $node    = $nodes['node'];
         $result  = $finding = array();
 
         $result['name']  = "JS_LIB";
