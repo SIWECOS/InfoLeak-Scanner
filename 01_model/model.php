@@ -61,7 +61,6 @@ class Model{
         if (!empty($this->cms['cms'])) {
             $this->plugins = $this->analyser->analyse_plugins($this->cms['cms']);
         }
-         
 
         $this->jslib = $this->analyser->analyse_JSLib();
         $this->email = $this->analyser->find_email($this->source);
