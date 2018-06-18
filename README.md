@@ -172,15 +172,16 @@ At least one finding in every scan:
             "name": "CMS",
             "hasError": false,
             "errorMessage": null,
-            "score": 80,
+            "score": 96,
             "scoreType": "info",
             "testDetails": [
                 {
-                    "placeholder": "CMS_ONLY",
+                    "placeholder": "CMS_VERSION",
                     "values": {
                         "cms": "wordpress",
+                        "version": "4.9.6",
                         "node": "meta",
-                        "node_content": "content : WordPress"
+                        "node_content": "WordPress 4.9.6"
                     }
                 }
             ]
@@ -189,15 +190,15 @@ At least one finding in every scan:
             "name": "CMS_PLUGINS",
             "hasError": false,
             "errorMessage": null,
-            "score": 90,
+            "score": 99,
             "scoreType": "warning",
             "testDetails": [
                 {
                     "placeholder": "PLUGIN_ONLY",
                     "values": {
-                        "plugin": "styles",
+                        "plugin": "contact-form-7",
                         "node": "href",
-                        "node_content": "[...]/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0"
+                        "node_content": "https://[...]/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0.2"
                     }
                 }
             ]
@@ -213,9 +214,9 @@ At least one finding in every scan:
                     "placeholder": "JS_LIB_VULN_VERSION",
                     "values": {
                         "js_lib_name": "jquery",
-                        "js_lib_version": "1.4.1",
+                        "js_lib_version": "1.12.4",
                         "node": "src",
-                        "node_content": "[...]/wp-includes/js/jquery/jquery-migrate-1.4.1.js"
+                        "node_content": "https://[...]/wp-includes/js/jquery/jquery.js?ver=1.12.4"
                     }
                 }
             ]
@@ -224,15 +225,15 @@ At least one finding in every scan:
             "name": "EMAIL_ADDRESS",
             "hasError": false,
             "errorMessage": null,
-            "score": 80,
+            "score": 96,
             "scoreType": "info",
             "testDetails": [
                 {
                     "placeholder": "EMAIL_FOUND",
                     "values": {
-                        "email_address": [
+                        "email_adress": [
                             [
-                                "admin@domain.de"
+                                "admin@host.de"
                             ]
                         ]
                     }
@@ -243,15 +244,15 @@ At least one finding in every scan:
             "name": "PHONE_NUMBER",
             "hasError": false,
             "errorMessage": null,
-            "score": 80,
+            "score": 98,
             "scoreType": "info",
             "testDetails": [
                 {
                     "placeholder": "NUMBER_FOUND",
                     "values": {
                         "number": [
-                            "0111-22 33 44-5",
-                            "0111-22 33 44-55"
+                            "1234-12 11 22-3",
+                            "123-11 22 333-4"
                         ]
                     }
                 }
