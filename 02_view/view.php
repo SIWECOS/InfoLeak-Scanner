@@ -301,6 +301,21 @@ class View{
                 $result['testDetails'][0]['values']['js_lib_version'] = $version;
                 $result['score'] = 0;
                 $this->vuln_count += 1;
+
+                /**
+                 * Special rule for Wordpress v1.12.4
+                 * Score: 90
+                 * And it doesn't count as a usual vulnerability
+                 * so vuln_count won't get incremented
+                 */
+                if ($this->model->getCMS()['cms'] === "wordpress") {
+                    if ($lib === "jquery") {
+                        if ($version === "1.12.4") {
+                            $result['score'] = 90;
+                            $this->vuln_count -= 1;
+                        }
+                    }
+                }
             }
 
             if (!empty($finding['node_content'])) {
