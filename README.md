@@ -76,6 +76,9 @@ then the overall score will capped to 20 and every additional vulnerability
 will decrease the overall score by 10. Which means, that if 
 CMS_VERSION_VULN and PLUGIN_VERSION_VULN and JS_LIB_VULN_VERSION is returned, the
 overall score will be 0.
+
+Also a finding of jQuery v1.12.4 on a Wordpress website won't be rated like a usual vulnerable library.
+This finding will result in a score of 90, but the placeholder will still be JS_LIB_VULN_VERSION as it is a vulnerable library.
 ```
 
 
