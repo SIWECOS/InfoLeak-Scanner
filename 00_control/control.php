@@ -56,6 +56,10 @@ class Control{
                     $this->setScannerHasError(TRUE);
                     return NULL;
                 }
+            } else {
+                $this->to_analyse = FALSE;
+                $this->setScannerHasError(TRUE);
+                return NULL;
             }
         } else {
             $this->to_analyse = FALSE;
@@ -245,7 +249,7 @@ class Control{
         $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
         $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
         $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
-        
+
         $options = array(
             CURLOPT_HEADER          => false,
             CURLOPT_RETURNTRANSFER  => true,
@@ -294,7 +298,10 @@ class Control{
 
             if (!empty($redir[1])) {
                 $tmp = $this->checkURL($redir[1]);
-                if ($tmp !== FALSE) {
+
+                if (empty($tmp)) {
+                    return TRUE;
+                } else if ($tmp !== FALSE) {
                     $redir_host = parse_url($this->checkURL($redir[1]));
                 } else {
                     $this->setScannerErrorMessage(23, array('domain' => $redir[1]));
@@ -400,6 +407,12 @@ class Control{
      * @return boolean
      */
     private function checkURL($url) {
+        /* relative path for redirect */
+        if (substr($url, 0, 1) === "/") {
+            $url = filter_var($url, FILTER_SANITIZE_URL);
+            return TRUE;
+        }
+
         if (!empty($url)) {
             /* Does the URL have illegal characters? */
             $url = filter_var($url, FILTER_SANITIZE_URL);
