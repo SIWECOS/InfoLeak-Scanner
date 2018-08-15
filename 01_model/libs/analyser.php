@@ -304,7 +304,7 @@ class Analyser {
         /**
          * Delete potential false-positive tags/attributes
          */
-        $toRemove = array("script");
+        $toRemove = array("script", "a");
         foreach ($toRemove as $node) {
             $source = $remover->removeNode($this->source, $node);
         }
