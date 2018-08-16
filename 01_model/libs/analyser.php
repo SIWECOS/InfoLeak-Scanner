@@ -308,6 +308,7 @@ class Analyser {
         foreach ($toRemove as $node) {
             $source = $remover->removeNode($this->source, $node);
         }
+        $searcher = new Searcher($source);
 
         $file          = NULL;
         $vulnCheckSite = NULL;
@@ -344,7 +345,7 @@ class Analyser {
                 $lines = file($file, FILE_IGNORE_NEW_LINES);
                 $first = $second = $third = 0;
                 foreach ($lines as $line) {
-                    $nodes = $this->searcher->in_all_caseInsensitive($line);
+                    $nodes = $searcher->in_all_caseInsensitive($line);
 
                     if (!empty($nodes->length)) {
                         foreach ($nodes as $node) {
