@@ -117,7 +117,7 @@ No findings in any scans:
 ```
 {
     "name": "InfoLeak-Scanner",
-	"version": "1.0.0",
+    "version": "1.0.0",
     "hasError": false,
     "errorMessage": null,
     "score": 100,
@@ -170,7 +170,7 @@ At least one finding in every scan:
 ```
 {
     "name": "InfoLeak-Scanner",
-	"version": "1.0.0",
+    "version": "1.0.0",
     "hasError": false,
     "errorMessage": null,
     "score": 20,
