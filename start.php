@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $controller = new Control($data->url);
     $controller->setDangerLevel($data->dangerLevel);
     $controller->setCallbackurls($data->callbackurls);
-
+    $controller->setUserAgent($data->userAgent);
+    
     $model = new Model($controller);
 
     $view = new View($model, $controller, "POST");
