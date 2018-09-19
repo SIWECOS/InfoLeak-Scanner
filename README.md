@@ -102,7 +102,7 @@ parameters in a JSON encoded format:
 `dangerLevel` is not relevant, simply define it to 0.
 `callbackurls` is an array of URLs. These URLs will get the result of the
 scanner (sent via POST).
-`userAgent` defines your individual user agent which you want to be send when scanning.
+`userAgent` defines your individual user agent which you want to be sent when scanning.
 
 ### GET
 Running the scanner with a GET request is much simpler. All you have to do is to
