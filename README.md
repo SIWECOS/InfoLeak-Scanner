@@ -94,13 +94,15 @@ parameters in a JSON encoded format:
   "dangerLevel": 0,
   "callbackurls": [
     "string"
-  ]
+  ],
+  "userAgent": "string"
 }
 ```
 `url` defines the URL which should be scanned.
 `dangerLevel` is not relevant, simply define it to 0.
 `callbackurls` is an array of URLs. These URLs will get the result of the
 scanner (sent via POST).
+`userAgent` defines your individual user agent which you want to be send when scanning.
 
 ### GET
 Running the scanner with a GET request is much simpler. All you have to do is to
@@ -115,6 +117,7 @@ No findings in any scans:
 ```
 {
     "name": "InfoLeak-Scanner",
+	"version": "1.0.0",
     "hasError": false,
     "errorMessage": null,
     "score": 100,
@@ -167,6 +170,7 @@ At least one finding in every scan:
 ```
 {
     "name": "InfoLeak-Scanner",
+	"version": "1.0.0",
     "hasError": false,
     "errorMessage": null,
     "score": 20,
