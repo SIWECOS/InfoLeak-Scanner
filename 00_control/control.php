@@ -31,6 +31,7 @@ class Control{
     private $header;    /* controlled by website */
 
     private $dangerLevel; /* not used */
+    private $userAgent;
     private $callbackurls = array();
     private $scannerHasError = FALSE;
     private $scannerErrorMessage = NULL;
@@ -246,10 +247,7 @@ class Control{
     private function setSource() {
         $con = curl_init($this->url);
 
-        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
-        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
-        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
-
+        
         $options = array(
             CURLOPT_HEADER          => false,
             CURLOPT_RETURNTRANSFER  => true,
@@ -257,7 +255,7 @@ class Control{
             CURLOPT_AUTOREFERER     => true,
             CURLOPT_FAILONERROR     => true,
             CURLOPT_SSL_VERIFYPEER  => false,
-            CURLOPT_USERAGENT       => $user_agent,
+            CURLOPT_USERAGENT       => $this->userAgent,
             CURLOPT_CONNECTTIMEOUT  => 10,
             CURLOPT_TIMEOUT         => 10
         );
@@ -340,10 +338,6 @@ class Control{
     private function setHeader($url) {
         $con = curl_init($this->url);
 
-        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
-        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
-        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
-
         $options = array(
             CURLOPT_HEADER         => true,
             CURLOPT_NOBODY         => true,
@@ -351,7 +345,7 @@ class Control{
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_FAILONERROR    => true,
             CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_USERAGENT      => $user_agent,
+            CURLOPT_USERAGENT      => $this->userAgent,
             CURLOPT_CONNECTTIMEOUT => 10,
             CURLOPT_TIMEOUT        => 10
         );
@@ -540,10 +534,6 @@ class Control{
 
         $con = curl_init($url);
 
-        $user_agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
-        $user_agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
-        $user_agent .= "Chrome/60.0.3112.113 Safari/537.36";
-
         $options = array(
             CURLOPT_HEADER          => false,
             CURLOPT_RETURNTRANSFER  => true,
@@ -553,7 +543,7 @@ class Control{
             CURLOPT_FOLLOWLOCATION  => true,
             CURLOPT_AUTOREFERER     => true,
             CURLOPT_SSL_VERIFYPEER  => false,
-            CURLOPT_USERAGENT       => $user_agent,
+            CURLOPT_USERAGENT       => $this->userAgent,
             CURLOPT_CONNECTTIMEOUT  => 10,
             CURLOPT_TIMEOUT         => 10
         );
@@ -564,6 +554,24 @@ class Control{
         curl_close($con);
 
         return 0;
+    }
+
+    /**
+     * Set the user agent individually
+     */
+    public function setUserAgent($agent) {
+        if (!empty($agent)) {
+            $this->userAgent = $agent;   
+        } else {
+            /**
+             * Default user agent
+             */
+            $agent  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ";
+            $agent .= "AppleWebKit/537.36 (KHTML, like Gecko) ";
+            $agent .= "Chrome/60.0.3112.113 Safari/537.36";
+
+            $this->userAgent = $agent;   
+        }
     }
 }
 ?>
