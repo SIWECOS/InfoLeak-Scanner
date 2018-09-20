@@ -469,8 +469,8 @@ class Control{
                     return FALSE;
                 } else {
                     /* URL seems legit. Check headers now. */
-                    $this->setHeader($url);
-                    $status_code = $this->header[1];
+                    $headers = get_headers($url);
+                    $status_code = substr($headers[0], 9, 3);
 
                     if (empty($status_code)) {
                         //$this->setScannerErrorMessage(19, array('domain' => $url));
