@@ -476,6 +476,8 @@ class Control{
                     /* URL seems legit. Check headers now. */
                     $headers = get_headers($url);
                     $status_code = substr($headers[0], 9, 3);
+                    $this->header[0] = $headers;
+                    $this->header[1] = $status_code;
 
                     if (empty($status_code)) {
                         //$this->setScannerErrorMessage(19, array('domain' => $url));
