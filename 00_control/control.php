@@ -292,24 +292,27 @@ class Control{
     private function checkRedir() {
         $data = $this->header[0];
         $info = $this->header[1];
-        $header = substr($data, 0, $info['header_size']);
-        if ($info['http_code']>=300 && $info['http_code']<=308) {
-            preg_match("!\r\n(?:Location|URI): *(.*?) *\r\n!", $header, $redir);
 
-            if (!empty($redir[1])) {
-                $tmp = $this->checkURL($redir[1]);
+        $header = $data;
+        if ($info>=300 && $info<=308) {
+            $key = array_values(preg_grep("!(?:Location|URI): *(.*?) *!", $header));
+            $key = $key[0];
+            $redir = substr($key, strpos($key, ':')+2, strlen($key));
+
+            if (!empty($redir)) {
+                $tmp = $this->checkURL($redir);
 
                 if (empty($tmp)) {
                     return TRUE;
                 } else if ($tmp !== FALSE) {
-                    $redir_host = parse_url($this->checkURL($redir[1]));
+                    $redir_host = parse_url($this->checkURL($redir));
                 } else {
-                    $this->setScannerErrorMessage(23, array('domain' => $redir[1]));
+                    $this->setScannerErrorMessage(23, array('domain' => $redir));
                     $this->setScannerHasError(TRUE);
                     return FALSE;
                 }
 
-                //$redir_host = parse_url($redir[1]);
+                //$redir_host = parse_url($redir);
                 $url_host = parse_url($this->url);
 
                 if (empty($redir_host['host']) || empty($url_host['host']))
