@@ -248,7 +248,6 @@ class Control{
      */
     private function setSource() {
         $con = curl_init($this->url);
-
         
         $options = array(
             CURLOPT_HEADER          => false,
@@ -322,7 +321,7 @@ class Control{
                     return TRUE;
                 } else {
                     $this->setScannerHasError(TRUE);
-                    $this->setScannerErrorMessage(23, array('domain' => $redir[1]));
+                    $this->setScannerErrorMessage(23, array('domain' => $redir));
                     return FALSE;
                 }
             } else {
@@ -354,7 +353,7 @@ class Control{
             CURLOPT_CONNECTTIMEOUT => 10,
             CURLOPT_TIMEOUT        => 10
         );
-
+        
         curl_setopt_array($con, $options);
         $data = curl_exec($con);
         $info = curl_getinfo($con);
