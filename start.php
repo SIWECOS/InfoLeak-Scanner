@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         return;
     }
 
-    $controller = new Control($data->url);
+    $controller = new Control($data->url, $data->userAgent);
     $controller->setDangerLevel($data->dangerLevel);
     $controller->setCallbackurls($data->callbackurls);
     $controller->setUserAgent($data->userAgent);
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
          * The controller decides whether the URL is valid and whether the source
          * code will be analysed
          */
-        $controller = new Control($_GET['url']);
+        $controller = new Control($_GET['url'], "");
 
         $model = new Model($controller);
 
