@@ -42,8 +42,10 @@ class Control{
     private $bcast; // = "192.168.0.255";
     private $smask; // = "255.255.255.0";
 
-    public function __construct($url) {
+    public function __construct($url, $ua) {
         $this->messages = new Messages();
+        $this->setUserAgent($ua);
+
         $this->url = $url;
         $this->url = $this->checkURL($this->url);
 
