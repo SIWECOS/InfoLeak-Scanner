@@ -46,7 +46,7 @@ class Control{
         $this->messages = new Messages();
         $this->setUserAgent($ua);
 
-        $this->url = $url;
+        $this->url = idn_to_ascii($url); ;
         $this->url = $this->checkURL($this->url);
 
         if ($this->url !== FALSE) {
