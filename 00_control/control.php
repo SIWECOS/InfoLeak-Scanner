@@ -27,6 +27,7 @@ class Control{
 
     private $messages;
     private $url;       /* controlled by client */
+    private $punkycode_url;
     private $source;    /* controlled by website */
     private $header;    /* controlled by website */
 
@@ -46,8 +47,9 @@ class Control{
         $this->messages = new Messages();
         $this->setUserAgent($ua);
 
-        $this->url = idn_to_ascii($url); ;
-        $this->url = $this->checkURL($this->url);
+        $this->url = $url;
+        $this->punkycode_url = idn_to_ascii($url);
+        $this->punkycode_url = $this->checkURL($this->punkycode_url);
 
         if ($this->url !== FALSE) {
             if ($this->checkRedir() === TRUE) {
@@ -247,7 +249,7 @@ class Control{
      * @return 0
      */
     private function setSource() {
-        $con = curl_init($this->url);
+        $con = curl_init($this->punkycode_url);
         
         $options = array(
             CURLOPT_HEADER          => false,
@@ -312,7 +314,7 @@ class Control{
                 }
 
                 //$redir_host = parse_url($redir);
-                $url_host = parse_url($this->url);
+                $url_host = parse_url($this->punkycode_url);
 
                 if (empty($redir_host['host']) || empty($url_host['host']))
                     return TRUE;
@@ -340,7 +342,7 @@ class Control{
      * @return string
      */
     private function setHeader($url) {
-        $con = curl_init($this->url);
+        $con = curl_init($this->punkycode_url);
 
         $options = array(
             CURLOPT_HEADER         => true,
@@ -484,7 +486,7 @@ class Control{
                         return FALSE;
                     } else if ($status_code['http_code'] != '404') {
                         /* Everything seems fine! */
-                        $this->url = $url;
+                        $this->punkycode_url = $url;
                         return $url;
                     } else {
                         $this->setScannerErrorMessage(19, array('domain' => $url));
