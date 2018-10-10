@@ -27,7 +27,7 @@ class Control{
 
     private $messages;
     private $url;       /* controlled by client */
-    private $punkycode_url;
+    private $punycode_url; /* punycode converted URL */
     private $source;    /* controlled by website */
     private $header;    /* controlled by website */
 
@@ -48,8 +48,8 @@ class Control{
         $this->setUserAgent($ua);
 
         $this->url = $url;
-        $this->punkycode_url = idn_to_ascii($url);
-        $this->punkycode_url = $this->checkURL($this->punkycode_url);
+        $this->punycode_url = $this->punycodeUrl($url);
+        $this->punycode_url = $this->checkURL($this->punycode_url);
 
         if ($this->url !== FALSE) {
             if ($this->checkRedir() === TRUE) {
@@ -249,7 +249,7 @@ class Control{
      * @return 0
      */
     private function setSource() {
-        $con = curl_init($this->punkycode_url);
+        $con = curl_init($this->punycode_url);
         
         $options = array(
             CURLOPT_HEADER          => false,
@@ -314,7 +314,7 @@ class Control{
                 }
 
                 //$redir_host = parse_url($redir);
-                $url_host = parse_url($this->punkycode_url);
+                $url_host = parse_url($this->punycode_url);
 
                 if (empty($redir_host['host']) || empty($url_host['host']))
                     return TRUE;
@@ -342,7 +342,7 @@ class Control{
      * @return string
      */
     private function setHeader($url) {
-        $con = curl_init($this->punkycode_url);
+        $con = curl_init($this->punycode_url);
 
         $options = array(
             CURLOPT_HEADER         => true,
@@ -486,7 +486,7 @@ class Control{
                         return FALSE;
                     } else if ($status_code['http_code'] != '404') {
                         /* Everything seems fine! */
-                        $this->punkycode_url = $url;
+                        $this->punycode_url = $url;
                         return $url;
                     } else {
                         $this->setScannerErrorMessage(19, array('domain' => $url));
@@ -580,6 +580,28 @@ class Control{
 
             $this->userAgent = $agent;   
         }
+    }
+
+    /**
+     * Returns the Punycode encoded URL for a given URL.
+     *
+     * @param string $url URL to encode
+     *
+     * @return string Punycode-Encoded URL.
+     * @author https://github.com/Lednerb
+     */
+    public function punycodeUrl($url) {
+        $parsed_url = parse_url($url);
+        $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'].'://' : '';
+        $host = isset($parsed_url['host']) ? idn_to_ascii($parsed_url['host']) : '';
+        $port = isset($parsed_url['port']) ? ':'.$parsed_url['port'] : '';
+        $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
+        $pass = isset($parsed_url['pass']) ? ':'.$parsed_url['pass'] : '';
+        $pass = ($user || $pass) ? "$pass@" : '';
+        $path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+        $query = isset($parsed_url['query']) ? '?'.$parsed_url['query'] : '';
+
+        return "$scheme$user$pass$host$port$path$query";
     }
 }
 ?>
