@@ -593,7 +593,7 @@ class Control{
     public function punycodeUrl($url) {
         $parsed_url = parse_url($url);
         $scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'].'://' : '';
-        $host = isset($parsed_url['host']) ? idn_to_ascii($parsed_url['host']) : '';
+        $host = isset($parsed_url['host']) ? idn_to_ascii($parsed_url['host'], IDNA_NONTRANSITIONAL_TO_ASCII,INTL_IDNA_VARIANT_UTS46) : '';
         $port = isset($parsed_url['port']) ? ':'.$parsed_url['port'] : '';
         $user = isset($parsed_url['user']) ? $parsed_url['user'] : '';
         $pass = isset($parsed_url['pass']) ? ':'.$parsed_url['pass'] : '';
