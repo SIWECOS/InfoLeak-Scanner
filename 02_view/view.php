@@ -140,11 +140,11 @@ class View{
             }
 
             if (is_string($cms_node)) {
-                $result['testDetails'][0]['values']['node'] = $cms_node;                
+                $result['testDetails'][0]['values']['node'] = $cms_node;
             } else {
-                $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;    
+                $result['testDetails'][0]['values']['node'] = $cms_node->nodeName;
             }
-            
+
             $result['testDetails'][0]['values']['node_content'] = $cms_node_content;
         } else {
             $result['score']      = 100;
@@ -272,16 +272,16 @@ class View{
 
             $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
             $result['testDetails'][0]['values']['js_lib_name'] = $lib;
-                
+
 
             foreach($node->attributes as $attribute) {
                 if (!empty($lib)) {
                     if (strpos($attribute->value, $lib) !== FALSE) {
                         $finding['node_name'] = $attribute->name;
                         $finding['node_content'] = $attribute->value;
-                        
+
                         break; // attribute found; stop searching
-                    }                    
+                    }
                 }
             }
 
@@ -323,23 +323,23 @@ class View{
                 if (strlen($finding['node_content']) >= 100) {
                     $finding['node_content'] = substr($finding['node_content'], 0, 100);
                     $finding['node_content'] .= " [...]";
-                }     
+                }
             }
-                
+
             $result['testDetails'][0]['values']['node'] = $finding['node_name'];
             $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
 
             if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
                 if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
                     $result['score'] = 100;
-                    $result['testDetails'] = NULL;   
+                    $result['testDetails'] = NULL;
                 }
             }
         } else {
             $result['score'] = 100;
             $result['testDetails'] = NULL;
         }
-        
+
         if ($result['hasError']) {
             $result['score'] = 0;
         }
