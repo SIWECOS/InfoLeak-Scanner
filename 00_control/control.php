@@ -484,7 +484,7 @@ class Control{
                         //$this->setScannerErrorMessage(19, array('domain' => $url));
                         $this->setScannerHasError(TRUE);
                         return FALSE;
-                    } else if ($status_code['http_code'] != '404') {
+                    } else if ($status_code != '404') {
                         /* Everything seems fine! */
                         $this->punycode_url = $url;
                         return $url;
