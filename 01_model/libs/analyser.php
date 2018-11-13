@@ -318,11 +318,11 @@ class Analyser {
             switch ($CMS) {
             case "wordpress":
             case "wp-content":
-                $file = "./wordfiles/Plugins/WPPlugins.conf";
+                $file = __DIR__ . "/../../wordfiles/Plugins/WPPlugins.conf";
                 //$vulnCheckSite = "https://wpvulndb.com/search?utf8=TRUE&text=";
                 break;
             case "drupal":
-                $file = "./wordfiles/Plugins/DrupPlugins.conf";
+                $file = __DIR__ . "/../../wordfiles/Plugins/DrupPlugins.conf";
                 break;
             }
 
@@ -375,7 +375,7 @@ class Analyser {
                                         /* Found plugin */
                                         //$plugins[] = $node;
                                         $pVal[]    = $attr->value;
-                                        $vuln_file = "./wordfiles/Plugins/WPvulnDB/" . $line . ".conf";
+                                        $vuln_file = __DIR__ . "/../../wordfiles/Plugins/WPvulnDB/" . $line . ".conf";
 
                                         if (file_exists($vuln_file)) {
                                             $known_vulnCount = count(file($vuln_file));
@@ -724,7 +724,7 @@ class Analyser {
      */
     public function analyse_cms($extend=TRUE) {
         $analysis_config = json_decode(
-            file_get_contents("01_model/libs/cms_analysis_config.json"), true);
+            file_get_contents(__DIR__ . "/cms_analysis_config.json"), true);
         
 
         foreach ($analysis_config as $field => $value) {
@@ -854,7 +854,7 @@ class Analyser {
         
     public function analyse_JSLib() {
         $analysis_config = json_decode(
-            file_get_contents("01_model/libs/js_analysis_config.json"), true);
+            file_get_contents(__DIR__ . "/js_analysis_config.json"), true);
         
 
         foreach ($analysis_config as $field => $value) {
