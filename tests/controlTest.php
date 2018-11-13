@@ -1,70 +1,83 @@
+<?php
+
+include '../00_control/control.php';
+include '../01_model/model.php';
+include '../02_view/view.php';
+
+use PHPUnit\Framework\TestCase;
+
+class ControlTest extends TestCase {
+
+    private $controller;
+
     public function setUp() {
         $this->controller = new Control("siwecos.de", "");
     }
+
     public function tearDown() {
         unset($this->controller);
 
         /*
-        $createdFiles = Array(
-            "/tmp/setHeader.txt",
-            "/tmp/callbackPostData.txt",
-            "/tmp/testGettingPostParameters.txt",
-        );
-        
-        foreach($createdFiles as $file) {
-            unlink($file);
-        }
+          $createdFiles = Array(
+          "/tmp/setHeader.txt",
+          "/tmp/callbackPostData.txt",
+          "/tmp/testGettingPostParameters.txt",
+          );
+
+          foreach($createdFiles as $file) {
+          unlink($file);
+          }
         */
     }
 
     /**
      * @dataProvider dataProviderSetHeader
-     */    
+     */
     public function testSetHeader($data_encoded, $expectedResult) {
         $data = json_decode($data_encoded);
-        
+
         $controller = new Control($data->url, $data->userAgent);
         $controller->setDangerLevel($data->dangerLevel);
         $controller->setCallbackurls($data->callbackurls);
         $controller->setUserAgent($data->userAgent);
-        
+
         $model = new Model($controller);
         $view = new View($model, $controller, "POST");
 
         $this->assertFileExists("/tmp/setHeader.txt");
         $content = file_get_contents("/tmp/setHeader.txt");
-        
+
         $this->assertEquals($content,
                             $expectedResult);
     }
 
     public function dataProviderSetHeader() {
         $userAgent = "test";
-        
+
         $json = json_encode (
             array(
                 "url" => "siwecos.de",
                 "dangerLevel" => 0,
                 "callbackurls" => array("localhost/InfoLeak-Scanner/tests/testSetHeader.php"),
                 "userAgent" => $userAgent
-            )  
+            )
         );
-        
+
         return [
             [$json, $userAgent]
         ];
     }
 
-    
+
     /**
      * @dataProvider dataProviderAddHTTP
-     */    
+     */
     public function testAddHTTP($url, $expectedResult) {
         $reflector = new ReflectionClass('Control');
-		$method = $reflector->getMethod("addHTTP");
-		$method->setAccessible(true);
- 
-		$result = $method->invokeArgs($this->controller, array($url));
+        $method = $reflector->getMethod("addHTTP");
+        $method->setAccessible(true);
+
+        $result = $method->invokeArgs($this->controller, array($url));
 
         $this->assertEquals($result,
                             $expectedResult);
@@ -78,16 +91,16 @@
             ["172.12.63.6", "http://172.12.63.6"],
         ];
     }
-    
+
     /**
      * @dataProvider dataProviderCheckURL
-     */    
+     */
     public function testCheckURL($url, $expectedResult) {
         $reflector = new ReflectionClass('Control');
-		$method = $reflector->getMethod("checkURL");
-		$method->setAccessible(true);
- 
-		$result = $method->invokeArgs($this->controller, array($url));
+        $method = $reflector->getMethod("checkURL");
+        $method->setAccessible(true);
+
+        $result = $method->invokeArgs($this->controller, array($url));
 
         $this->assertEquals($result,
                             $expectedResult);
@@ -104,18 +117,18 @@
             ["user:pass@example.com", FALSE],
         ];
     }
-    
+
     /**
      * @dataProvider dataProviderCallbacks
-     */    
+     */
     public function testSendToCallbackurls($data_encoded) {
         $data = json_decode($data_encoded);
-        
+
         $controller = new Control($data->url, $data->userAgent);
         $controller->setDangerLevel($data->dangerLevel);
         $controller->setCallbackurls($data->callbackurls);
         $controller->setUserAgent($data->userAgent);
-        
+
         $model = new Model($controller);
         $view = new View($model, $controller, "POST");
 
@@ -129,20 +142,20 @@
                 "dangerLevel" => 0,
                 "callbackurls" => array("localhost/InfoLeak-Scanner/tests/testCallbackPostData.php"),
                 "userAgent" => "test"
-            )  
+            )
         );
-        
+
         return [
             [$json]
         ];
     }
-    
+
     /**
      * @dataProvider dataProviderUserAgent
      */
     public function testSetUserAgent($userAgent, $expectedUserAgent) {
         $this->controller->setUserAgent($userAgent);
-        
+
         $this->assertEquals($this->controller->getUserAgent(),
                             $expectedUserAgent);
     }
@@ -170,16 +183,16 @@
     /**
      * @dataProvider dataProviderPOST
      * @depends testSetUserAgent
-     */    
+     */
     public function testSendResult_POST($result, $url, $md5FileContent) {
         $result = $this->controller->sendResult_POST($result, $url);
-        
+
         $this->assertEquals(0, $result);
         $this->assertFileExists("/tmp/testGettingPostParameters.txt");
 
         $fileContent = file_get_contents("/tmp/testGettingPostParameters.txt");
         $md5 = hash_file('md5', "/tmp/testGettingPostParameters.txt");
-        
+
         $this->assertEquals($md5, $md5FileContent);
     }
 
@@ -188,13 +201,13 @@
             ["{\"url\":\"siwecos.de\",\"dangerLevel\":0,\"callbackurls\":[\"test\"]}", "http://localhost/InfoLeak-Scanner/tests/testPOST.php", "22f2bd739903334c35623e1717619204"]
         ];
     }
-    
+
     /**
      * @dataProvider dataProviderPunycode
      */
     public function testPunycodeUrl($url, $punycode) {
         //$this->markTestSkipped('must be revisited.');
-        
+
         $this->assertEquals($punycode, $this->controller->punycodeUrl($url));
     }
 
@@ -220,12 +233,12 @@
         //$this->markTestSkipped('must be revisited.');
 
         $reflector = new ReflectionClass('Control');
-		$method = $reflector->getMethod("IP_isLocal");
-		$method->setAccessible(true);
- 
-		$result = $method->invokeArgs($this->controller, array($ip, $bcast, $smask));
- 
-		$this->assertTrue($result);
+        $method = $reflector->getMethod("IP_isLocal");
+        $method->setAccessible(true);
+
+        $result = $method->invokeArgs($this->controller, array($ip, $bcast, $smask));
+
+        $this->assertTrue($result);
     }
 
     public function dataProviderIP() {
@@ -234,3 +247,4 @@
         ];
     }
 }
+?>
