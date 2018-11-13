@@ -189,3 +189,27 @@
         ];
     }
     
+    /**
+     * @dataProvider dataProviderPunycode
+     */
+    public function testPunycodeUrl($url, $punycode) {
+        //$this->markTestSkipped('must be revisited.');
+        
+        $this->assertEquals($punycode, $this->controller->punycodeUrl($url));
+    }
+
+    public function dataProviderPunycode() {
+        return [
+            ["https://www.wattläufer-peters.de/", "https://www.xn--wattlufer-peters-znb.de/"],
+            ["https://bluecȯat.com", "https://xn--bluecat-x2c.com"],
+            ["https://bluecoạt.com", "https://xn--bluecot-fn4c.com"],
+            ["https://bluecoaṫ.com", "https://xn--bluecoa-393c.com"],
+            ["https://㯙㯜㯙㯟.com", "https://xn--domain.com"],
+            ["https://hääää.de", "https://xn--h-0faaaa.de"],
+            ["https://üüüü.com", "https://xn--tdaaaa.com"],
+            ["https://mö-süte-üst-cüül.de", "https://xn--m-ste-st-cl-rfb4fdea.de"],
+            ["", ""],
+            ["108.177.127.94", "108.177.127.94"]
+        ];
+    }
+
