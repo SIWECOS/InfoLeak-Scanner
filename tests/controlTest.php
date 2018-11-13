@@ -54,3 +54,28 @@
             [$json, $userAgent]
         ];
     }
+
+    
+    /**
+     * @dataProvider dataProviderAddHTTP
+     */    
+    public function testAddHTTP($url, $expectedResult) {
+        $reflector = new ReflectionClass('Control');
+		$method = $reflector->getMethod("addHTTP");
+		$method->setAccessible(true);
+ 
+		$result = $method->invokeArgs($this->controller, array($url));
+
+        $this->assertEquals($result,
+                            $expectedResult);
+    }
+
+    public function dataProviderAddHTTP() {
+        return [
+            ["siwecos.de", "http://siwecos.de"],
+            ["goögle.de", "http://goögle.de"],
+            ["testme.com", "http://testme.com"],
+            ["172.12.63.6", "http://172.12.63.6"],
+        ];
+    }
+    
