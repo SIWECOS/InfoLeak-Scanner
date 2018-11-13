@@ -213,3 +213,18 @@
         ];
     }
 
+    /**
+     * @dataProvider dataProviderIP
+     */
+    public function testIP_isLocal($ip, $bcast, $smask) {
+        //$this->markTestSkipped('must be revisited.');
+
+        $reflector = new ReflectionClass('Control');
+		$method = $reflector->getMethod("IP_isLocal");
+		$method->setAccessible(true);
+ 
+		$result = $method->invokeArgs($this->controller, array($ip, $bcast, $smask));
+ 
+		$this->assertTrue($result);
+    }
+
