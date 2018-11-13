@@ -79,3 +79,28 @@
         ];
     }
     
+    /**
+     * @dataProvider dataProviderCheckURL
+     */    
+    public function testCheckURL($url, $expectedResult) {
+        $reflector = new ReflectionClass('Control');
+		$method = $reflector->getMethod("checkURL");
+		$method->setAccessible(true);
+ 
+		$result = $method->invokeArgs($this->controller, array($url));
+
+        $this->assertEquals($result,
+                            $expectedResult);
+    }
+
+    public function dataProviderCheckURL() {
+        return [
+            ["siwecos.de", "http://siwecos.de"],
+            ["127.0.0.1", FALSE],
+            ["localhost", FALSE],
+            // ["192.168.1.101", FALSE],
+            ["/wp_config/test.php", TRUE],
+            ["testurl.de:8080", FALSE],
+            ["user:pass@example.com", FALSE],
+        ];
+    }
