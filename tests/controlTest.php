@@ -167,3 +167,25 @@
         ];
     }
 
+    /**
+     * @dataProvider dataProviderPOST
+     * @depends testSetUserAgent
+     */    
+    public function testSendResult_POST($result, $url, $md5FileContent) {
+        $result = $this->controller->sendResult_POST($result, $url);
+        
+        $this->assertEquals(0, $result);
+        $this->assertFileExists("/tmp/testGettingPostParameters.txt");
+
+        $fileContent = file_get_contents("/tmp/testGettingPostParameters.txt");
+        $md5 = hash_file('md5', "/tmp/testGettingPostParameters.txt");
+        
+        $this->assertEquals($md5, $md5FileContent);
+    }
+
+    public function dataProviderPOST() {
+        return [
+            ["{\"url\":\"siwecos.de\",\"dangerLevel\":0,\"callbackurls\":[\"test\"]}", "http://localhost/InfoLeak-Scanner/tests/testPOST.php", "22f2bd739903334c35623e1717619204"]
+        ];
+    }
+    
