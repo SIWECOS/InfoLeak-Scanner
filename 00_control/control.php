@@ -168,6 +168,13 @@ class Control{
     }
 
     /**
+     * Function to access the private variable $userAgent
+     */
+    public function getUserAgent() {
+        return $this->userAgent;
+    }
+
+    /**
      * Get curl error code and set errorMessage placeholder
      */
     private function curlError($errno) {
