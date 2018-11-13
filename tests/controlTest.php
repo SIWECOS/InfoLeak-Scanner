@@ -104,3 +104,35 @@
             ["user:pass@example.com", FALSE],
         ];
     }
+    
+    /**
+     * @dataProvider dataProviderCallbacks
+     */    
+    public function testSendToCallbackurls($data_encoded) {
+        $data = json_decode($data_encoded);
+        
+        $controller = new Control($data->url, $data->userAgent);
+        $controller->setDangerLevel($data->dangerLevel);
+        $controller->setCallbackurls($data->callbackurls);
+        $controller->setUserAgent($data->userAgent);
+        
+        $model = new Model($controller);
+        $view = new View($model, $controller, "POST");
+
+        $this->assertFileExists("/tmp/callbackPostData.txt");
+    }
+
+    public function dataProviderCallbacks() {
+        $json = json_encode (
+            array(
+                "url" => "siwecos.de",
+                "dangerLevel" => 0,
+                "callbackurls" => array("localhost/InfoLeak-Scanner/tests/testCallbackPostData.php"),
+                "userAgent" => "test"
+            )  
+        );
+        
+        return [
+            [$json]
+        ];
+    }
