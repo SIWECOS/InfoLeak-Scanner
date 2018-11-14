@@ -29,7 +29,7 @@ include __DIR__ . '/../01_model/libs/messages.php';
  * Returns JSON output of findings.
  */
 class View{
-    private $version = "1.0.2";
+    private $version = "1.0.3";
     private $model;
     private $controller;
     private $messages;
