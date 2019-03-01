@@ -1,17 +1,18 @@
-FROM php:5.6-apache
+FROM php:7.2-apache
 
-# Install and run composer
-RUN apt-get update \
-    && apt-get install -y wget git zip unzip zlib1g-dev libicu-dev g++ php- \
-    && wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet \
-    && mv composer.phar /usr/bin/composer && chown www-data: /var/www -R \
+RUN apt-get update && apt-get install -y wget git zip unzip zlib1g-dev curl libicu-dev g++ php- 
+
+RUN curl --silent --show-error https://getcomposer.org/installer | php
+
+RUN mv /var/www/html/composer.phar /usr/bin/composer && chown www-data: /var/www -R \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-configure pcntl \
+    && docker-php-ext-install pcntl \	
+    && rm -rf /var/lib/apt/lists/* \
+	&& chmod +x /usr/bin/composer
 
 COPY ./ /var/www/html/
-
-WORKDIR /var/www/html
 
 RUN composer install
 
