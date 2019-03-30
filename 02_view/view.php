@@ -450,7 +450,7 @@ class View{
         $tests[] = $this->printPhonenumber();
 
         /* Scanner details - overall */
-        $result["name"] = "InfoLeak-Scanner";
+        $result["name"] = "INFOLEAK";
         $result["version"] = $this->version;
         $result["hasError"] = $this->controller->getScannerHasError();
         $result["errorMessage"] = $this->controller->getScannerErrorMessage();
