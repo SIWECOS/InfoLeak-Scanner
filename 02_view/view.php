@@ -29,7 +29,7 @@ include __DIR__ . '/../01_model/libs/messages.php';
  * Returns JSON output of findings.
  */
 class View{
-    private $version = "1.0.3";
+    private $version = "1.0.4";
     private $model;
     private $controller;
     private $messages;
@@ -450,7 +450,7 @@ class View{
         $tests[] = $this->printPhonenumber();
 
         /* Scanner details - overall */
-        $result["name"] = "InfoLeak-Scanner";
+        $result["name"] = "INFOLEAK";
         $result["version"] = $this->version;
         $result["hasError"] = $this->controller->getScannerHasError();
         $result["errorMessage"] = $this->controller->getScannerErrorMessage();
