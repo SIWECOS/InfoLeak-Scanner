@@ -29,7 +29,7 @@ include __DIR__ . '/../01_model/libs/messages.php';
  * Returns JSON output of findings.
  */
 class View{
-    private $version = "1.0.4";
+    private $version = "1.0.5";
     private $model;
     private $controller;
     private $messages;
@@ -203,26 +203,26 @@ class View{
                 }
 
                 if ($isVuln[$j]) {
-                    $result['testDetails'][0]['placeholder'] = "PLUGIN_VERSION_VULN";
-                    $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
-                    $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
-                    $result['testDetails'][0]['values']['node'] = $nodeName[$j];
-                    $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+                    $result['testDetails'][$j]['placeholder'] = "PLUGIN_VERSION_VULN";
+                    $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
+                    $result['testDetails'][$j]['values']['plugin_version'] = $version[$j];
+                    $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
+                    $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
                     $result['score'] = 0;
                     $this->vuln_count += 1;
                 } else {
                     if ($version[$j] === NULL) {
-                        $result['testDetails'][0]['placeholder'] = "PLUGIN_ONLY";
-                        $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
-                        $result['testDetails'][0]['values']['node'] = $nodeName[$j];
-                        $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+                        $result['testDetails'][$j]['placeholder'] = "PLUGIN_ONLY";
+                        $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
+                        $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
+                        $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
                         $result['score'] = 99;
                     } else {
-                        $result['testDetails'][0]['placeholder'] = "PLUGIN_VERSION";
-                        $result['testDetails'][0]['values']['plugin'] = $plugin_name[$j];
-                        $result['testDetails'][0]['values']['plugin_version'] = $version[$j];
-                        $result['testDetails'][0]['values']['node'] = $nodeName[$j];
-                        $result['testDetails'][0]['values']['node_content'] = $f_val[$j];
+                        $result['testDetails'][$j]['placeholder'] = "PLUGIN_VERSION";
+                        $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
+                        $result['testDetails'][$j]['values']['plugin_version'] = $version[$j];
+                        $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
+                        $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
                         $result['score'] = 96;
                     }
                 }
@@ -371,9 +371,14 @@ class View{
 
         if (!empty($emails)) {
             $result['score']   = 96;
-            $result['testDetails'][0]['placeholder'] = "EMAIL_FOUND";
 
-            $result['testDetails'][0]['values']['email_adress'][] = $emails;
+            $i = 0;
+            foreach ($emails as $email) {
+                $result['testDetails'][$i]['placeholder'] = "EMAIL_FOUND";
+
+                $result['testDetails'][$i]['values']['email_adress'][] = $emails[$i];
+                $i++;
+            }
         } else {
             $result['score'] = 100;
 
