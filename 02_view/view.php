@@ -376,7 +376,7 @@ class View{
             foreach ($emails as $email) {
                 $result['testDetails'][$i]['placeholder'] = "EMAIL_FOUND";
 
-                $result['testDetails'][$i]['values']['email_adress'][] = $emails[$i];
+                $result['testDetails'][$i]['values']['email_adress'] = $emails[$i];
                 $i++;
             }
         } else {
