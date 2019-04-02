@@ -417,9 +417,13 @@ class View{
             $phone_numbers_  = array();
 
             $result['score'] = 98;
-            $result['testDetails'][0]['placeholder'] = "NUMBER_FOUND";
 
-            $result['testDetails'][0]['values']['number'] = $phone_numbers;
+            $i = 0;
+            foreach ($phone_numbers as $phone_number) {
+                $result['testDetails'][$i]['placeholder'] = "NUMBER_FOUND";
+                $result['testDetails'][$i]['values']['number'] = $phone_number;
+                $i++;
+            }
         } else {
             $result['score'] = 100;
             $result['testDetails'] = NULL;
