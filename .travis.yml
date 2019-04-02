@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - "7.1"
+  - "7.2"
 
 cache:
   directories:
@@ -24,7 +24,6 @@ jobs:
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -t "$DOCKER_IMAGE" .
-      - docker images
       - docker tag "$DOCKER_IMAGE" "$DOCKER_REPO"/"$DOCKER_IMAGE":"$TRAVIS_BRANCH"
       - docker push "$DOCKER_REPO"/"$DOCKER_IMAGE":"$TRAVIS_BRANCH"
 
