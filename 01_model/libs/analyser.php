@@ -37,7 +37,7 @@ class Analyser {
 
     public function __construct($url, $source) {
         $this->url = $url;
-        
+
         /**
          * Detect chinese characters and decode
          */
@@ -208,8 +208,10 @@ class Analyser {
         $result = array();
         $phoneNumberUtil    = \libphonenumber\PhoneNumberUtil::getInstance();
 
-        $phoneNumberMatcher = $phoneNumberUtil->findNumbers($source, $nation);
-
+        $phoneNumberMatcher = $phoneNumberUtil->findNumbers($source,
+                                                            $nation,
+                                                            null,
+                                                            $maxTries = 300);
         foreach ($phoneNumberMatcher as $phoneNumberMatch) {
             $phoneNumber = $phoneNumberMatch->rawString();
 
@@ -481,7 +483,7 @@ class Analyser {
      *
      */
     public function analyse_js_version($regex, $attribute_value,
-                                        $vuln_if_smaller, $vuln_array) {
+                                       $vuln_if_smaller, $vuln_array) {
         // check if it contains version
         $version_regex = $regex;
         if (preg_match($version_regex, $attribute_value, $match) === 1) {
@@ -529,7 +531,7 @@ class Analyser {
 
         return $result;
     }
-        
+
 
     /**
      * @short: Search for specific CMS indicators
@@ -591,7 +593,7 @@ class Analyser {
                                     $result['node'] = $mg;
                                     $result['node_content'] = $attribute->value;
 
-                                    // there was a finding with max entropy                                    
+                                    // there was a finding with max entropy
                                     if (isset($result["isVuln"])) {
                                         return $result;
                                     } else if (isset($result["version"])) {
@@ -607,11 +609,11 @@ class Analyser {
                      * return here and not in loop, because there could be meta tags
                      * containing more informations (like versions)
                      */
-                      if (isset($result['cms'])) {
-                          // there was at least one finding
-                          return $result;
-                      }
-                    
+                    if (isset($result['cms'])) {
+                        // there was at least one finding
+                        return $result;
+                    }
+
                 }
             }
         }
@@ -643,10 +645,10 @@ class Analyser {
                                         'data', 'href', 'longdesc', 'profile',
                                         'src', 'usemap', 'background', 'formaction',
                                         'icon', 'manifest', 'poster', 'srcset');
-                
+
                 foreach ($path_indicator as $pi) {
                     foreach ($pi->attributes as $attribute) {
-                        
+
                         foreach ($url_attributes as $ua) {
                             // indicator is a url, compare domain for equality
                             if ($attribute_name === $ua) {
@@ -670,7 +672,7 @@ class Analyser {
 
                                             return $result;
                                         }
-                                    }                                    
+                                    }
                                 }
                             }
                         }
@@ -716,7 +718,7 @@ class Analyser {
 
         return $h1 === $h2 ? TRUE : FALSE;
     }
-        
+
     /**
      * TODO: False-Positive = https://www.fietz-medien.de/eshops-groupware/webshop-systeme/xtcommerce-3.04-sp2.1/index.html
      * in meta tag CMS CONTENIDO is defined but scanner finds also wp-content path
@@ -725,7 +727,7 @@ class Analyser {
     public function analyse_cms($extend=TRUE) {
         $analysis_config = json_decode(
             file_get_contents(__DIR__ . "/cms_analysis_config.json"), true);
-        
+
 
         foreach ($analysis_config as $field => $value) {
             $result = $this->analyse_cms_specific($value['name'],
@@ -773,7 +775,7 @@ class Analyser {
         if (empty($nodes)) {
             return FALSE;
         }
-        
+
         foreach ($nodes as $node) {
             foreach ($node->attributes as $attr) {
                 if (strpos($attr->value, $name) !== FALSE) {
@@ -826,13 +828,13 @@ class Analyser {
 
     public function get_worst_finding_js_lib($result) {
         $worst = NULL;
-        
+
         foreach ($result as $finding) {
             if ($finding["isVuln"]) {
                 $worst = $finding;
             }
         }
-        
+
         if ($worst === NULL) {
             foreach ($result as $finding) {
                 if (!empty($finding["version"])) {
@@ -840,7 +842,7 @@ class Analyser {
                 }
             }
         }
-        
+
         if ($worst === NULL) {
             foreach ($result as $finding) {
                 if (!empty($finding["lib"])) {
@@ -851,19 +853,19 @@ class Analyser {
 
         return $worst;
     }
-        
+
     public function analyse_JSLib() {
         $analysis_config = json_decode(
             file_get_contents(__DIR__ . "/js_analysis_config.json"), true);
-        
+
 
         foreach ($analysis_config as $field => $value) {
             $result[] = $this->analyse_js_specific($value['name'],
-                                                 $value['tag'],
-                                                 $value['default_version'],
-                                                 $value['vuln_if_smaller'],
-                                                 $value['vuln_array'],
-                                                 $value['version_regex']);
+                                                   $value['tag'],
+                                                   $value['default_version'],
+                                                   $value['vuln_if_smaller'],
+                                                   $value['vuln_array'],
+                                                   $value['version_regex']);
 
 
             if (!empty($result)) {
