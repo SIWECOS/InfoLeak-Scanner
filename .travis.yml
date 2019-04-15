@@ -49,7 +49,7 @@ deploy:
       docker tag infoleak-scanner siwecos/infoleak-scanner:latest &&
       docker push siwecos/infoleak-scanner:latest &&
       kubectl patch deployment infoleak-scanner --namespace production -p '{"spec":{"template":{"metadata":{"labels":{"date":"`date +'%s'`", "commit":"$TRAVIS_COMMIT"}}}}}'
-- provider: script
+  - provider: script
     skip_cleanup: true
     on:
       tags: true
