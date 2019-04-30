@@ -1,0 +1,382 @@
+{
+    "wordpress": {
+        "name": "wordpress",
+        "meta": {
+            "generator": "wordpress",
+			"Generator": "wordpress"
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 4,
+            "1": 9,
+            "2": 4
+        },
+        "vuln_array": {
+            "0": "4.9.4"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-2337/product_id-4096/",
+            "1": "https://wpvulndb.com/wordpresses?page=1"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": {
+            "0": "href",
+            "1": "src",
+            "2": "srcset"
+        },
+        "indicators": {
+            "0": "wp-includes",
+            "1": "wp-content",
+            "2": "wp-json"
+        },
+        "html_regex": null
+    },
+    "joomla": {
+        "name": "joomla",
+        "meta": {
+            "generator": "Joomla!",
+			"Generator": "Joomla!"
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 3,
+            "1": 8,
+            "2": 5
+        },
+        "vuln_array": {
+            "0": "3.7.1"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-3496/product_id-16499/Joomla-Joomla-.html",
+            "1": "https://blog.sucuri.net/2017/05/sql-injection-vulnerability-joomla-3-7.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "drupal": {
+        "name": "drupal",
+        "meta": {
+            "generator": "Drupal",
+			"Generator": "Drupal"
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 8,
+            "1": 2,
+            "2": 3
+        },
+        "vuln_array": {
+            "0": "7.57"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-1367/product_id-2387/Drupal-Drupal.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "vbulletin": {
+        "name": "vbulletin",
+        "meta": {
+            "generator": "vBulletin",
+			"Generator": "vBulletin"
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 5,
+            "1": 3,
+            "2": 0
+        },
+        "vuln_array": {
+            "0": "5.1.3"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-8142/Vbulletin.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "contenido": {
+        "name": "contenido",
+        "meta": {
+            "generator": "CONTENIDO",
+			"Generator": "CONTENIDO"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 4,
+            "1": 9,
+            "2": 6
+        },
+        "vuln_array": {
+            "0": "4.8.4"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-3633/Contenido.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "xt-commerce": {
+        "name": "xt-commerce",
+        "meta": {
+            "generator": "xt:Commerce",
+			"Generator": "xt:Commerce"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 3,
+            "1": 0,
+            "2": 4
+        },
+        "vuln_array": {
+            "0": "3.0.4"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-6173/Xt-commerce.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "webspell": {
+        "name": "webspell",
+        "meta": {
+            "generator": "webSPELL",
+			"Generator": "webSPELL"						
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 4,
+            "1": 2,
+            "2": 1
+        },
+        "vuln_array": {
+            "0": "4.2.1"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-4068/product_id-7132/Webspell-Webspell.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "webspell-nor": {
+        "name": "webspell-nor",
+        "meta": {
+            "generator": "webSPELL-NOR",
+			"Generator": "webSPELL-NOR"									
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+            "0": 4,
+            "1": 2,
+            "2": 1
+        },
+        "vuln_array": {
+            "0": "4.2.1"
+        },
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-4068/product_id-7132/Webspell-Webspell.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "magento2": {
+        "name": "magento",
+        "meta": null,
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": {
+            "0": "https://www.cvedetails.com/vulnerability-list/vendor_id-15393/product_id-36803/Magento-Magento2.html"
+        },
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": "script",
+        "attribute_names": {
+            "0": "type"
+        },
+        "indicators": {
+            "0": "text/x-magento-init"
+        },
+        "html_regex": null
+    },
+    "shopsys": {
+        "name": "shopsys",
+        "meta": {
+            "Author": "ShopSys",
+			"Generator": "ShopSys",
+			"generator": "ShopSys"
+        },
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "shopify": {
+        "name": "shopify",
+        "meta": null,
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": "link",
+        "attribute_names": {
+            "0": "href"
+        },
+        "indicators": {
+            "0": "//cdn.shopify"
+        },
+        "html_regex": null
+    },
+    "squarespace": {
+        "name": "squarespace",
+        "meta": null,
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": {
+            "0": {
+                "node": "comment",
+                "regex": "/<!-- This is Squarespace\\. -->/"
+            }
+        }
+    },
+    "blogger": {
+        "name": "blogger",
+        "meta": {
+            "generator": "Blogger",
+			"Generator": "Blogger"
+        },
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "1C-Bitrix": {
+        "name": "1C-Bitrix",
+        "meta": null,
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": {
+            "0": {
+                "node": "link",
+                "regex": "/(?:<link[^>]+components.+bitrix|(?:src|href)=\"bitrix(?:js|templates))/"
+            }
+        }
+    },
+    "TYPO3": {
+        "name": "TYPO3",
+        "meta": {
+            "generator": "TYPO",
+			"Generator": "TYPO"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+			"0": "7",
+			"1": "6",
+			"2": "8"
+		},
+        "vuln_array": {
+			"0": "7.6.15"
+		},
+        "vuln_references": "https://www.cvedetails.com/vulnerability-list/vendor_id-3887/Typo3.html",
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    },
+    "prestashop": {
+        "name": "prestashop",
+        "meta": {
+            "generator": "PrestaShop",
+            "Generator": "PrestaShop"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": null,
+        "vuln_array": null,
+        "vuln_references": null,
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": {
+            "0": {
+                "node": "a",
+                "regex": "/Powered by <a\\s+[^>]+>PrestaShop/"
+            },
+            "1": {
+                "node": "comment",
+                "regex": "/<!-- Block [a-z ]+ module (?:HEADER|TOP)?\\s?-->/"
+            },
+            "2": {
+                "node": "comment",
+                "regex": "/<!-- Module Block [a-z ]+ -->/"
+            }
+        }
+    },
+    "MediaWiki": {
+        "name": "MediaWiki",
+        "meta": {
+            "generator": "MediaWiki",
+			"Generator": "MediaWiki"			
+        },
+        "default_version": null,
+        "vuln_if_smaller": {
+			"0": "1",
+			"1": "24",
+			"2": "2"
+		},
+        "vuln_array": {
+			"0": "1.23.9"
+		},
+        "vuln_references": "https://www.cvedetails.com/vulnerability-list/vendor_id-2360/product_id-4125/version_id-151629/Mediawiki-Mediawiki-1.21.html",
+        "version_regex": "/\\s+([\\d.]+)/",
+        "attribute_whitelist": null,
+        "attribute_names": null,
+        "indicators": null,
+        "html_regex": null
+    }	
+}

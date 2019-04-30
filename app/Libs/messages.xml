@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding="UTF-8" standalone='yes'?>
+<messages>
+  <message id="0">
+    <name>CMS_ONLY</name>
+    <type>comment</type>
+    <content>Die verwendete CMS konnte ermittelt werden</content>
+  </message>
+
+  <message id="1">
+    <name>CMS_VERSION_VULN</name>
+    <type>comment</type>
+    <content>Die verwendete CMS und dessen Version konnte ermittelt werden. Diese Version der CMS ist verwundbar</content>
+  </message>
+
+  <message id="2">
+    <name>CMS_VERSION</name>
+    <type>comment</type>
+    <content>Die verwendete CMS und dessen Version konnte ermittelt werden</content>
+  </message>
+
+  <message id="3">
+    <name>NO_CMS</name>
+    <type>comment</type>
+    <content>Es konnte keine CMS detektiert werden</content>
+  </message>
+
+  <message id="4">
+    <name>NO_FINDING</name>
+    <type>finding</type>
+    <content>N/A</content>
+  </message>
+
+  <message id="5">
+    <name>NO_PLUGINS</name>
+    <type>comment</type>
+    <content>Es konnten keine Plugins gefunden werden</content>
+  </message>
+
+  <message id="6">
+    <name>JS_ONLY</name>
+    <type>comment</type>
+    <content>Es wurde eine bekannte JavaScript Bibliothek entdeckt</content>
+  </message>
+
+  <message id="7">
+    <name>JS_VERSION</name>
+    <type>comment</type>
+    <content>Es wurde eine bekannte JavaScript Bibliothek und dessen Version entdeckt</content>
+  </message>
+
+  <message id="8">
+    <name>JS_VULN_VERSION</name>
+    <type>comment</type>
+    <content>Es wurde eine JavaScript Bibliothek gefunden für dessen Version eine Schwachstelle existiert</content>
+  </message>
+
+  <message id="9">
+    <name>NO_JS</name>
+    <type>comment</type>
+    <content>Es konnte keine JavaScript Bibliothek gefunden werden</content>
+  </message>
+
+  <message id="10">
+    <name>EMAIL_ONLY</name>
+    <type>comment</type>
+    <content>Die Offenlegung von E-Mail Adressen könnte zu ungewünschtem Spam und unter anderem auch zu einer gezielten Phishing Attacke führen</content>
+  </message>
+
+  <message id="11">
+    <name>NO_EMAIL</name>
+    <type>comment</type>
+    <content>Es konnte keine E-Mail Adresse gefunden werden</content>
+  </message>
+
+  <message id="12">
+    <name>PHONE_ONLY</name>
+    <type>comment</type>
+    <content>Die Offenlegung von Telefonnummern könnte zu social engineering Angriffen oder anderen unerwünschten Anrufen führen</content>
+  </message>
+
+  <message id="13">
+    <name>NO_PHONE</name>
+    <type>comment</type>
+    <content>Es konnten keine Telefonnummern gefunden werden</content>
+  </message>
+
+  <message id="14">
+    <name>PLUGIN_VULN_VERSION</name>
+    <type>comment</type>
+    <content>Ein verwundbares Plugin wird verwendet</content>
+  </message>
+
+  <message id="15">
+    <name>PLUGIN_ONLY</name>
+    <type>comment</type>
+    <content>Ein verwendetes Plugin konnte detektiert werden</content>
+  </message>
+
+  <message id="16">
+    <name>NO_SOURCE_CODE</name>
+    <type>error</type>
+    <content>Sorry, the given URL has no source code</content>
+  </message>
+
+  <message id="17">
+    <name>INVALID_URL</name>
+    <type>error</type>
+    <content>Sorry, this does not look like a valid URL</content>
+  </message>
+
+  <message id="18">
+    <name>INFOLEAK_LOCALHOST_SCAN_NOT_ALLOWED</name>
+    <type>error</type>
+    <content>Scanning localhost is not allowed</content>
+  </message>
+
+  <message id="19">
+    <name>NO_RESPONSE</name>
+    <type>error</type>
+    <content>The given URL does not respond</content>
+  </message>
+
+  <message id="20">
+    <name>INFOLEAK_PORT_DISALLOWED</name>
+    <type>error</type>
+    <content>Sorry, I am not able to communicate on that port</content>
+  </message>
+
+  <message id="21">
+    <name>INFOLEAK_DONT_LEAK_USER_CREDS</name>
+    <type>error</type>
+    <content>You should not tell me your username/password for other services</content>
+  </message>
+
+  <message id="22">
+    <name>INFOLEAK_JSON_DECODE_ERROR</name>
+    <type>error</type>
+    <content>Given JSON could not be decoded</content>
+  </message>
+
+  <message id="23">
+    <name>INFOLEAK_REDIRECT_ERROR</name>
+    <type>error</type>
+    <content>URL does a forbidden redirect</content>
+  </message>
+  
+  <message id="24">
+    <name>UNSUPPORTED_PROTOCOL</name>
+    <type>error</type>
+    <content>The Website is using a protocol which is not supported</content>
+  </message>
+
+  <message id="25">
+    <name>FAILED_INIT</name>
+    <type>error</type>
+    <content>Scanner failed to initialize the connection</content>
+  </message>
+
+  <message id="26">
+    <name>URL_MALFORMAT</name>
+    <type>error</type>
+    <content>URL is not properly formatted</content>
+  </message>
+
+  <message id="27">
+    <name>COULDNT_RESOLVE_HOST</name>
+    <type>error</type>
+    <content>The given remote host was not resolved</content>
+  </message>
+
+  <message id="28">
+    <name>COULDNT_CONNECT</name>
+    <type>error</type>
+    <content>Failed to connect to host or proxy</content>
+  </message>
+  
+  <message id="29">
+    <name>REMOTE_ACCESS_DENIED</name>
+    <type>error</type>
+    <content>Access to the resource given in the URL was denied</content>
+  </message>
+
+  <message id="30">
+    <name>HTTP2_ERROR</name>
+    <type>error</type>
+    <content>A problem was detected in the HTTP2 framing layer</content>
+  </message>
+
+  <message id="31">
+    <name>TOO_MANY_REDIRECTS</name>
+    <type>error</type>
+    <content>There were too many redirects</content>
+  </message>
+
+  <message id="32">
+    <name>SEND_ERROR</name>
+    <type>error</type>
+    <content>Failed sending network data</content>
+  </message>
+
+  <message id="33">
+    <name>RECV_ERROR</name>
+    <type>Failure receiving network data</type>
+    <content></content>
+  </message>
+
+  <message id="34">
+    <name>BAD_CONTENT_ENCODING</name>
+    <type>error</type>
+    <content>Unrecognized transfer encoding</content>
+  </message>
+  
+  <message id="35">
+    <name>SSL_ENGINE_INITFAILED</name>
+    <type>error</type>
+    <content>Initiating the SSL Engine failed</content>
+  </message>
+
+  <message id="36">
+    <name>TIMEOUT</name>
+    <type>error</type>
+    <content>The specified timeout period was reached according to the conditions</content>
+  </message>
+
+  <message id="37">
+    <name>CONV_FAILED</name>
+    <type>error</type>
+    <content>Character conversion failed</content>
+  </message>
+
+  <message id="38">
+    <name>REMOTE_FILE_NOT_FOUND</name>
+    <type>error</type>
+    <content>The resource referenced in the URL does not exist</content>
+  </message>
+
+  <message id="39">
+    <name>HTTP2_STREAM</name>
+    <type>error</type>
+    <content>Stream error in the HTTP/2 framing layer</content>
+  </message>
+  
+</messages>
