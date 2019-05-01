@@ -560,7 +560,8 @@ class Control{
             CURLOPT_SSL_VERIFYPEER  => false,
             CURLOPT_USERAGENT       => $this->userAgent,
             CURLOPT_CONNECTTIMEOUT  => 10,
-            CURLOPT_TIMEOUT         => 10
+            CURLOPT_TIMEOUT         => 10,
+            CURLOPT_HTTPHEADER      => array('Content-Type: application/json')
         );
 
         /* Use settings defined in $options for the connection */
