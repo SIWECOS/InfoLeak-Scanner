@@ -178,25 +178,4 @@ class InfoLeakScan {
         }
     }
 }
-
-
-/**
- * All possible scoreTypes.
- */
-abstract class scoreType {
-    const critical = 0;
-    const warning = 1;
-    const success = 2;
-    const bonus = 3;
-    const info = 4;
-    const hidden = 5;
-}
-
-class Test {
-    public $name = "Unknown";
-    public $hasError = false;
-    public $score = 0;
-    public $scoreType = scoreType::info;
-    public $testDetails = [];
-}
 ?>

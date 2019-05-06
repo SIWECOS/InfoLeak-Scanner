@@ -146,9 +146,6 @@ class View{
         $result['scoreType'] = $this->scoreType(1);
         $result['testDetails'] = array();
 
-        if ($nodes === NULL)
-            return $result;
-
         if ($nodes["result"] !== NULL) {
             $isVuln   = $nodes['result'];
             $f_val    = $nodes['pVal'];
@@ -221,16 +218,13 @@ class View{
     /**
      *
      */
-    private function printJS($nodes, $cms){
+    private function printJS($nodes){
         $result  = $finding = array();
         $result['name']  = "JS_LIB";
         $result['hasError'] = $this->hasError;
         $result['errorMessage'] = $this->errorMessage;
         $result['scoreType'] = $this->scoreType(1);
         $result['testDetails'] = array();
-
-        if ($nodes === NULL && $cms === NULL)
-            return $result;
 
         $isVuln  = $nodes['isVuln'];
         $version = $nodes['version'];
@@ -338,9 +332,10 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
         $result['testDetails'] = array();
 
-        if ($emails === NULL)
-            return $result;
-
+        // TODO(ya): 
+        // if ($emails === NULL) {
+        //     return $result;
+        // }
 
         if (!empty($emails)) {
             $result['score']   = 96;
@@ -384,8 +379,9 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
         $result['testDetails'] = array();
 
-        if ($phone_numbers === NULL)
-            return $result;
+        // TODO(ya): 
+        // if ($phone_numbers === NULL)
+        //     return $result;
 
         if (!empty($phone_numbers)) {
             $phone_numbers_  = array();
@@ -440,7 +436,7 @@ class View{
         /* Scan results */
         //$tests[] = $this->printCMS($cms);
         $tests[] = $this->printPlugin(NULL);
-        $tests[] = $this->printJS(NULL, NULL);
+        $tests[] = $this->printJS(NULL);
         $tests[] = $this->printEmail(NULL);
         $tests[] = $this->printPhonenumber(NULL);
 
@@ -476,7 +472,7 @@ class View{
         /* Scan results */
         //$tests[] = $this->printCMS($cms);
         $tests[] = $this->printPlugin($plugins);
-        $tests[] = $this->printJS($jslib, $cms);
+        $tests[] = $this->printJS($jslib);
         $tests[] = $this->printEmail($email);
         $tests[] = $this->printPhonenumber($phonenumber);
 
@@ -502,4 +498,24 @@ class View{
     }
 }
 
+/**
+ * All possible scoreTypes.
+ */
+abstract class scoreType {
+    const critical = 0;
+    const warning = 1;
+    const success = 2;
+    const bonus = 3;
+    const info = 4;
+    const hidden = 5;
+}
+
+class ScanTemplate {
+    public $name = "Unknown";
+    public $hasError = false;
+    public $errorMessage = NULL;
+    public $score = 0;
+    public $scoreType = scoreType::info;
+    public $testDetails = [];
+}
 ?>
