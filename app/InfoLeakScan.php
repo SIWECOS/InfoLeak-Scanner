@@ -68,7 +68,7 @@ class InfoLeakScan {
         $view = new View(file_get_contents(base_path('VERSION')));
 
         try {
-            $url = $this->punycodeUrl($this->addHTTP($this->url));
+            $this->url = $this->punycodeUrl($this->addHTTP($this->url));
 
             $this->body = $this->client->get($this->url)->getBody();
         } catch (\Exception $e) {
