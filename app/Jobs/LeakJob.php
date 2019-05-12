@@ -39,14 +39,11 @@ class LeakJob implements ShouldQueue
         Log::info('Starting Scan Job for ' . $this->request->get('url'));
         Log::info('Queue jobs remaining ' . Queue::size($this->queue));
 
-        // NOTE(ya): Default user agent.
-        $agent  = file_get_contents(app_path() . "/Libs/default_UA");
-
         $scan = new InfoLeakScan(
             $this->request->get('url'),
             0,
             $this->request->get('callbackurls', []),
-            $this->request->get('userAgent', $agent)
+            $this->request->get('userAgent', \Config::get('scanner.user_agent'))
         );
 
         $scan->scan();

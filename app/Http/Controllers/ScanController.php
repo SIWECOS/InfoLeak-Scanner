@@ -15,14 +15,11 @@ class ScanController extends Controller
             return "OK";
         }
 
-        // NOTE(ya): Default user agent.
-        $agent  = file_get_contents(app_path() . "/Libs/default_UA");
-
         $scan = new InfoLeakScan(
             $request->get('url'),
             0,
             $request->get('callbackurls', []),
-            $request->get('userAgent', $agent)
+            $request->get('userAgent', \Config::get('scanner.user_agent'))
         );
 
         return response($scan->scan(), 200)->header('Content-Type', 'application/json; charset=utf-8');
