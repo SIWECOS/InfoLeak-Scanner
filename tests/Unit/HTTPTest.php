@@ -14,7 +14,7 @@ class HTTPTest extends TestCase
     /**
        === General Tests ===
     **/
-    
+
     /**
      * This tests whether the URL gets punycode encoded
      *
@@ -27,18 +27,30 @@ class HTTPTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertInternalType('array', json_decode($response->getContent(), true));
-    }  
+    }
 
     /**
        === POST Tests ===
     **/
 
     /**
+     * This tests whether the user agent gets set.
+     *
+     * @return void
+     */
+    public function testUA()
+    {
+        // TODO(ya)
+
+        $this->assertTrue(true);
+    }
+
+    /**
      * This tests whether response is valid JSON.
      *
      * @return void
      */
-    public function test_POST()
+    public function testPOST()
     {
         $response = $this->withHeaders([
             'Content-Type' => 'application/json',
@@ -70,8 +82,6 @@ class HTTPTest extends TestCase
 
         $this->assertEquals('OK', $response->getContent());
     }
-
-
 
 
     /**
