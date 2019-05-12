@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
   |
 */
 
-Route::post("/start", "Controller@start");
+Route::post("/start", "ScanController@start");

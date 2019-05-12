@@ -11,5 +11,5 @@
   |
 */
 
-Route::match(['get', 'post'], '/', "Controller@start");
-Route::match(['get', 'post'], '/start', "Controller@start");
+Route::match(['get', 'post'], '/', "ScanController@start");
+Route::match(['get', 'post'], '/start', "ScanController@start");
