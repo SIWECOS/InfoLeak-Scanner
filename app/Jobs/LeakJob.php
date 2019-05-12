@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\InfoLeakScan;
+use App\Libs\View;
 use App\Http\Requests\ScanStartRequest;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
@@ -64,18 +65,19 @@ class LeakJob implements ShouldQueue
             );
             try {
                 $client = new Client;
+                $view = new View(file_get_contents(base_path('VERSION')));
+                $view = $view->printError($exception->getMessage(), get_class($exception));
+                $result = json_encode($view,
+                                      JSON_PRETTY_PRINT |
+                                      JSON_UNESCAPED_UNICODE |
+                                      JSON_UNESCAPED_SLASHES);
+
                 $client->post(
                     $url,
                     [
                         'http_errors' => false,
                         'timeout' => 60,
-                        'json' => [
-                            'name'         => 'INFOLEAK',
-                            'version'      => file_get_contents(base_path('VERSION')),
-                            'hasError'     => true,
-                            'errorMessage' => $exception->getMessage(),
-                            'score'        => 0
-                        ],
+                        'json' => $result,
                     ]
                 );
             } catch (\Exception $e) {
