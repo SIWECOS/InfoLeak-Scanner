@@ -50,7 +50,7 @@ class InfoLeakScan {
 
             $this->body = $this->client->get($this->url)->getBody();
         } catch (\Exception $e) {
-            \Log::warning('Could not connect to: ' . $url);
+            \Log::warning('Could not connect to: ' . $this->url);
 
             if ($this->verbose)
                 \Log::warning('Guzzle error: ' . $e);
