@@ -144,9 +144,10 @@ class InfoLeakScan {
 
             try {
                 $this->client->post($url, [
+                    'headers'     => ['Content-type' => 'application/json'],
                     'http_errors' => false,
                     'timeout'     => 60,
-                    'json'        => $this->result,
+                    'json'        => json_decode($this->result)
                 ]);
             } catch (\Exception $e) {
                 Log::warning('Callback error (url): ' . $url);
