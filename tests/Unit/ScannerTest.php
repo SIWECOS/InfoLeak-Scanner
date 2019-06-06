@@ -104,15 +104,15 @@ class ScannerTest extends TestCase
         $this->assertEquals($view["tests"][2]["score"], "96");
         $this->assertEquals($view["tests"][2]["name"], "EMAIL_ADDRESS");
         $this->assertEquals($view["tests"][2]["scoreType"], "info");
-        $this->assertEquals($view["tests"][2]["testDetails"][0]["placeholder"], "EMAIL_FOUND");
-        $this->assertEquals($view["tests"][2]["testDetails"][0]["values"]["email_adress"], "test@email.com");
+        $this->assertEquals($view["tests"][2]["testDetails"][0]["translationStringId"], "EMAIL_FOUND");
+        $this->assertEquals($view["tests"][2]["testDetails"][0]["placeholders"]["email_adress"], "test@email.com");
         
         // tests 3
         $this->assertEquals($view["tests"][3]["score"], "98");
         $this->assertEquals($view["tests"][3]["name"], "PHONE_NUMBER");
         $this->assertEquals($view["tests"][3]["scoreType"], "info");
-        $this->assertEquals($view["tests"][3]["testDetails"][0]["placeholder"], "NUMBER_FOUND");
-        $this->assertEquals($view["tests"][3]["testDetails"][0]["values"]["number"], "1234567");
+        $this->assertEquals($view["tests"][3]["testDetails"][0]["translationStringId"], "NUMBER_FOUND");
+        $this->assertEquals($view["tests"][3]["testDetails"][0]["placeholders"]["number"], "1234567");
 
         /**
            === Check scoring ===
