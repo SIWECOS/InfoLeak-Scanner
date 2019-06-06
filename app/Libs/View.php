@@ -26,7 +26,8 @@ class View{
         2 => "success",
         3 => "bonus",
         4 => "info",
-        5 => "hidden"
+        5 => "hidden",
+        6 => "failed",
     );
 
     public function scoreType($ordinal) {
