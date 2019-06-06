@@ -3,6 +3,7 @@
 namespace App\Libs;
 
 use App\Libs\Messages;
+use App\Libs\TranslateableMessage;
 
 
 /**
