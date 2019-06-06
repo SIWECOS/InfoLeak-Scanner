@@ -2,7 +2,6 @@
 
 namespace App\Libs;
 
-use App\Libs\Messages;
 use App\Libs\TranslateableMessage;
 
 
@@ -10,7 +9,6 @@ use App\Libs\TranslateableMessage;
  * Returns JSON output of findings.
  */
 class View{
-    private $messages;
     private $scan_count = 4; // NOTE(ya): decreased by 1 - CMS SCAN got obsolete (but still built-in)
     private $global_score = 0;
     private $version;
@@ -35,7 +33,6 @@ class View{
     }
 
     public function __construct($version) {
-        $this->messages   = new Messages();
         $this->version = $version;
     }
 
