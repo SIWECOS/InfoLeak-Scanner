@@ -339,6 +339,12 @@ class View{
     }
 
     /**
+     * TODO(ya): This function only gets called when guzzle
+     * fails. $errorMessage is retrieved by guzzle and is too verbose
+     * in some cases.
+     * TODO(ya): Do we want to keep the different ERROR types or would
+     * HTTP_ERROR be enough?
+     *
      * Something went wrong. Print error message according specifications.
      *
      * Possible types:
