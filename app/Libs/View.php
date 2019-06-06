@@ -74,30 +74,38 @@ class View{
 
                 if (strlen($f_val[$j]) > 100) {
                     $f_val[$j]  = substr($f_val[$j], 0, 100);
-                    $f_val[$j] .= " [...]";
                 }
 
                 if ($isVuln[$j]) {
-                    $result['testDetails'][$j]['placeholder'] = "PLUGIN_VERSION_VULN";
-                    $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
-                    $result['testDetails'][$j]['values']['plugin_version'] = $version[$j];
-                    $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
-                    $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
+                    $result['testDetails'][$j] = TranslateableMessage::get(
+                        "PLUGIN_VERSION_VULN", ["plugin" => $plugin_name[$j],
+                                                "plugin_version" => $version[$j],
+                                                "node" => $nodeName[$j],
+                                                "node_content" => $f_val[$j]
+                        ]
+                    );
+
                     $result['score'] = 0;
                     $this->vuln_count += 1;
                 } else {
                     if ($version[$j] === NULL) {
-                        $result['testDetails'][$j]['placeholder'] = "PLUGIN_ONLY";
-                        $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
-                        $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
-                        $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
+                        $result['testDetails'][$j] = TranslateableMessage::get(
+                            "PLUGIN_ONLY", ["plugin" => $plugin_name[$j],
+                                            "node" => $nodeName[$j],
+                                            "node_content" => $f_val[$j]
+                            ]
+                        );
+
                         $result['score'] = 99;
                     } else {
-                        $result['testDetails'][$j]['placeholder'] = "PLUGIN_VERSION";
-                        $result['testDetails'][$j]['values']['plugin'] = $plugin_name[$j];
-                        $result['testDetails'][$j]['values']['plugin_version'] = $version[$j];
-                        $result['testDetails'][$j]['values']['node'] = $nodeName[$j];
-                        $result['testDetails'][$j]['values']['node_content'] = $f_val[$j];
+                        $result['testDetails'][$j] = TranslateableMessage::get(
+                            "PLUGIN_VERSION", ["plugin" => $plugin_name[$j],
+                                               "plugin_version" => $version[$j],
+                                               "node" => $nodeName[$j],
+                                               "node_content" => $f_val[$j]
+                            ]
+                        );
+
                         $result['score'] = 96;
                     }
                 }
@@ -144,10 +152,6 @@ class View{
         if (!empty($node)) {
             $result['score'] = 99;
 
-            $result['testDetails'][0]['placeholder'] = "JS_LIB_ONLY";
-            $result['testDetails'][0]['values']['js_lib_name'] = $lib;
-
-
             foreach($node->attributes as $attribute) {
                 if (!empty($lib)) {
                     if (strpos($attribute->value, $lib) !== FALSE) {
@@ -159,11 +163,23 @@ class View{
                 }
             }
 
+            $result['testDetails'][0] = TranslateableMessage::get(
+                "JS_LIB_ONLY", ["js_lib_name" => $lib,
+                                "node" => $finding['node_name'],
+                                "node_content" => substr($finding['node_content'], 0, 100)
+                ]
+            );
+
             if ((!empty($version)) &&
                 ($version !== "N/A")) {
-                $result['testDetails'][0]['placeholder'] = "JS_LIB_VERSION";
-                $result['testDetails'][0]['values']['js_lib_name'] = $lib;
-                $result['testDetails'][0]['values']['js_lib_version'] = $version;
+                $result['testDetails'][0] = TranslateableMessage::get(
+                    "JS_LIB_VERSION", ["js_lib_name" => $lib,
+                                       "js_lib_version" => $version,
+                                       "node" => $finding['node_name'],
+                                       "node_content" => substr($finding['node_content'], 0, 100)
+                    ]
+                );
+
                 $result['score'] = 96;
             } else {
                 unset($result['version']);
@@ -171,9 +187,14 @@ class View{
 
             if ((!empty($isVuln)) &&
                 ($isVuln !== "N/A")) {
-                $result['testDetails'][0]['placeholder'] = "JS_LIB_VULN_VERSION";
-                $result['testDetails'][0]['values']['js_lib_name'] = $lib;
-                $result['testDetails'][0]['values']['js_lib_version'] = $version;
+                $result['testDetails'][0] = TranslateableMessage::get(
+                    "JS_LIB_VULN_VERSION", ["js_lib_name" => $lib,
+                                            "js_lib_version" => $version,
+                                            "node" => $finding['node_name'],
+                                            "node_content" => substr($finding['node_content'], 0, 100)
+                    ]
+                );
+
                 $result['score'] = 0;
                 $this->vuln_count += 1;
 
@@ -193,18 +214,8 @@ class View{
                 }
             }
 
-            if (!empty($finding['node_content'])) {
-                if (strlen($finding['node_content']) >= 100) {
-                    $finding['node_content'] = substr($finding['node_content'], 0, 100);
-                    $finding['node_content'] .= " [...]";
-                }
-            }
-
-            $result['testDetails'][0]['values']['node'] = $finding['node_name'];
-            $result['testDetails'][0]['values']['node_content'] = $finding['node_content'];
-
             if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
-                if (empty($result['testDetails'][0]['values']['js_lib_version'])) {
+                if (empty($result['testDetails'][0]['values']['version'])) {
                     $result['score'] = 100;
                     $result['testDetails'] = NULL;
                 }
@@ -243,7 +254,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
         $result['testDetails'] = array();
 
-        // TODO(ya): 
+        // TODO(ya):
         // if ($emails === NULL) {
         //     return $result;
         // }
@@ -253,9 +264,10 @@ class View{
 
             $i = 0;
             foreach ($emails as $email) {
-                $result['testDetails'][$i]['placeholder'] = "EMAIL_FOUND";
+                $result['testDetails'][$i] = TranslateableMessage::get(
+                    "EMAIL_FOUND", ["email_adress" => $emails[$i]]
+                );
 
-                $result['testDetails'][$i]['values']['email_adress'] = $emails[$i];
                 $i++;
             }
         } else {
@@ -291,7 +303,7 @@ class View{
         $result['scoreType'] = $this->scoreType(4);
         $result['testDetails'] = array();
 
-        // TODO(ya): 
+        // TODO(ya):
         // if ($phone_numbers === NULL)
         //     return $result;
 
@@ -302,8 +314,10 @@ class View{
 
             $i = 0;
             foreach ($phone_numbers as $phone_number) {
-                $result['testDetails'][$i]['placeholder'] = "NUMBER_FOUND";
-                $result['testDetails'][$i]['values']['number'] = $phone_number;
+                $result['testDetails'][$i] = TranslateableMessage::get(
+                    "NUMBER_FOUND", ["number" => $phone_number]
+                );
+
                 $i++;
             }
         } else {
@@ -339,9 +353,16 @@ class View{
     public function printError($errorMessage, $type) {
         $type = strtoupper(str_replace("Exception", "", explode("\\", $type)[2])) . "_ERROR";
 
+        // NOTE(ya): remove everything in between brackets
+        if (strpos($errorMessage, "(")) {
+            $errorMessage = preg_replace('/\([\s\S]+?\)/', '', $errorMessage);
+            $errorMessage = rtrim($errorMessage, " ");
+        }
+
         $this->hasError = TRUE;
-        $this->errorMessage["placeholder"] = $type;
-        $this->errorMessage["values"]["description"] = $errorMessage;
+        $this->errorMessage = TranslateableMessage::get(
+            $type, ["description" => $errorMessage]
+        );
 
         $result = array();
         $tests  = array();
