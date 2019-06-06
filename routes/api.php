@@ -13,4 +13,6 @@ use Illuminate\Http\Request;
   |
 */
 
-Route::post("/start", "ScanController@start");
+Route::group(['prefix' => 'v2'], function () {
+    Route::post("/start", "ScanController@start");
+});
