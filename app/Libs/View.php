@@ -110,6 +110,7 @@ class View{
 
         if ($result['hasError']) {
             $result['score'] = 0;
+            $result['scoreType'] = $this->scoreType(6);
         }
 
         $this->global_score += $result['score'];
@@ -215,6 +216,7 @@ class View{
 
         if ($result['hasError']) {
             $result['score'] = 0;
+            $result['scoreType'] = $this->scoreType(6);
         }
 
         $this->global_score += $result['score'];
@@ -264,6 +266,7 @@ class View{
 
         if ($result['hasError']) {
             $result['score'] = 0;
+            $result['scoreType'] = $this->scoreType(6);
         }
 
         $this->global_score += $result['score'];
@@ -310,6 +313,7 @@ class View{
 
         if ($result['hasError']) {
             $result['score'] = 0;
+            $result['scoreType'] = $this->scoreType(6);
         }
 
         $this->global_score += $result['score'];
