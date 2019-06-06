@@ -358,7 +358,7 @@ class View{
 
         $this->hasError = TRUE;
         $this->errorMessage = TranslateableMessage::get(
-            $type, ["description" => $errorMessage]
+            $type, ["description" => substr($errorMessage, 0, 100)]
         );
 
         $result = array();
