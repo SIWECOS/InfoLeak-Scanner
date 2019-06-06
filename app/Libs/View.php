@@ -411,13 +411,6 @@ class View{
         $result = array();
         $tests  = array();
 
-        /* Scan results */
-        //$tests[] = $this->printCMS($cms);
-        $tests[] = $this->printPlugin(NULL);
-        $tests[] = $this->printJS(NULL);
-        $tests[] = $this->printEmail(NULL);
-        $tests[] = $this->printPhonenumber(NULL);
-
         /* Scanner details - overall */
         $result["name"] = "INFOLEAK";
         $result["version"] = $this->version;
@@ -432,7 +425,7 @@ class View{
             $result["score"] = round($this->global_score/$this->scan_count);
         }
 
-        $result["tests"] = $tests;
+        $result["tests"] = [];
 
         $this->scan_result = $result;
 
