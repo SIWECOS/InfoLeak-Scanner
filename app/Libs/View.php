@@ -376,7 +376,6 @@ class View{
         $tests  = array();
 
         /* Scan results */
-        //$tests[] = $this->printCMS($cms);
         $tests[] = $this->printPlugin($plugins);
         $tests[] = $this->printJS($jslib);
         $tests[] = $this->printEmail($email);
