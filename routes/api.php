@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v2'], function () {
-    Route::post("/start", "ScanController@start");
+    Route::match(['get', 'post'], '/start', "ScanController@start");
 });
