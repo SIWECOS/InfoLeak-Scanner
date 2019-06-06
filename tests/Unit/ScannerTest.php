@@ -172,11 +172,15 @@ class ScannerTest extends TestCase
 
     /**
      * Check whether Analyser works correctly
-     * 
+     *
      * @return void
      */
     public function testAnalyser() {
         $analyser = new Analyser("http://SCANNER-PHP-UNIT-TEST.com", "");
+
+        /**
+          ======== TESTING find_email ========
+        **/
 
         $mail_adresses = ["easy@mail.com", "x@y.com", "test0@email.de",
                           "easy1[at]mail.com", "easy/=?^2[at]mail.com",
