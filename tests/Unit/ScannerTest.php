@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 use Mockery;
 
 use App\Libs\View;
+use App\Libs\Analyser;
 
 class ScannerTest extends TestCase
 {
@@ -19,7 +20,7 @@ class ScannerTest extends TestCase
         parent::tearDown();
         \Mockery::close();
     }
-    
+
     /**
      * Check whether error messages are valid and not malformed
      *
@@ -29,10 +30,10 @@ class ScannerTest extends TestCase
     {
         $e = new \GuzzleHttp\Exception\RequestException("Error Communicating with Server",
                                                         new Request('GET', 'test'));
-        
+
         $view = new View(file_get_contents(base_path('VERSION')));
         $view = $view->printError($e->getMessage(), get_class($e));
-        
+
         $this->assertInternalType('array', $view);
     }
 
@@ -47,9 +48,9 @@ class ScannerTest extends TestCase
 
         $view = $view->printJSON("Wordpress", ["test@email.com"], null, null, ["1234567"]);
 
-        
+
         /**
-           === Check keys ===
+          === Check keys ===
         **/
         $this->assertArrayHasKey('name', $view);
         $this->assertArrayHasKey('version', $view);
@@ -66,7 +67,7 @@ class ScannerTest extends TestCase
         }
 
         /**
-           === Check types ===
+          === Check types ===
         **/
         $this->assertInternalType('array', $view);
         $this->assertInternalType('string', $view["version"]);
@@ -85,7 +86,7 @@ class ScannerTest extends TestCase
         }
 
         /**
-           === Check values ===
+          === Check values ===
         **/
         $this->assertEquals($view["name"], "INFOLEAK");
         $this->assertEquals($view["score"], "99");
@@ -99,14 +100,14 @@ class ScannerTest extends TestCase
         $this->assertEquals($view["tests"][1]["score"], "100");
         $this->assertEquals($view["tests"][1]["name"], "JS_LIB");
         $this->assertEquals($view["tests"][1]["scoreType"], "warning");
-        
+
         // tests 2
         $this->assertEquals($view["tests"][2]["score"], "96");
         $this->assertEquals($view["tests"][2]["name"], "EMAIL_ADDRESS");
         $this->assertEquals($view["tests"][2]["scoreType"], "info");
         $this->assertEquals($view["tests"][2]["testDetails"][0]["translationStringId"], "EMAIL_FOUND");
         $this->assertEquals($view["tests"][2]["testDetails"][0]["placeholders"]["email_adress"], "test@email.com");
-        
+
         // tests 3
         $this->assertEquals($view["tests"][3]["score"], "98");
         $this->assertEquals($view["tests"][3]["name"], "PHONE_NUMBER");
@@ -115,7 +116,7 @@ class ScannerTest extends TestCase
         $this->assertEquals($view["tests"][3]["testDetails"][0]["placeholders"]["number"], "1234567");
 
         /**
-           === Check scoring ===
+          === Check scoring ===
         **/
         unset($view);
         $view = new View(file_get_contents(base_path('VERSION')));
@@ -151,21 +152,62 @@ class ScannerTest extends TestCase
         $this->assertEquals($view["score"], "98");
 
         /* TODO(ya): js lib vuln
-        $view = new View(file_get_contents(base_path('VERSION')));
-        $p = array();
-        $p["result"] = [true];
-        $p["pVal"] = ["/path/to/YoastSEO"];
-        $p["attrName"] = ["href"];
-        $p["version"] = ["1.7.3.3"];
-        $p["plugin_name"] = ["YoastSEO"];
-        $j = array();
-        $j["isVuln"] = [true];
-        $j["version"] = ["2.0.3"];
-        $j["lib"] = ["jquery"];
-        $j["node"] = ["script"];        
-        $view = $view->printJSON("Wordpress", ["test@email.com"], $p, $j, ["1234567"]);
-        print_r($view);
-        $this->assertEquals($view["score"], "98");
+           $view = new View(file_get_contents(base_path('VERSION')));
+           $p = array();
+           $p["result"] = [true];
+           $p["pVal"] = ["/path/to/YoastSEO"];
+           $p["attrName"] = ["href"];
+           $p["version"] = ["1.7.3.3"];
+           $p["plugin_name"] = ["YoastSEO"];
+           $j = array();
+           $j["isVuln"] = [true];
+           $j["version"] = ["2.0.3"];
+           $j["lib"] = ["jquery"];
+           $j["node"] = ["script"];
+           $view = $view->printJSON("Wordpress", ["test@email.com"], $p, $j, ["1234567"]);
+           print_r($view);
+           $this->assertEquals($view["score"], "98");
         */
+    }
+
+    /**
+     * Check whether Analyser works correctly
+     * 
+     * @return void
+     */
+    public function testAnalyser() {
+        $analyser = new Analyser("http://SCANNER-PHP-UNIT-TEST.com", "");
+
+        $mail_adresses = ["easy@mail.com", "x@y.com", "test0@email.de",
+                          "easy1[at]mail.com", "easy/=?^2[at]mail.com",
+                          "my.mail[at]hoster.to", "number11[at]gmx.de",
+                          "me#easy@mail.com", "me#easy|}~@mail.com", "me.*+-/=?^_`{|}~easy@mail.com"
+                          //"&#116;&#101;&#115;&#116;&#064;&#109;&#097;&#105;&#108;&#046;&#100;&#101", // test@mail.de encoded
+        ];
+        $email_source = <<<EOT
+<html>
+<body>
+easy $mail_adresses[0]
+inquotes "$mail_adresses[1]"
+mailto mailto:$mail_adresses[2]
+a href="mailto:$mail_adresses[3]"
+askdbasd "$mail_adresses[4]" kjasdasd
+$mail_adresses[5]
+$mail_adresses[6]
+$mail_adresses[7]
+$mail_adresses[8]
+$mail_adresses[9]
+</body>
+</html>
+EOT;
+        $email_analysis = $analyser->find_email($email_source);
+
+        // NOTE(ya): Check whether results match original adresses precisely
+        foreach ($email_analysis as $email) {
+            $this->assertEquals(in_array($email, $mail_adresses), true);
+        }
+
+        // NOTE(ya): Are all tested emails getting detected?
+        $this->assertEquals(count($email_analysis), 10);
     }
 }
