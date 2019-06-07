@@ -13,7 +13,7 @@ before_script:
   - composer install --no-interaction
 
 script:
-  # - vendor/bin/phpunit
+  - vendor/bin/phpunit
   - docker build -t infoleak-scanner .
 
 before_deploy:
