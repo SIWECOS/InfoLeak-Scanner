@@ -5,6 +5,11 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
+use App\InfoLeakScan;
+use App\Jobs\LeakJob;
+use App\Http\Controllers\ScanController;
+
 
 class HTTPTest extends TestCase
 {
@@ -12,7 +17,7 @@ class HTTPTest extends TestCase
     private $punycode_url = "http://äü.de";
 
     /**
-       === General Tests ===
+      === General Tests ===
     **/
 
     /**
@@ -29,10 +34,6 @@ class HTTPTest extends TestCase
     }
 
     /**
-       === POST Tests ===
-    **/
-
-    /**
      * This tests whether the user agent gets set.
      *
      * @return void
@@ -45,6 +46,11 @@ class HTTPTest extends TestCase
 
         $this->assertEquals($response->headers->get('User-Agent'), $ua);
     }
+
+    /**
+      === POST Tests ===
+    **/
+
 
     /**
      * This tests whether response is valid JSON.
@@ -73,21 +79,24 @@ class HTTPTest extends TestCase
      */
     public function testDispatch_POST()
     {
+        // LeakJob.php
+        Queue::fake();
+
         $response = $this->withHeaders([
             'Content-Type' => 'application/json',
         ])->json('POST', '/start', [
             "url" => 'eco.de',
             "dangerLevel" => 0,
-            "callbackurls" => ["http://localhost:8001/test2.php"],
+            "callbackurls" => ["http://localhost:8000/testing?url=test"],
             "userAgent" => "TESTING_USER_AGENT"
         ]);
 
-        $this->assertEquals('OK', $response->getContent());
+        Queue::assertPushed(LeakJob::class, 1);
     }
 
 
     /**
-       === GET Tests ===
+      === GET Tests ===
     **/
 
     /**
