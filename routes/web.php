@@ -13,3 +13,7 @@
 
 Route::match(['get', 'post'], '/', "ScanController@start");
 Route::match(['get', 'post'], '/start', "ScanController@start");
+
+if (config("app.env") == 'testing') {
+    Route::match(['get', 'post'], '/testing', "ScanController@reflect");
+}
