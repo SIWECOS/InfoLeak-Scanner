@@ -39,9 +39,11 @@ class HTTPTest extends TestCase
      */
     public function testUA()
     {
-        // TODO(ya)
+        // Testing User-Agent set by a GET request
+        $ua = "TESTING_USER_AGENT";
+        $response = $this->get('/?url=http://not-existing-1337.com&userAgent=' . $ua);
 
-        $this->assertTrue(true);
+        $this->assertEquals($response->headers->get('User-Agent'), $ua);
     }
 
     /**
