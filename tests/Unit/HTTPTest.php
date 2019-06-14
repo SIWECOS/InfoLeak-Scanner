@@ -58,7 +58,7 @@ class HTTPTest extends TestCase
         ])->json('POST', '/start', [
             "url" => 'eco.de',
             "dangerLevel" => 0,
-            "callbackurls" => ["http://localhost:8001/test2.php"],
+            "callbackurls" => ["http://localhost:8000/testing?url=test"],
             "userAgent" => "TESTING_USER_AGENT"
         ]);
 
