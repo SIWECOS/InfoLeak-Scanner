@@ -133,7 +133,7 @@ class View{
     /**
      *
      */
-    private function printJS($nodes){
+    private function printJS($nodes, $cms){
         $result  = $finding = array();
         $result['name']  = "JS_LIB";
         $result['hasError'] = $this->hasError;
@@ -211,7 +211,7 @@ class View{
                 }
             }
 
-            if ($result['testDetails'][0]['values']['js_lib_name'] === "jquery") {
+            if ($result['testDetails'][0]['placeholders']['js_lib_name'] === "jquery") {
                 if (empty($result['testDetails'][0]['values']['version'])) {
                     $result['score'] = 100;
                     $result['testDetails'] = NULL;
@@ -401,7 +401,7 @@ class View{
 
         /* Scan results */
         $tests[] = $this->printPlugin($plugins);
-        $tests[] = $this->printJS($jslib);
+        $tests[] = $this->printJS($jslib, $cms);
         $tests[] = $this->printEmail($email);
         $tests[] = $this->printPhonenumber($phonenumber);
 
