@@ -63,6 +63,7 @@ class HTTPTest extends TestCase
         ]);
 
         $response->assertStatus(200);
+        $this->assertEquals('OK', $response->getContent());
     }
 
     /**
