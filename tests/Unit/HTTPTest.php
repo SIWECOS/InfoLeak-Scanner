@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HTTPTest extends TestCase
 {
-    private $test_url = "google.de";
+    private $test_url = "http://not-existing-1337.com";
     private $punycode_url = "http://äü.de";
 
     /**
