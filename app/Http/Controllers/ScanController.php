@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ScanStartRequest;
+use Illuminate\Http\Request;
 use App\InfoLeakScan;
 use App\Jobs\LeakJob;
 
@@ -26,5 +27,11 @@ class ScanController extends Controller
             ->header('Content-Type', 'application/json; charset=utf-8')
             ->header('User-Agent', $request->get('userAgent', \Config::get('scanner.user_agent')));
     }
+
+    public function reflect(ScanStartRequest $request) {
+        if (count($request->json()->all())) {
+            return $request->json()->all();
+        }
+        return "[-] Could not reflect";
     }
 }
