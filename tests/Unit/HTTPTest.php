@@ -22,11 +22,10 @@ class HTTPTest extends TestCase
      */
     public function testPunycode_GET()
     {
-        $response = $this->get('/?url=' . $this->punycode_url);
+        $scanner = new InfoLeakScan($this->punycode_url, 0, [], "Testing_Punycode");
+        $encoded = $scanner->punycodeUrl($this->punycode_url);
 
-
-        $response->assertStatus(200);
-        $this->assertInternalType('array', json_decode($response->getContent(), true));
+        $this->assertEquals($encoded, "http://xn--4ca2c.de");
     }
 
     /**
