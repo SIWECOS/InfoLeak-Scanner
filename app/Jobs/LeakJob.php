@@ -44,7 +44,7 @@ class LeakJob implements ShouldQueue
             $this->request->get('url'),
             0,
             $this->request->get('callbackurls', []),
-            $this->request->get('userAgent', \Config::get('scanner.user_agent'))
+            $this->request->get('userAgent', config('scanner.user_agent'))
         );
 
         $scan->scan();
