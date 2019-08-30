@@ -1,19 +1,16 @@
-FROM php:7.2-apache
+FROM siwecos/dockered-laravel:7.2
 
-RUN apt-get update && apt-get install -y wget git zip unzip zlib1g-dev curl libicu-dev g++ php- 
+LABEL maintainer="Sascha Brendel <mail@lednerb.eu>"
 
-RUN curl --silent --show-error https://getcomposer.org/installer | php
+# Settings [Further information: https://github.com/SIWECOS/dockered-laravel#env-options]
 
-RUN mv /var/www/html/composer.phar /usr/bin/composer && chown www-data: /var/www -R \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && docker-php-ext-configure pcntl \
-    && docker-php-ext-install pcntl \	
-    && rm -rf /var/lib/apt/lists/* \
-	&& chmod +x /usr/bin/composer
 
-COPY ./ /var/www/html/
+# Copy application
+COPY . .
+COPY .env.example .env
 
-RUN composer install
+# Install all PHP dependencies and change ownership of our applications
+RUN composer install --optimize-autoloader --no-dev --no-interaction \
+    && chown -R www-data:www-data .
 
 EXPOSE 80
