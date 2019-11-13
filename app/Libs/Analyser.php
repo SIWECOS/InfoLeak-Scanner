@@ -83,7 +83,7 @@ class Analyser {
         $top_level_domains .= "tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|us|uy|uz|va|";
         $top_level_domains .= "vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|za|zm|zw";
 
-        $local_part  = "/(?:[a-z0-9\!\#\$\%&'*+\/=?^_`{|}~-]+(?:(\.|\s*(\[|\()(do|punk)t(\]|\))\s*)";
+        $local_part  = "/(?:[a-z0-9\!\#\$\%&'*+=?^_`{|}~-]+(?:(\.|\s*(\[|\()(do|punk)t(\]|\))\s*)";
         $local_part .= "[a-z0-9\!\#\$\%&'*+\/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x";
         $local_part .= "0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x";
         $local_part .= "0c\x0e-\x7f])*\")";
@@ -857,5 +857,3 @@ class Analyser {
         }
     }
 }
-
-?>
