@@ -201,7 +201,7 @@ class View{
                  * And it doesn't count as a usual vulnerability
                  * so vuln_count won't get incremented
                  */
-                if ($cms === "wordpress") {
+                if ($cms["cms"] === "wordpress") {
                     if ($lib === "jquery") {
                         if ($version === "1.12.4") {
                             $result['score'] = 90;
