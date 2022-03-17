@@ -126,7 +126,6 @@ class View{
                                "scoreType"    => $result['scoreType'],
                                "testDetails"  => $result['testDetails']);
 
-
         return $sorted_result;
     }
 
@@ -215,6 +214,7 @@ class View{
                 if (empty($result['testDetails'][0]['values']['version'])) {
                     $result['score'] = 100;
                     $result['testDetails'] = NULL;
+                    $this->vuln_count -= 1;
                 }
             }
         } else {
